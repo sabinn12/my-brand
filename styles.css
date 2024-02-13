@@ -5,10 +5,13 @@
     list-style: none;
     box-sizing: border-box;
     
+    
 }
 body{
     font-family: Arial, Helvetica, sans-serif;
     background: #111827;
+    width: 100vw;
+    height: 100vh;
 }
 /* navigation bar */
 nav{
@@ -51,7 +54,10 @@ a.active{
 
 /* Section part */
 
-.Home{
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
     height: 100vh;
   background-position: left;
     display: flex;
@@ -64,43 +70,56 @@ a.active{
 }
 .home-content h1{
     position: relative;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 700;
     line-height: 1.2;
     color: #EAB308;
     margin-top: -30%;
+    margin-bottom: 20px;
 
 }
 
 .home-content h2{
     position: relative;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 700;
     color: #F3F4F6;
+    
 }
 .home-content p{
     position: relative;
-    font-size: 25px;
-    margin: 20px 0 40px;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding-top: 5px;
     color: #6B7280;
-    line-height: 1;
+    line-height: 2;
+
+}
+.home-content a{
+    border: 1px yellow solid;
+    background: #EAB308;
+    color: black;
+    padding: 10px ;
+    
+    border-radius: 17px;
+    margin-bottom: 90%;
+    
+}
+.home-content-pic{
+    display: flex;
 }
 
-
-.home-content-pic, img {
+img {
 float:  left;
-background-color: #081b29;
 position: absolute;
 top: 15%;
-right: 10%;
-width: 50%;
-height: 70%;
-background: transparent;
-display: flex;
-margin-top: 1px;
+right: 18%;
+width: 20%;
+height: 45%;
+margin-top: 6%;
 margin-bottom: 7%;
-background: transparent;
-border-radius: 10%;
+border-radius: 15%;
 }
 
 .box {

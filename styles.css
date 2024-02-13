@@ -4,7 +4,7 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
-    position: static;
+    
 }
 body{
     font-family: Arial, Helvetica, sans-serif;
@@ -87,21 +87,36 @@ a.active{
 }
 
 
-img {
-
+.home-content-pic, img {
 float:  left;
 background-color: #081b29;
 position: absolute;
-top: 60;
+top: 15%;
 right: 10%;
-width: 30%;
-height: 60%;
+width: 50%;
+height: 70%;
 background: transparent;
 display: flex;
 margin-top: 1px;
 margin-bottom: 7%;
 background: transparent;
 border-radius: 10%;
-
-
 }
+
+.box {
+    display: flex;
+    align-items: center;
+    background-color: #FACC15;
+    border-radius: 10px;
+    width: 50%;
+    height: 5%;
+    float: left;
+    margin-top: 50%;
+    margin-left: 0%;
+    
+  }
+  .box span{
+  color: black;
+  font-size: 10px;
+  }
+ 

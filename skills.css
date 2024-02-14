@@ -54,3 +54,40 @@ a.active{
     color: white;
     transition: .5s;
 }
+ 
+/* skills content */
+
+.container{
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+   
+}
+.skills-contents{
+    margin-left: 30%;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.skills-contents h1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  margin-right: 40px;
+  font-size: 40px;
+}
+.skills-contents span{
+    color: #EAB308;
+}
+.skills-contents p{
+   margin-right: -90%;
+}
+img{
+    width: 100%;
+    margin-bottom: -35%;
+}

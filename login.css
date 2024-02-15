@@ -1,0 +1,55 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    
+    
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: #111827;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+/* navigation bar */
+
+nav{
+    background: black;
+    height: 70px;
+    width: 100%;
+    
+}
+label.logo{
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+}
+label span{
+    color: #EAB308;
+}
+nav ul{
+    float: right;
+    margin-right: 20px;
+}
+nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+    
+}
+nav ul li a{
+    color: #9CA3AF;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 7px 13px;
+    border-radius: 3px;
+}
+a.active{
+    color: white;
+    transition: .5s;

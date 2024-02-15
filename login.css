@@ -53,3 +53,71 @@ nav ul li a{
 a.active{
     color: white;
     transition: .5s;
+}
+
+
+/* login content */
+
+.container{
+    display: flex;
+     flex-direction: column;
+        position: absolute;
+        top: 50%;
+        left: 50%;        
+        transform: translate(-50%, -50%);
+       
+       
+}
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15%;
+
+}
+.content h2{
+    color: white;
+    font-weight: bold;
+    font-size: 50px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+
+}
+.inputs{
+    display: flex;
+    flex-direction: column;
+    margin-right: 50%;
+   
+}
+input{
+    margin-bottom: 40px;
+    border: none;
+    outline: none;   
+    padding: 10px;
+    background: none;
+    border-bottom: 2px solid #DADADA;
+    width: 400px;
+}
+
+
+.log-in{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 228px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    background: blue;
+    margin-left: 20%;
+    margin-top: 30px;
+    cursor: pointer;
+}
+.log-in h3{
+    color: white;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

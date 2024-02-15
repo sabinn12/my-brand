@@ -142,11 +142,12 @@ a.active{
   .contactForm{
     width: 40%;
     padding: 40px;
-    background: black;
+    background: #b2ad9d;
   }
   .contactForm h2{
-    font-size: 30px;
-    color: #333;
+    font-size: 18px;
+    color: #black
+    ;
     font-weight: 500;
   }
   .contactForm .inputBox{
@@ -154,16 +155,14 @@ a.active{
     width: 100%;
     margin-top: 20px;
   }
-.box i{
-    color: blue;
-}
+
   .contactForm .inputBox input, .contactForm .inputBox input textarea{
     width: 100%;
     padding: 5px 0;
     font-size: 16px;
     margin: 10px 0;
     border: none;
-    border-bottom: 2px solid #333;
+    border-bottom: 1px solid #333;
     outline: none;
     resize: none;
   }
@@ -171,7 +170,7 @@ a.active{
     position: absolute;
     left: 0;
     padding: 5px 0;
-    font-size: 16px;
+    font-size: 12px;
     margin: 10px 0;
     pointer-events: none;
     transition: 0.5s;
@@ -186,12 +185,12 @@ a.active{
   }
   .contactForm .inputBox input[type="submit"]{
     width: 100px;
-    background: #00bcd4;
+    background: #EAB308;
     color: #fff;
     border: none;
     cursor: pointer;
     padding: 10px;
-    font-size: 18px;
+    font-size: 12px;
   }
 
   @media (max-width: 991px){

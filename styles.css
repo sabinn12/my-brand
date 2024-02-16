@@ -1,59 +1,79 @@
-*{
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
-    
-    
+:root{
+    --nav-height: 60px;
 }
 body{
-    font-family: Arial, Helvetica, sans-serif;
-    background: #111827;
-    
+    margin: 0;
+    background: #111827
+}
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
     
 }
-/* navigation bar */
-.fa-sharp{
-    color: #EAB308;
-}
-
-nav{
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background: black;
-    height: 70px;
-    width: 100%;
-    
+    height: var(--nav-height);
+    padding: 0 20px;
+    position: relative;
 }
-label.logo{
+.nav h2{
     color: white;
-    font-size: 35px;
-    line-height: 80px;
-    padding: 0 100px;
-    font-weight: bold;
+    margin-left: 70px;
+    font-size: 24px;
 }
-label span{
+.nav h2 span{
     color: #EAB308;
 }
-nav ul{
-    float: right;
-    margin-right: 20px;
-}
-nav ul li{
-    display: inline-block;
-    line-height: 80px;
-    margin: 0 5px;
-    
-}
-nav ul li a{
+.nav a{
     color: #9CA3AF;
-    font-size: 14px;
-    text-transform: uppercase;
-    padding: 7px 13px;
-    border-radius: 3px;
+    font-size: 16px;
+   
 }
-a.active{
+.nav a:first-child{
     color: white;
-    transition: .5s;
+}
+.nav i{
+    font-size: 1.4rem;
+    padding: 0 10px;
+    display: none;
+    color: #EAB308;
+}
+.nav i:hover{
+    background: white;
+}
+.nav .links a{
+    text-decoration: none;
+    padding: 5px;
+}
+.nav .links a:hover{
+    color: #fff;
+    background: #000;
+}
+@media only screen and (max-width: 620px){
+    .nav i{
+        display: block;
+    }
+    .links {
+        position: absolute;
+        display: none;
+        flex-direction: column;
+        top: var(--nav-height);
+        background: black;
+        left: 0;
+        right: 0;
+        border-top: 2px solid #aaa;
+        
+    }
+    .responsive{
+        display: flex;
+    }
+    .links a{
+        color: darkgray;
+    }
+    
 }
 
 /* main part */
@@ -107,6 +127,7 @@ a.active{
     padding: 10px ;
     border-radius: 17px;
     margin-bottom: 90%;
+    text-decoration: none;
     
 }
 .home-content-pic{
@@ -124,4 +145,17 @@ margin-top: 6%;
 margin-bottom: 7%;
 border-radius: 15%;
 }
+
+@media screen and (max-width: 600px) {
+   .home-content{
+    margin-top: 500px;    
+   }
+   .home-content-pic img{
+     width: 50%;
+     height: 30%;
+     margin-right: 10%;
+     margin-top: 29%;
+   }
+}
+
 

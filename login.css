@@ -1,60 +1,82 @@
-*{
-    padding: 0;
+:root{
+    --nav-height: 60px;
+  }
+  body{
     margin: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
-    
-    
-}
-body{
-    font-family: Arial, Helvetica, sans-serif;
     background: #111827;
-    width: 100vw;
-    height: 100vh;
-}
-
-
-/* navigation bar */
-
-nav{
+    
+  }
+  * {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    
+  }
+  .nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background: black;
-    height: 70px;
-    width: 100%;
-    
-}
-label.logo{
+    height: var(--nav-height);
+    padding: 0 20px;
+    position: relative;
+  }
+  .nav h2{
     color: white;
-    font-size: 35px;
-    line-height: 80px;
-    padding: 0 100px;
-    font-weight: bold;
-}
-label span{
+    margin-left: 70px;
+    font-size: 24px;
+  }
+  .nav h2 span{
     color: #EAB308;
-}
-nav ul{
-    float: right;
-    margin-right: 20px;
-}
-nav ul li{
-    display: inline-block;
-    line-height: 80px;
-    margin: 0 5px;
-    
-}
-nav ul li a{
+  }
+  .nav a{
     color: #9CA3AF;
-    font-size: 14px;
-    text-transform: uppercase;
-    padding: 7px 13px;
-    border-radius: 3px;
-}
-a.active{
+    font-size: 16px;
+   
+  }
+  .nav a:first-child{
     color: white;
-    transition: .5s;
-}
-
+  }
+  .nav i{
+    font-size: 1.4rem;
+    padding: 0 10px;
+    display: none;
+    color: #EAB308;
+  }
+  .nav i:hover{
+    background: white;
+  }
+  .nav .links a{
+    text-decoration: none;
+    padding: 5px;
+  }
+  .nav .links a:hover{
+    color: #fff;
+    background: #000;
+  }
+  @media only screen and (max-width: 620px){
+    .nav i{
+        display: block;
+    }
+    .links {
+        position: absolute;
+        display: none;
+        flex-direction: column;
+        top: var(--nav-height);
+        background: black;
+        left: 0;
+        right: 0;
+        border-top: 2px solid #aaa;
+        
+    }
+    .responsive{
+        display: flex;
+    }
+    .links a{
+        color: darkgray;
+    }
+    
+  }
+  
 
 /* login content */
 

@@ -162,7 +162,7 @@ margin-top: 1.5vw;
 }
 .boxes{
     display: flex;
-    border: 2px solid #EAB308;
+    border: 2px solid darkgray;
     padding: 0px;
 }
 .exp{

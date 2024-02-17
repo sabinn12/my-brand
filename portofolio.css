@@ -83,12 +83,12 @@ body{
     display: flex;
     text-align: center;
     
+    
 }
 
 .container .portfolio-content{
     text-align: center;
-    width: 100%;
-    margin-left: 18vw;
+    margin-left: 27vw;
     
 }
 .container .portfolio-content h1{
@@ -110,43 +110,85 @@ body{
     margin-top: 20px;
     margin-left: 30px;
 }
-.pics-projects{
+.projects-pics {
     display: flex;
-   align-items: center;
-   justify-content: space-between;
-   
+    margin-left: 400px;
+}
+.pic{
+    background: #EAB308;
     
 }
-.content{
+.pic2{
+margin-top: 1.5vw;
+}
+.pic3{
+    margin-top: 13.5vw;
+    margin-left: -165px;
+}
+.pic4{
+    margin-top: 1.5vw;
+    margin-left: 30px;
+    
+}
+.pic5{
+    margin-top: 210px;
+    margin-left: -160px;
+}
+/* experience section */
+
+.experience-section{
+    display: inline;
+    
+
+}
+.experience-section .myexperience{
+    align-items: center;
+    justify-content: center;
+    margin-left: 200px;
+    margin-top: 50px;
+}
+.myexperience h2{
+    color: white;
+    font-size: 42px;
+    font-weight: bolder;
+
+}
+.myexperience h2 span{
+    color: #EAB308;
+}
+.myexperience p {
+    color: white;
+    font-size: 15px;
+}
+.boxes{
     display: flex;
+    border: 2px solid #EAB308;
+    padding: 0px;
+}
+.exp{
+    border: 2px solid darkgray;
     flex-wrap: wrap;
-    justify-content: space-between;
+    background: #202027;
+    border-radius: 3%;
     
 }
-.item{
-    height: 200px;
-    width: 25%;
-    background: #fff;
-    border: 1px solid #333;
-    box-shadow: 0 0 5px #aaa;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    margin-left: 80px;
-   
-    
+.exp h1 {
+    color: #D1D5DB;
+    margin-left: 10px;
+    margin-bottom: 50px;
+    font-size: 20px;
+} 
+.exp h2{
+    color: #EAB308;
+    margin-left: 10px;
+    margin-top: -40px;
+    font-size: 20px;
+    font-weight: bolder;
 }
-@media only screen and (max-width: 1030px){
-    .item{
-        width: 31%;
-    }
-}
-@media only screen and (max-width: 756px){
-    .item{
-        width: 48%;
-    }
-}
-@media only screen and (max-width: 470px){
-    .item{
-        width: 99%;
-    }
+.exp p{
+    color: #6B7280;
+    font-size: 16px;
+    margin-left: 10px;
+    padding-bottom: 30px;
+    padding-top: 30px;
 }

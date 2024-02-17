@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>single page blog</title>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body{
+        background: #111827;
+      }
+      header p{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #FFFF00;
+        font-size: 31px;
+        font-weight: bolder;
+        margin-top: 40px;
+      }
+    .container{
+        display: flex;
+        margin-top: 70px;
+        line-height: 30px;
+    }
+    .container .pone{
+        color: white;
+        font-size: 30px;
+        padding: 20px;
+        font-weight: bold;
+        margin-left: 20px;
+    }
+    .container .ptwo{
+        color: white;
+        font-size: 30px;
+        padding: 20px;
+        font-weight: bold;
+        margin-left: 20px;
+    }
+    .contains{
+        display: inline-block;
+        align-items: center;
+        justify-content: center;
+    }
+    .contains h2{
+        text-align: center;
+        margin-left: 200px;
+        font-size: 23px;
+        font-weight: bold;
+        color: blue;
+    }
+     input{
+        width: 60%;
+        padding: 7px;
+        background: #1F2937;
+        color: white;
+    }
+    textarea{
+        width: 80%;
+        padding: 10px;
+        background: #1F2937;
+        color: white;
+        
+    }
+    input,textarea{
+        margin-top: 5px;
+        margin-bottom: 7px;
+    }
+    .contains, input, textarea, button{
+        margin-left: 300px;
+    }
+    button{
+        background: #6B7280;
+        color: white;
+        margin-bottom: 1px;
+        cursor: pointer;
+    }
+   .back{
+        margin-bottom: -30px;
+        color: #FFFF00;
+    }
+    .back a{
+        color: #FFFF00;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    @media (max-width: 1250px) {
+        header p, .container .pone, .container .ptwo, .contains h2 {
+            font-size: 24px;
+        }
+        .contains, input, textarea, button {
+            margin-left: 50px;
+        }
+        input, textarea {
+            width: 90%;
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <header>
+        <p>Clients are part of the team</p>
+    </header>
+    <main>
+        <div class="container">
+        
+        <section>
+            <div class="pone">
+       <p>Clients are Part of the Team<br>
+        In the world of software development, we often draw a line between the team that builds the product and the clients who use it. But what if we blurred that line? What if we started to see our clients not just as end-users, but as integral parts of our team?</p>
+    </div>
+    <br>
+    <div class="ptwo">
+        <p>Collaboration Over Instruction<br>
+            The traditional model of software development sees the client as someone who gives instructions and the development team as those who follow them. But this can lead to a disconnect. The team might not fully understand the client’s vision, and the client might not be aware of the technical challenges involved in their requests.</p>
+    </div>
+      <footer>
+        <div class="contains">
+            <h2>Comments</h2>
+            <input type="text" placeholder="Your Name">
+            <br>
+            <textarea rows="3" cols="10" placeholder="Add a comment"></textarea>
+            <br>
+            <button type="button">Submit</button>
+
+            <div class="back">
+                <a href="blog.html">Back Home</a>
+            </div>
+        </div>
+      </footer>
+        </section>
+
+
+    </div>
+    </main>
+</body>
+</html>

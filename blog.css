@@ -53,6 +53,31 @@ body{
     color: #fff;
     background: #000;
 }
+@media only screen and (max-width: 620px){
+  
+    .nav i{
+        display: block;
+    }
+    .links {
+        position: absolute;
+        display: none;
+        flex-direction: column;
+        top: var(--nav-height);
+        background: black;
+        left: 0;
+        right: 0;
+        border-top: 2px solid #aaa;
+        
+    }
+    .responsive{
+        display: flex;
+    }
+    .links a{
+        color: darkgray;
+    }
+    
+  }
+  
 
 
 
@@ -155,15 +180,6 @@ body{
 .blog-text a:hover{
     color: #c74242;
     transition: all ease 0.3s;
-}
-.fa-solid{
- 
-    
-}
-.fa-comment{
-    
- 
- 
 }
  
 @media(max-width:1250px){

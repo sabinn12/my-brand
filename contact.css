@@ -111,12 +111,18 @@ body{
 }
 .container .contact-form{
   float: right;
-  margin-top: -255px;
+  margin-top: -240px;
   margin-right: -250px;
 
   
 }
 .container .contact-form input{
+  width: 30vw;
+  height: 2.5vw;
+  background: #1F2937;
+  color: white;
+}
+.container .contact-form textarea{
   width: 30vw;
   height: 2.5vw;
   background: #1F2937;

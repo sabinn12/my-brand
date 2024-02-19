@@ -9,6 +9,7 @@
   
   body{
     background: #111827;
+    width: 100%;
   }
   
   .container{
@@ -101,4 +102,47 @@
       display: block;
     }
   }
+
+  /* main section */
+
+  .container{
+    display: flex;
+    width: 100%;
+    
+  }
+  /* .text{
+    width: 400%;
+  } */
+ .text h1{
+    margin-top: 10%;
+    font-size: 16px;
+    
+    
+  }
+  .container .box-one{
+    border: 2px solid #009E52;
+    width: 300px;
+    height: 75px;
+    margin-top: 10%;
+  }
+  .container .box-one h1, p{
+    margin-left: 50%;
+  }
+
+  .container .box-two{
+    border: 2px solid #009E52;
+    width: 300px;
+    height: 75px;
+    margin-top: 10%;
+    margin-left: 10%;
+  }
+  .container .box-three{
+    border: 2px solid #009E52;
+    width: 300px;
+    height: 75px;
+    margin-top: 10%;
+    margin-left: 10%;
+  }
+
+
   

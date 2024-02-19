@@ -78,19 +78,16 @@ body{
 }
 
 /* main content */
-
 .container{
     display: flex;
     text-align: center;
-    
-    
 }
 
 .container .portfolio-content{
     text-align: center;
-    margin-left: 27vw;
-    
+    margin-left: 19vw;
 }
+
 .container .portfolio-content h1{
     color: white;
     font-size: 42px;
@@ -98,86 +95,90 @@ body{
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-
-    
+    margin-left: 100px;
 }
+
 .container .portfolio-content h1 span{
     color: #EAB308;
     font-size: 42px;
 }
+
 .container .portfolio-content p{
     color: #9CA3AF;
     margin-top: 20px;
     margin-left: 30px;
 }
+
 .projects-pics {
     display: flex;
-    margin-left: 400px;
-}
-.pic{
-    background: #EAB308;
+    margin-left: 350px;
     
 }
-.pic2{
-margin-top: 1.5vw;
-}
-.pic3{
-    margin-top: 13.5vw;
-    margin-left: -165px;
+
+.pic, .pic2, .pic3, .pic4, .pic5{
+    
+    margin-top: 1.5vw;
 }
 .pic4{
-    margin-top: 1.5vw;
-    margin-left: 30px;
-    
+    margin-left: 10px;
+}
+.pic3{
+ margin-top: 200px;
+ margin-left: -170px;
 }
 .pic5{
-    margin-top: 210px;
+    margin-top: 200px;
     margin-left: -160px;
-}
+   }
+   
 /* experience section */
 
 .experience-section{
     display: inline;
-    
-
 }
+
 .experience-section .myexperience{
     align-items: center;
     justify-content: center;
     margin-left: 200px;
     margin-top: 50px;
 }
+
 .myexperience h2{
     color: white;
     font-size: 42px;
     font-weight: bolder;
-
 }
+
 .myexperience h2 span{
     color: #EAB308;
 }
+
 .myexperience p {
     color: white;
     font-size: 15px;
 }
+
 .boxes{
     display: flex;
     border: 2px solid darkgray;
     padding: 0px;
 }
+
 .exp{
     border: 2px solid darkgray;
     flex-wrap: wrap;
     background: #202027;
     border-radius: 3%;
-    
 }
+
 .exp h1 {
     color: #D1D5DB;
     margin-left: 10px;
     margin-bottom: 50px;
     font-size: 20px;
 } 
+
 .exp h2{
     color: #EAB308;
     margin-left: 10px;
@@ -185,10 +186,55 @@ margin-top: 1.5vw;
     font-size: 20px;
     font-weight: bolder;
 }
+
 .exp p{
     color: #6B7280;
     font-size: 16px;
     margin-left: 10px;
     padding-bottom: 30px;
     padding-top: 30px;
+}
+
+@media screen and (max-width: 768px) {
+   .container .portfolio-content{
+    margin-left: 10vw;
+       
+   }
+   .container .portfolio-content h1{
+    margin-left: -9vw;
+   }
+   .container .portfolio-content p{
+    margin-left: -8vw;
+   }
+   .projects-pics{
+     margin-left: 0;
+     flex-direction: column;
+     align-items: center;
+   }
+   .experience-section .myexperience{
+     margin-left: 0;
+   }
+   .pic, .pic2, .pic3, .pic4, .pic5{
+    
+     width: 90%;
+     margin-left: 5%;
+     margin-right: 5%;
+   }
+   .pic2{
+    margin-left: -50vw;
+   }
+   .pic3{
+    margin-top: -0.1vw;
+    margin-left: -50vw;
+   }
+   .pic4{
+    margin-top: -95vw;
+    margin-right: -50vw;
+   
+   }
+   .pic5{
+    margin-top: -0.1vw;
+    margin-right: -50vw;
+   
+   }
 }

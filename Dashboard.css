@@ -1,3 +1,4 @@
+
 *{
     margin: 0;
     padding: 0;
@@ -26,7 +27,7 @@
     width: 280px;
     overflow: hidden;
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-    transition: width 0.5s; /* Add transition */
+    transition: width 0.5s;
   }
   
   .logo{
@@ -105,50 +106,80 @@
 
   /* main section */
 
-  .container{
+  #content{
+    width: calc(100vw - 230px);
+    background: var(--secondary);
+    height: 100vh;
+    overflow-y: auto;
+    padding: 40px 20px;
+  }
+  
+  #content .summary{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  #content .summary .item{
+    border: 2px solid #009E52;
+    /* border: 2px solid var(--green); */
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    padding: 30px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    color: white;
+  }
+  .item .icon i{
+    color: #009E52;
+  }
+  .green{
+    color: #009E52;
+  }
+  
+  @media only screen and (max-width: 900px){
+    #content .summary .item{
+      width: 99%;
+    }
+  }
+  
+  #content .summary .item:hover{
+    background: #004e2822;
+  }
+  
+  #content .summary .item .icon{
+    font-size: 40px;
+    color: var(--green);
+  }
+  
+  #content .summary .item .details{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 20px;
+  }
+  
+  #content .summary .item .details strong{
+    padding: 5px 10px;
+  }
+  
+  #content h1,
+  #content h2{
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  .bottom-container{
     display: flex;
     width: 100%;
+  }
+  .first-container{
+    border: 1px solid yellow;
+    width: 50%;
+    max-width: 200%;
     
   }
-  /* .text{
-    width: 400%;
-  } */
- .text h1{
-    margin-top: 10%;
-    font-size: 16px;
-    
-    
-  }
-  .container .box-one{
-    border: 2px solid #009E52;
-    width: 300px;
-    height: 75px;
-    margin-top: 10%;
-  }
-  .container .box-one h1, p{
-    margin-left: 50%;
-  }
-
-  .container .box-two{
-    border: 2px solid #009E52;
-    width: 300px;
-    height: 75px;
-    margin-top: 10%;
-    margin-left: 10%;
-  }
-  .container .box-two h1, p{
-    margin-left: 50%;
-  }
-  .container .box-three{
-    border: 2px solid #009E52;
-    width: 300px;
-    height: 75px;
-    margin-top: 10%;
-    margin-left: 10%;
-  }
-  .container .box-three h1, p{
-    margin-left: 50%;
-  }
-
-
   

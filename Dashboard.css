@@ -136,12 +136,18 @@
     margin-top: 10%;
     margin-left: 10%;
   }
+  .container .box-two h1, p{
+    margin-left: 50%;
+  }
   .container .box-three{
     border: 2px solid #009E52;
     width: 300px;
     height: 75px;
     margin-top: 10%;
     margin-left: 10%;
+  }
+  .container .box-three h1, p{
+    margin-left: 50%;
   }
 
 

@@ -80,7 +80,7 @@
 
 /* login content */
 
-.container{
+ .container{
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -157,4 +157,90 @@ input{
    width: 11.25rem;
    height: 2.5rem;
  }
+} 
+
+/* #login-form {
+	width: 100%;
+	max-width: 31.25rem; 
+	border-top: 0.0625rem solid darkgreen; 
+	margin: auto;
+	padding: 0.625rem; 
 }
+
+#login-form .i-group {
+	background: white;
+	margin: 1.25rem 0; 
+	display: flex;
+	align-items: center;
+	position: relative;
+	justify-content: flex-end;
+}
+
+#login-form .i-group i {
+	font-size: 1.1rem;
+	padding: 0 0.9375rem; 
+	position: absolute;
+	left: 0;
+}
+
+#login-form .i-group input,
+#submit {
+	width: 100%;
+	padding: 0.9375rem; 
+	padding-top: 1.25rem; 
+	padding-left: 2.5rem; 
+	font-size: 1.1rem;
+	background: transparent;
+	color: white;
+	border: 0;
+	outline: none;
+	border-bottom: 0.3125rem solid #232d3f; 
+	transition: 0.6s;
+}
+
+#submit {
+	background: blue;
+	border-color: blue;
+	cursor: pointer;
+	margin-top: 1.25rem; 
+}
+
+#submit:hover {
+	background: var(--green);
+	border-color: var(--dark-green);
+}
+
+#login-form .i-group input:focus {
+	border-color: rgb(0, 158, 53);
+}
+
+.align-center{
+  justify-content: center;
+  align-items: center;
+  margin-left: 45%; 
+  color: white;
+  margin-top: 8%; 
+}
+
+@media screen and (max-width: 600px) {
+  #login-form {
+      max-width: 100%; 
+  }
+
+  #login-form .i-group {
+      flex-direction: column; 
+  }
+
+  #login-form .i-group i {
+      padding: 0.625rem 0; 
+  }
+
+  #login-form .i-group input,
+  #submit {
+      padding-left: 0.625rem; 
+  }
+
+  .align-center {
+      margin-left: 0; 
+  }
+} */

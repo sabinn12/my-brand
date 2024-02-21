@@ -1,104 +1,86 @@
-<span style="font-family: verdana, geneva, sans-serif;"><!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <title>Dashboard | By Code Info</title>
-      <link rel="stylesheet" href="Dashboard.css" />
-      <!-- Font Awesome Cdn Link -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-    </head>
-    <body>
-      <div class="container">
-        <nav>
-          <ul>
-            <li><a href="#" class="logo">
-              <span class="nav-item">DashBoard</span>
-            </a></li>
-            <li><a href="#">
-              <i class="fas fa-home"></i>
-              <span class="nav-item">Home</span>
-            </a></li>
-            <li><a href="">
-              <i class="fas fa-user"></i>
-              <span class="nav-item">Blogs</span>
-            </a></li>
-            
-            <li><a href="" >
-              <i class="fas fa-sign-out-alt"></i>
-              <span class="nav-item">Log out</span>
-            </a></li>
-          </ul>
-
-        </nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Home</title>
+    <link rel="stylesheet" href="Dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <main>
+        <div id="side">
+            <h1 class="greener">Dashboard</h1>
+            <div id="nav">
+                <a class="link active"  href="Dashboard.html" id="home">
+                    <i class="fa fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a class="link" id="blog" href="addblog.html">
+                    <i class="fa fa-newspaper"></i>
+                    <span>Blogs</span>
+                </a>
+                               
+                <a class="link"  href="index.html">
+                    <i class="fa fa-sign-out"></i>
+                    <span>Log out</span>
+                </a>
+            </div>
+        </div>
         <div id="content">
-          <h2 style="color: white;">Welcome back, Sabin</h2>
-          <div class="summary">
-              <div class="item">
-                  <div class="icon">
-                      <i class="fa fa-eye"></i>
-                  </div>
-                  <div class="details">
-                      <strong>100</strong>
-                      <strong class="green">Visitors</strong>
-                  </div>
-              </div>
-              <div class="item">
-                  <div class="icon">
-                      <i class="fa fa-user-group"></i>
-                  </div>
-                  <div class="details">
-                      <strong>50</strong>
-                      <strong class="green">Subscribers</strong>
-                  </div>
-              </div>
-              <div class="item">
-                  <div class="icon">
-                      <i class="fa fa-comments"></i>
-                  </div>
-                  <div class="details">
-                      <strong>10</strong>
-                      <strong class="green">Messages</strong>
-                  </div>
-              </div>
-          </div>
-          <div class="bottom-container">
-            <div class="first-container">
-             <h1 style="color: white;">Latest comments</h1>
-             <h2 style="color: white;">Sea all</h2>
-            </div>
-            <div class="second-container">
-              <h1 style="color: #FFFF00;">Sabinn</h1>
-              <p style="color: white;">Collaboration Over Instruction</p>
-            </div>
-      </div>
-        <!-- <main>
-            <div class="container">
-               section
-                  <div class="text">
-                    <h1 style="color: white";>Welcome Back, Sabin</h1>
-                  </div>
-                    <div class="box-one">
-                   <img src="pics/d.png" >
-z                   <h1 style="color: white;">100</h1>
-                   <p style="color: green;">Visitors</p>
+            <h2>Welcome back, Sabin</h2>
+            <div class="summary">
+                <div class="item">
+                    <div class="icon">
+                        <i class="fa fa-eye"></i>
                     </div>
-                    <div class="box-two">
-                      <img src="pics/def.png" width="10%">
-                      <h1 style="color: white;">2</h1>
-                      <p style="color: green;">Subscribers</p>
+                    <div class="details">
+                        <strong>1000</strong>
+                        <strong class="green">Visitors</strong>
                     </div>
-                    <div class="box-three">
-                      <img src="pics/des.png">
-                      <h1 style="color: white;">1</h1>
-                      <p style="color: green;">Comments</p>
+                </div>
+                <div class="item">
+                    <div class="icon">
+                        <i class="fa fa-user-group"></i>
                     </div>
-                /section>
+                    <div class="details">
+                        <strong>500</strong>
+                        <strong class="green">Subscribers</strong>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="icon">
+                        <i class="fa fa-comments"></i>
+                    </div>
+                    <div class="details">
+                        <strong>1000</strong>
+                        <strong class="green">Messages</strong>
+                    </div>
+                </div>
             </div>
-        </main> -->
+            <div class="bottom-container">
+                <div class="first-container">
+                    <h1 style="font-size: 18px;">Latest comments</h1>
+                    <button style="font-size: 15px;">See all</button>
+                </div>
+            </div>
+                <div class="second-container">
+                  <h1 style="color: #FFFF00;">Sabinn</h1>
+                  <p style="color: white;">Collaboration Over Instruction</p>
+                </div>
+                <div class="second-container">
+                  <h1 style="color: #FFFF00;">Sabinn</h1>
+                  <p style="color: white;">Collaboration Over Instruction</p>
+                </div>
+                <div class="second-container">
+                  <h1 style="color: #FFFF00;">Sabinn</h1>
+                  <p style="color: white;">Collaboration Over Instruction</p>
+                </div>
+         </div>
+        
+    </main>
     
-      
-      
-    </div>
-        <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script> 
-    </body>
-    </html></span>
+</body>
+</html>

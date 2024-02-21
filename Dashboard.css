@@ -1,5 +1,3 @@
-
-
 @font-face {
 	font-family: main;
 	src: url("../fonts/roboto.ttf");
@@ -28,15 +26,15 @@ body {
     font-family: main, sans-serif;
 }
 
-/* Utilities */
-
 .greener {
 	color: blue;
 }
+
 .divider {
 	border-bottom: 1px solid #ffffff44;
 	margin: 15px 0;
 }
+
 .green {
 	color: green;
 }
@@ -57,8 +55,6 @@ main{
 	align-items: center;
 	justify-content: space-between;
 }
-
-/* Side Menu */
 
 #side{
 	width: 230px;
@@ -86,21 +82,20 @@ main{
 	border-radius: 10px;
 	outline: none;
 }
+
 #side #nav .active{
 	background: blue;
 }
+
 #side #nav a:hover{
 	background: blue;
 }
+
 #side #nav a i{
 	width: 20px;
 	text-align: center;
 	margin-right: 10px;
 }
-
-
-
-/* Main content */
 
 #content{
 	width: calc(100vw - 230px);
@@ -128,6 +123,7 @@ main{
 	cursor: pointer;
 	margin-bottom: 10px;
 }
+
 
 @media only screen and (max-width: 900px){
 	#content .summary .item{
@@ -160,69 +156,70 @@ main{
 	font-size: 20px;
 	margin-bottom: 20px;
 }
+
 .bottom-container{
 	display: flex;
 	width: 100%;
-  }
-  
-  .first-container{
-	border: 0.0625rem solid black; /* Use rem instead of px */
+}
+
+.first-container{
+	border: 0.0625rem solid black;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 	width: 50%;
-	height: 3.125rem; /* Use rem instead of px */
+	height: 3.125rem;
 	background: #009E52;
 	background: #202027;
 	margin-left: 22.5%;
 	margin-top: 2%;
-  }
-  
-  .first-container h1{
+}
+
+.first-container h1{
 	margin-top: 3.5%;
 	margin-left: 1%;
 	color: white;
-  }
-  
-  .first-container button{
+}
+
+.first-container button{
 	margin-top: 1%;
 	margin-left: 50%;  
 	color: white;
 	background: black;
 	width: 10%;
-  }
-  
-  .second-container{
-	border: 0.0625rem solid black; /* Use rem instead of px */
+}
+
+.second-container{
+	border: 0.0625rem solid black;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 	width: 50%;
-	height: 5rem; /* Use rem instead of px */
+	height: 5rem;
 	background-color: #000000;
 	margin-left: 22.5%;
 	margin-top: 2%;
-  }
-  
-  .second-container h1{
+}
+
+.second-container h1{
 	margin-right: 30%;
-  }
-  
-  .second-container p{
+}
+
+.second-container p{
 	margin-left: 10%;
-  }
-  @media screen and (max-width: 600px) {
+}
+
+@media screen and (max-width: 600px) {
     .first-container, .second-container {
-        width: 100%; /* Full width on small screens */
-        height: auto; /* Auto height on small screens */
-        margin-left: 0; /* No left margin on small screens */
+        width: 100%;
+        height: auto;
+        margin-left: 0;
     }
 
     .first-container button {
-        width: 50%; /* Half width on small screens */
-        margin-left: 25%; /* Center the button on small screens */
+        width: 50%;
+        margin-left: 25%;
     }
 }
-

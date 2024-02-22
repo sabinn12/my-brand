@@ -58,25 +58,28 @@ main{
 
 /* Side Menu */
 
-#side{
+
+#side {
 	width: 230px;
 	background: #111827;
 	height: 100vh;
 	padding: 20px 10px;
 	overflow-y: auto;
+	position: fixed;
+	transition: 0.5s;
 }
 
-#side h1{
+#side h1 {
 	margin: 0;
 	padding: 10px;
 }
 
-#side #nav{
+#side #nav {
 	display: flex;
 	flex-direction: column;
 }
 
-#side #nav a{
+#side #nav a {
 	padding: 12px 20px;
 	margin: 5px 0;
 	text-decoration: none;
@@ -84,25 +87,65 @@ main{
 	border-radius: 10px;
 	outline: none;
 }
-#side #nav .active{
+
+#side #nav .active {
 	background: blue;
 }
-#side #nav a:hover{
+
+#side #nav a:hover {
 	background: blue;
 }
-#side #nav a i{
+
+#side #nav a i {
 	width: 20px;
 	text-align: center;
 	margin-right: 10px;
 }
 
+.openbtn {
+	font-size: 20px;
+	cursor: pointer;
+	background-color: #333;
+	color: white;
+	padding: 10px 15px;
+	border: none;
+}
+
+.openbtn:hover {
+	background-color: #444;
+}
+
+#main {
+	margin-left: 230px;
+	transition: margin-left .5s;
+	padding: 20px;
+}
+
+@media screen and (max-width: 600px) {
+	#side {
+		width: 0;
+	}
+	#main {
+		margin-left: 0;
+	}
+}
 #content{
-	width: calc(100vw - 230px);
+	/* width: calc(100vw - 230px); */
 	background: #111827;
 	height: 100vh;
 	overflow-y: auto;
 	padding: 40px 20px;
+	width: 100%;
+	margin-left: 1%;
 }
+/* #content .second-container{
+	
+	margin-left: 32.5%;
+}
+#content .bottom-container{
+	margin-left: 10%;
+} */
+
 
 #content .summary{
 	display: flex;

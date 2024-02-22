@@ -109,6 +109,9 @@ main{
 	color: white;
 	padding: 10px 15px;
 	border: none;
+	top: 0;
+	position: sticky;
+	z-index: 10px;
 }
 
 .openbtn:hover {
@@ -203,7 +206,7 @@ main{
   }
   
   .first-container{
-	border: 0.0625rem solid darkgray; /* Use rem instead of px */
+	border: 0.0625rem solid darkgray; 
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -212,8 +215,10 @@ main{
 	height: 3.125rem; 
 	background: #009E52;
 	background: #202027;
-	margin-left: 22.5%;
-	margin-top: 2%;
+	margin-left: 25%;
+	margin-top: 0;
+
+	
   }
   
   .first-container h1{
@@ -238,45 +243,67 @@ main{
   }
   
   .second-container{
-	border: 0.0625rem solid darkgray; 
+    border: 0.0625rem solid darkgray; 
     display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	width: 50%;
-	height: 3rem; 
-	background-color: #000000;
-	margin-left: 22.5%;
-	margin-top: 2%;
-  }
-  
-  .second-container h1{
-	margin-right: 30%;
-    margin-top: 3.5%;
-    
-  }
-  .second-container h1 a{
-    color: #B09F00;
-    text-decoration: none;
-  }
-  
-  .second-container p{
-	margin-left: 10%;
-  }
-  .second-container p a{
-    color: red;
-    text-decoration: none;
-  }
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 30%;     height: 65%; 
+    background-color: rgb(184, 144, 144);
+    margin: 2% auto; 
+    padding: 1rem;
+}
+
+.second-container .blog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.second-container .blog-content .blog-image {
+    width: 100%;
+    height: auto;
+}
+
+.second-container .blog-actions {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1rem; 
+}
+
+.second-container .blog-actions button {
+    margin-left: 0.5rem; 
+    margin-right: 0.5rem;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .second-container {
+        flex-direction: column;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .second-container .blog-content, .second-container .blog-actions {
+        width: 100%;
+    }
+}
+
   @media screen and (max-width: 600px) {
     .first-container, .second-container {
-        width: 100%; /* Full width on small screens */
-        height: auto; /* Auto height on small screens */
-        margin-left: 0; /* No left margin on small screens */
+        width: 100%; 
+        height: auto; 
+        margin-left: 0; 
     }
 
     .first-container button {
-        width: 50%; /* Half width on small screens */
-        margin-left: 25%; /* Center the button on small screens */
+        width: 50%; 
+        margin-left: 25%; 
     }
 }
 

@@ -109,9 +109,7 @@ main{
 	color: white;
 	padding: 10px 15px;
 	border: none;
-	top: 0;
-	position: sticky;
-	z-index: 10px;
+	
 }
 
 .openbtn:hover {

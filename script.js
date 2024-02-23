@@ -19,3 +19,16 @@ function openNav() {
     document.getElementById("side").style.width = "0";
     document.getElementById("main").style.marginLeft= "0";
   }
+
+  /* js for sliders */
+  document.getElementById('slideLeft').addEventListener('click', function() {
+    document.querySelector('.blog-slider').scrollBy(-350, 0);
+});
+
+document.getElementById('slideRight').addEventListener('click', function() {
+    document.querySelector('.blog-slider').scrollBy(350, 0);
+});
+
+
+// form validation 
+

@@ -5,6 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="login.css">
     <title>Login</title>
+    <script>
+    function validateForm() {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    var usernameError = document.getElementById('usernameError');
+    var passwordError = document.getElementById('passwordError');
+
+    // Clear previous error messages
+    usernameError.innerHTML = "";
+    passwordError.innerHTML = "";
+
+    // Username validation rules
+    var hasOnlyLettersAndNumbers = /^[a-zA-Z0-9]+$/.test(username);
+
+    if(username === "") {
+        usernameError.innerHTML = "Please enter a username";
+        return false;
+    }
+
+    if (!hasOnlyLettersAndNumbers) {
+        usernameError.innerHTML = "Username must contain only letters and numbers";
+        return false;
+    }
+
+    // Password validation rules
+    var hasUpperCase = /[A-Z]/.test(password);
+    var hasLowerCase = /[a-z]/.test(password);
+    var hasNumbers = /\d/.test(password);
+    var hasSymbols = /\W/.test(password);
+
+    if(password === "") {
+        passwordError.innerHTML = "Please enter a password";
+        return false;
+    }
+
+    if (!hasUpperCase) {
+        passwordError.innerHTML = "Password must have at least one uppercase letter";
+        return false;
+    }
+
+    if (!hasLowerCase) {
+        passwordError.innerHTML = "Password must have at least one lowercase letter";
+        return false;
+    }
+
+    if (!hasNumbers) {
+        passwordError.innerHTML = "Password must include numbers";
+        return false;
+    }
+
+    if (!hasSymbols) {
+        passwordError.innerHTML = "Password must include symbols";
+        return false;
+    }
+    window.location.href = "Dashboard.html";
+    return false;
+}
+
+    </script>
 </head>
 <body>
     <header>
@@ -22,44 +81,30 @@
             </div>
         </div>
     <header>
-        <!-- <div id="app">
-            <main>
-                <div class="heading">
-                    <h1 class="align-center" style="font-size: 40px;">Log in</h1>
-                    <form action="dashboard" method="" id="login-form">
-                        <div class="i-group">
-                            <i class="fa fa-user"></i>
-                            <input required type="text" name="username" id="username" placeholder="Username">
-                        </div>
-                        <div class="i-group">
-                            <i class="fa fa-lock"></i>
-                            <input required type="password" name="password" id="password" placeholder="Password">
-                        </div>
-                        <button type="submit" value="Log in" id="submit">
-                            Log in &nbsp; <i class="fa fa-sign-in"></i>
-                        </button>
-                    </form>
-                </div>
-            </main>
-        </div> -->
         <main>
             <div class="container">
-          <section>
-            <div class="content">
-                <h2>Log in</h2>
-            </div>
-                <div class="inputs">
-                    <input type="text" placeholder=" Username">
-                    <input type="password" placeholder="password">
-                </div>
-                <div class="log-in">
-                    <a href="Dashboard.html"><h3>Log in</h3></a>
-                </div>
-          </section>
-        </div>
-        </main>
+                <section>
+                    <div class="content">
+                        <h2>Log in</h2>
+                    </div>
+                    <form id="loginForm" onsubmit="return validateForm()">
+                        <div class="inputs">
+                            <input type="text" id="username" placeholder="Username">
+                            <div id="usernameError" style="color: red;"></div>
+                            <input type="password" id="password" placeholder="Password">
+                            <div id="passwordError" style="color: red;"></div>
+                        </div>
+                        <div class="log-in">
+                            <button type="submit" style="background: none; border: none; cursor: pointer;"><h3>Log in</h3></button>
+                        </div>
+                    </form>
+                </section>
+            </div>       
+    
+                </main>
         <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
         
-        <script src="script.js"></script>
+       
+
 </body>
 </html>

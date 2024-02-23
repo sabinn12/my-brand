@@ -42,13 +42,17 @@
                     <p>Website_<span> www.sabin.com</span></p>
                 </div>
                 <div class="contact-form">
-                    <input type="text" required="required" placeholder="Name">
+                    <input type="text" placeholder="Enter Your Name" id="contact-name" onkeyup="validateName() ">
+    <span id="name-error"></span>
                     <br>
-                    <input type="text" required="required"placeholder="Email">
+                    <input type="email" placeholder="Enter email" id="contact-email" onkeyup="validateEmail()" >
+    <span id="email-error"></span>
                     <br>
-                    <textarea  required="required"placeholder="Message"></textarea>
+                    <textarea  placeholder="Enter Your Message" id="contact-message" onkeyup="validateMessage()"></textarea>
+    <span id="message-error"></span>
                     <br>
-                    <button>Send</button>
+                    <button onclick="return validateForm()">Submit</button>
+                     <span id="submit-error"></span>
                 </div>
               
             </section>
@@ -56,6 +60,6 @@
         </main>
         <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
         
-        <script src="script.js"></script> 
+        <script src="contact.js"></script> 
 </body>
 </html>

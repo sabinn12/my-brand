@@ -176,4 +176,40 @@ button{
     margin-left: 20px;
   }
 }
-
+.contact-form .fa-paper-plane{
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: #fff;
+  font-size: 26px;
+  padding: 20px;
+  border-radius: 50%;
+  color: green;
+}
+.contact-form button{
+  background-color: #141a34;
+  color: #fff;
+  border-radius: 4px;
+  border:1px solid rgba(255, 255, 255, 0.7);
+ padding: 10px 40px;
+ outline: 0;
+ cursor: pointer;
+ display: block;
+ margin: 30px auto 10px;
+}
+.contact-form span{
+ position: absolute;
+ margin-right: 1%;
+ margin-left: 2%;
+ margin-top: 0.5%;
+ font-size: 16px; 
+ color: red;
+ 
+}
+.contact-form #submit-error{
+  color: red;
+}
+.contact-form span i{
+  color: seagreen;
+}

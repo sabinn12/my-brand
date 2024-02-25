@@ -152,13 +152,16 @@ border-radius: 15%;
 
 @media screen and (max-width: 768px) {
    .home-content{
-    margin-top: 500px;    
+    margin-top: 500px;
+    margin-left: 8%;
+    justify-content: space-between;    
    }
    .home-content-pic img{
      width: 50%;
      height: 30%;
-     margin-right: 10%;
-     margin-top: 29%;
+     margin-right: 13%;
+     margin-top: 10%;
    }
+   
    
 }

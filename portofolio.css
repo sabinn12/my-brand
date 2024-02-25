@@ -1,8 +1,13 @@
 :root{
     --nav-height: 60px;
 }
+html{
+    margin: 0px;
+    padding: 0px;
+}
 body{
-    margin: 0;
+    margin: 0px;
+    padding: 0px;
     background: #111827;
     
 }
@@ -20,7 +25,7 @@ body{
     padding: 0 20px;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 10px;
     
     
 }
@@ -58,6 +63,7 @@ body{
     background: #000;
 }
 @media only screen and (max-width: 620px){
+    
     .nav i{
         display: block;
     }
@@ -200,9 +206,10 @@ body{
     padding-top: 30px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 620px) {
    .container .portfolio-content{
     margin-left: 10vw;
+    margin-top: 1%;
        
    }
    .container .portfolio-content h1{
@@ -226,20 +233,20 @@ body{
      margin-right: 5%;
    }
    .pic2{
-    margin-left: -50vw;
+    margin-left: -40vw;
    }
    .pic3{
     margin-top: -0.1vw;
-    margin-left: -50vw;
+    margin-left: -40vw;
    }
    .pic4{
-    margin-top: -95vw;
-    margin-right: -50vw;
+    margin-top: -80vw;
+    margin-right: -40vw;
    
    }
    .pic5{
     margin-top: -0.1vw;
-    margin-right: -50vw;
+    margin-right: -40vw;
    
    }
 }

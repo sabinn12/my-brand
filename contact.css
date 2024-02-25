@@ -18,9 +18,7 @@ body{
   background: black;
   height: var(--nav-height);
   padding: 0 20px;
-  position: sticky;
-    top: 0;
-    z-index: 100;
+  
 
 }
 .nav h2{
@@ -57,7 +55,9 @@ body{
   background: #000;
 }
 @media only screen and (max-width: 620px){
-  
+  .nav{
+    width: 100%;
+  }
   .nav i{
       display: block;
   }
@@ -148,9 +148,12 @@ button{
   cursor: pointer;
 }
 @media (max-width: 600px) {
+ 
   .container {
-    margin-top: 30px;
+    margin-top: 10px;
       flex-direction: column;
+      margin-left: -10px;
+      position: relative;
   }
   .container .content h2 {
       font-size: 32px;
@@ -169,12 +172,21 @@ button{
       width: 80vw;
       height: 5vw;
   }
+  .container .contact-form textarea{
+    width: 80vw;
+    height: 20vw;
+  }
+  .container .contact-form button{
+    margin-left: 14%;
+  }
   .contact-info p {
     margin-left: 20px;
   }
   .content p{
     margin-left: 20px;
   }
+  
+ 
 }
 .contact-form .fa-paper-plane{
   position: absolute;

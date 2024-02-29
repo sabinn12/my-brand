@@ -18,13 +18,23 @@
         justify-content: center;
         align-items: center;
         color: #FFFF00;
-        font-size: 31px;
+        font-size: 12px;
         font-weight: bolder;
         margin-top: 40px;
+        display: none;
+      }
+      img{
+        width: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 35%;
+       margin-top: 2%;
+       height: 250px;
       }
     .container{
         display: flex;
-        margin-top: 70px;
+        margin-top: 80px;
         line-height: 30px;
     }
     .container .pone{
@@ -41,26 +51,47 @@
         font-weight: bold;
         margin-left: 20px;
     }
+        #blogTitle{
+          color: #EAB308;
+          font-size: 20px;
+          text-transform: capitalize;
+          margin-top: 3%;
+          margin-left: 35%;
+        }
+        #blogImage{
+        
+        }
+        #blogContent{
+        background: darkgray;
+        margin-top: 1%;
+        width: 70%;
+        margin-left: 12%;
+     
+        }
+        
     .contains{
         display: inline-block;
         align-items: center;
         justify-content: center;
+        margin-top: 5%;
+        
     }
     .contains h2{
         text-align: center;
-        margin-left: 222px;
+        margin-left: 130px;
         font-size: 23px;
         font-weight: bold;
         color: blue;
+        
     }
      input{
-        width: 60%;
+        width: 80%;
         padding: 7px;
         background: #1F2937;
         color: white;
     }
     textarea{
-        width: 60%;
+        width: 80%;
         padding: 10px;
         background: #1F2937;
         color: white;
@@ -71,7 +102,8 @@
         margin-bottom: 7px;
     }
     .contains, input, textarea, button{
-        margin-left: 300px;
+        margin-left: 200px;
+        
     }
     button{
         background: #6B7280;
@@ -81,13 +113,21 @@
     }
    .back{
         margin-bottom: -30px;
+        margin-right: 00px;
         color: #FFFF00;
     }
     .back a{
-        color: #FFFF00;
+        font-style: inherit;
+        color: black;
+        background: #EAB308;
         text-decoration: none;
         cursor: pointer;
+        margin-left: -180px;
+        border: 1px solid black;
+        border-color: #6B7280;
+        border-radius: 12px;
     }
+   
     /* debugging */
    
     @media (max-width: 1250px) {
@@ -106,39 +146,99 @@
 </head>
 <body>
     <header>
-        <p>Clients are part of the team</p>
+     <p>Blog Title</p>
     </header>
-    <main>
-        <div class="container">
-        
-        <section>
-            <div class="pone">
-       <p>Clients are Part of the Team<br>
-        In the world of software development, we often draw a line between the team that builds the product and the clients who use it. But what if we blurred that line? What if we started to see our clients not just as end-users, but as integral parts of our team?</p>
-    </div>
-    <br>
-    <div class="ptwo">
-        <p>Collaboration Over Instruction<br>
-            The traditional model of software development sees the client as someone who gives instructions and the development team as those who follow them. But this can lead to a disconnect. The team might not fully understand the client’s vision, and the client might not be aware of the technical challenges involved in their requests.</p>
-    </div>
-      <footer>
+
+    <div>
+        <h1 id="blogTitle"></h1>
+        <img id="blogImage" alt="Blog Image">
+        <div id="blogContent"></div>
+    </div> 
         <div class="contains">
             <h2>Comments</h2>
-            <input type="text" placeholder="Your Name">
+            <input type="text" id="commenterName" placeholder="Your Email">
             <br>
-            <textarea rows="3" cols="10" placeholder="Add a comment"></textarea>
+            <textarea rows="3" cols="10" id="commentText" placeholder="Add a comment"></textarea>
             <br>
-            <button type="button">Submit</button>
+            <button type="button" onclick="submitComment()">Submit</button>
 
             <div class="back">
                 <a href="blog.html">Back Home</a>
             </div>
         </div>
-      </footer>
-        </section>
+    
+        
+    
 
+    <script>
 
-    </div>
-    </main>
+window.onload = function () {
+            // Get the blog ID from the query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const blogId = urlParams.get('id');
+
+            // Get the existing blog posts from local storage
+            const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+
+            // Find the blog post based on the provided ID
+            const targetBlog = blogPosts.find(blog => blog.id === blogId);
+
+            if (targetBlog) {
+                // Display the blog content on the page
+                document.getElementById('blogTitle').innerText = targetBlog.title;
+                document.getElementById('blogImage').src = targetBlog.image;
+                document.getElementById('blogContent').innerHTML = targetBlog.content;
+
+                // Initialize CKEditor on the blog content
+                CKEDITOR.replace('blogContent', {
+                    readOnly: true
+                });
+            } else {
+                // Handle case where the blog with the provided ID is not found
+                alert('Blog not found');
+            }
+        };
+
+        // Function to submit a new comment
+        function submitComment() {
+            // Get the comment details
+            const commenterName = document.getElementById('commenterName').value;
+            const commentText = document.getElementById('commentText').value;
+
+            // Validate if commenterName and commentText are not empty
+            if (commenterName.trim() === '' || commentText.trim() === '') {
+                alert('Please enter your name and comment before submitting.');
+                return;
+            }
+
+            // Create a new comment object
+            const newComment = {
+                name: commenterName,
+                text: commentText,
+            };
+
+            // Get the existing blog posts from local storage
+            const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+
+            // Find the correct blog post based on some identifier, let's assume it's the first one for simplicity
+            const targetBlogPostIndex = 0;
+
+            // Add the new comment to the comments array of the target blog post
+            blogPosts[targetBlogPostIndex].comments = blogPosts[targetBlogPostIndex].comments || [];
+            blogPosts[targetBlogPostIndex].comments.push(newComment);
+
+            // Increment the comments count for the target blog post
+            blogPosts[targetBlogPostIndex].commentsCount = (blogPosts[targetBlogPostIndex].commentsCount || 0) + 1;
+
+            // Update the local storage with the modified blog posts
+            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+
+            // Optionally, you can redirect the user back to the blog post or perform any other actions
+
+            // Reload the page to display the updated comments
+            location.reload();
+        }
+    </script>
+    
 </body>
 </html>

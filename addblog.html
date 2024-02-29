@@ -41,44 +41,114 @@
                     <h1 style="font-size: 18px;">Blogs</h1>
                     <button style="font-size: 15px;"><a href="newblog.html">Newblog</a></button>
                 </div>
-               
-                
             </div>
-            <div class="second-container">
-                <div class="blog-content">
-                    <img src="pics/a.png" alt="Blog Image" class="blog-image">
-                    <h2>Some Title</h2>
-                </div>
-                <div class="blog-actions">
-                    <button style="background: #B09F00;"><a style="color: #202027;" href="editblog.html">Edit</a></button>
-                    <button style="background: #B00000;"><a style="color: #202027;" href="">Delete</a></button>
-                </div>
-            </div>
-            <div class="second-container">
-                <div class="blog-content">
-                    <img src="pics/a.png" alt="Blog Image" class="blog-image">
-                    <h2>Some Title</h2>
-                </div>
-                <div class="blog-actions">
-                    <button style="background: #B09F00;"><a style="color: #202027;" href="editblog.html">Edit</a></button>
-                    <button style="background: #B00000;"><a style="color: #202027;" href="">Delete</a></button>
-                </div>
-            </div>
-            
-            <div class="second-container">
-                <div class="blog-content">
-                    <img src="pics/a.png" alt="Blog Image" class="blog-image">
-                    <h2>Some Title</h2>
-                </div>
-                <div class="blog-actions">
-                    <button style="background: #B09F00;"><a style="color: #202027;" href="editblog.html">Edit</a></button>
-                    <button style="background: #B00000;"><a style="color: #202027;" href="">Delete</a></button>
-                </div>
-            </div>
-         </div>
-        
-</main>
-<script src="script.js"></script>
 
+            <!-- Headers for the content -->
+           
+
+            <!-- Existing blogs will be displayed here -->
+            <table>
+                <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th></th>
+                </tr>
+                <!-- Sample blog post -->
+                <tr>
+                    <td><img src="pics/a.png" alt="Blog Image" class="blog-image"></td>
+                    <td>Some Title</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam condimentum varius urna, a
+                        efficitur orci aliquam id.</td>
+                    <td>
+                        <button style="background: #B09F00;"><a style="color: #202027;" href="editblog.html">Edit</a></button>
+                        <button style="background: #B00000;"><a style="color: #202027;" href="">Delete</a></button>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Rich Text Editor Section -->
+            <h3>Add/Update Content</h3>
+            <div id="editor-container">
+                <!-- Rich Text Editor will be integrated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Include the script to display existing blogs and integrate rich text editor -->
+    <script>
+        var blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+        var table = document.querySelector('table');
+
+        function deleteBlog(blogIndex) {
+            blogPosts.splice(blogIndex, 1);
+            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+            displayBlogs();
+        }
+
+        function editBlog(blogIndex) {
+            window.location.href = 'editblog.html?index=' + blogIndex;
+        }
+
+        function displayBlogs() {
+            table.innerHTML = '';
+
+            for (let i = 0; i < blogPosts.length; i++) {
+                const blogPost = blogPosts[i];
+                const row = document.createElement('tr');
+
+                const imageCell = document.createElement('td');
+                imageCell.innerHTML = `<img src="${blogPost.image}" alt="Blog Image" class="blog-image">`;
+
+                const titleCell = document.createElement('td');
+                titleCell.textContent = blogPost.title;
+
+                const contentCell = document.createElement('td');
+                contentCell.textContent = blogPost.content;
+
+                const actionsCell = document.createElement('td');
+                const editButton = document.createElement('button');
+                const deleteButton = document.createElement('button');
+
+                editButton.textContent = 'Edit';
+                editButton.style.backgroundColor = '#B09F00';
+                editButton.style.color = '#202027';
+                editButton.addEventListener('click', function () {
+                    editBlog(i);
+                });
+
+                deleteButton.textContent = 'Delete';
+                deleteButton.style.backgroundColor = '#B00000';
+                deleteButton.style.color = '#202027';
+                deleteButton.addEventListener('click', function () {
+                    deleteBlog(i);
+                });
+
+                actionsCell.appendChild(editButton);
+                actionsCell.appendChild(deleteButton);
+
+                row.appendChild(imageCell);
+                row.appendChild(titleCell);
+                row.appendChild(contentCell);
+                row.appendChild(actionsCell);
+
+                table.appendChild(row);
+            }
+        }
+
+        // Call displayBlogs when the page loads
+        displayBlogs();
+
+        // Integration of Rich Text Editor (Example: CKEditor)
+        ClassicEditor
+            .create(document.querySelector('#editor-container'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
+    <script src="script.js"></script>
+    <!-- Include the CKEditor script -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.1/classic/ckeditor.js"></script>
 </body>
 </html>

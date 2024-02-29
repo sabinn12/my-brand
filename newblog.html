@@ -1,58 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Blog</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background: #111827;
         }
-        .container{
+        .container {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .text{
+        .text {
             margin-top: 5%;
             margin-bottom: -0%;
             margin-left: 43%;
         }
-        .text h1{
+        .text h1 {
             color: white;
             font-size: 30px;
             font-weight: bold;
         }
-        .form{
+        .form {
             margin-top: 1%;
             margin-left: 3%;
         }
-        .form label{
+        .form label {
             color: white;
         }
-        .form input{
+        .form input {
             background: white;
             width: 70vw;
-            color:white;
+            color: black;
         }
-        .form textarea{ 
-           
+        .form textarea {
             width: 70vw;
-            color:black;
+            color: black;
         }
-        .form input[type="submit"]{
+        .form input[type="submit"] {
             width: 40vw;
             margin-left: 20%;
             height: 30%;
             background: #202027;
             cursor: pointer;
+            color: white;
         }
-        label, textarea, input[type="submit"] {
+        label,
+        textarea,
+        input[type="submit"] {
             display: block;
             margin: 1rem 0;
         }
-      
     </style>
-     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 </head>
 <body>
     <header>
@@ -63,31 +66,69 @@
     <main>
         <div class="container">
             <div class="form">
-                <form>
+                <form id="addBlogForm">
                     <label for="title">Title:</label>
                     <input type="text" id="title" name="title" required>
                     <label for="image">Choose image</label>
-                    <input type="file" id="image" name="image" accept="image/*">
+                    <input type="file" id="image" name="image" accept="image/*" onchange="previewImage()">
+                    <img id="imagePreview" src="" alt="Preview" style="margin-right: 70%; ">
                     <label for="content">Content:</label>
                     <textarea id="editor" name="content" rows="10" cols="30" required></textarea>
-
-                    <input type="submit" value="Update">
+                    <input type="submit" value="Add">
                 </form>
             </div>
         </div>
     </main>
     <footer>
-        <a style="
-        text-decoration: None;
-            border: 1px solid darkgoldenrod;
-            color: white;
-            border-width: 5px;
-            border-radius: 20px;
-            " href="addblog.html">Back</a>
+        <a href="blog.html">Back</a>
     </footer>
     <script>
         CKEDITOR.replace('editor');
+
+        // Function to preview the selected image
+        function previewImage() {
+            var fileInput = document.getElementById('image');
+            var imagePreview = document.getElementById('imagePreview');
+
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+
+        document.getElementById('addBlogForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const image = document.getElementById('imagePreview').src;
+            const content = CKEDITOR.instances.editor.getData();
+
+            const blogId = generateUniqueId();
+
+            const newBlog = {
+                id: blogId,
+                title: title,
+                image: image,
+                content: content,
+            };
+
+            const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+
+            blogPosts.push(newBlog);
+
+            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+
+            window.location.href = `singlepb.html?id=${blogId}`;
+        });
+
+        function generateUniqueId() {
+            return 'blog_' + Date.now();
+        }
     </script>
-   
 </body>
 </html>

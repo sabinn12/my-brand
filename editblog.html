@@ -1,58 +1,12 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Blog</title>
+    <title>Edit Blog</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #111827;
-        }
-        .container{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .text{
-            margin-top: 5%;
-            margin-bottom: -0%;
-            margin-left: 43%;
-        }
-        .text h1{
-            color: white;
-            font-size: 30px;
-            font-weight: bold;
-        }
-        .form{
-            margin-top: 1%;
-            margin-left: 3%;
-        }
-        .form label{
-            color: white;
-        }
-        .form input{
-            background: white;
-            width: 70vw;
-            color:white;
-        }
-        .form textarea{ 
-           
-            width: 70vw;
-            color:black;
-        }
-        .form input[type="submit"]{
-            width: 40vw;
-            margin-left: 20%;
-            height: 30%;
-            background: #202027;
-            cursor: pointer;
-        }
-        label, textarea, input[type="submit"] {
-            display: block;
-            margin: 1rem 0;
-        }
-      
+        /*  */
+
     </style>
-     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 </head>
 <body>
     <header>
@@ -63,7 +17,7 @@
     <main>
         <div class="container">
             <div class="form">
-                <form>
+                <form id="editBlogForm">
                     <label for="title">Title:</label>
                     <input type="text" id="title" name="title" required>
                     <label for="image">Choose image</label>
@@ -77,17 +31,199 @@
         </div>
     </main>
     <footer>
-        <a style="
-        text-decoration: None;
-            border: 1px solid darkgoldenrod;
-            color: white;
-            border-width: 5px;
-            border-radius: 20px;
-            " href="addblog.html">Back</a>
+        <a href="addblog.html">Back</a>
     </footer>
     <script>
         CKEDITOR.replace('editor');
+
+        // Retrieve the blog index from the URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const blogIndex = urlParams.get('index');
+
+        // Get the existing blog data
+        const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+
+        // Load the existing blog data and fill the form
+        document.addEventListener('DOMContentLoaded', function () {
+            if (blogIndex !== null && blogIndex >= 0 && blogIndex < blogPosts.length) {
+                const blogToEdit = blogPosts[blogIndex];
+                document.getElementById('title').value = blogToEdit.title;
+                // Add logic to populate other form fields (image, content, etc.) based on your data structure
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('editBlogForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get the updated values from the form
+            const updatedTitle = document.getElementById('title').value;
+            // Add logic to get other updated values (image, content, etc.) based on your data structure
+
+            // Update the blog in the array
+            blogPosts[blogIndex].title = updatedTitle;
+            // Add logic to update other blog properties based on your data structure
+
+            // Update the local storage
+            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+
+            // Redirect back to the blog list page
+            window.location.href = 'addblog.html';
+        });
     </script>
-   
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111827;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .text {
+            margin-top: 5%;
+            margin-bottom: -0%;
+            margin-left: 43%;
+        }
+        .text h1 {
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .form {
+            margin-top: 1%;
+            margin-left: 3%;
+        }
+        .form label {
+            color: white;
+        }
+        .form input {
+            background: white;
+            width: 70vw;
+            color: black;
+        }
+        .form textarea {
+            width: 70vw;
+            color: black;
+        }
+        .form input[type="file"] {
+            width: 70vw;
+            margin-bottom: 10px;
+        }
+        #imagePreview {
+            max-width: 70vw;
+            margin-right: 20%;
+        }
+        .form input[type="submit"] {
+            width: 40vw;
+            margin-left: 20%;
+            height: 30%;
+            background: #202027;
+            cursor: pointer;
+            color: white;
+        }
+        label, textarea, input[type="submit"] {
+            display: block;
+            margin: 1rem 0;
+        }
+    </style>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+</head>
+<body>
+    <header>
+        <div class="text">
+            <h1>Edit Blog</h1>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="form">
+                <form id="editBlogForm">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                    <label for="image">Choose image</label>
+                    <input type="file" id="image" name="image" accept="image/*" onchange="previewImage()">
+                    <img id="imagePreview" src="" alt="Preview">
+                    <label for="content">Content:</label>
+                    <textarea id="editor" name="content" rows="10" cols="30" required></textarea>
+                    <input type="submit" value="Update">
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <a href="addblog.html">Back</a>
+    </footer>
+    <script>
+        CKEDITOR.replace('editor');
+        // Retrieve the blog index from the URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const blogIndex = urlParams.get('index');
+
+        // Get the existing blog data
+        const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+
+        // Load the existing blog data and fill the form
+        document.addEventListener('DOMContentLoaded', function () {
+            if (blogIndex !== null && blogIndex >= 0 && blogIndex < blogPosts.length) {
+                const blogToEdit = blogPosts[blogIndex];
+                document.getElementById('title').value = blogToEdit.title;
+                document.getElementById('editor').value = blogToEdit.content; // Assuming content is a plain text input
+                document.getElementById('imagePreview').src = blogToEdit.image; // Set the src attribute of the img tag
+                // Add logic to populate other form fields based on your data structure
+            }
+        });
+
+        // Function to preview the selected image
+        function previewImage() {
+            var fileInput = document.getElementById('image');
+            var imagePreview = document.getElementById('imagePreview');
+
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('editBlogForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get the updated values from the form
+            const updatedTitle = document.getElementById('title').value;
+            const updatedContent = CKEDITOR.instances.editor.getData(); // Get content from CKEditor
+            const updatedImage = document.getElementById('imagePreview').src;
+
+            // Update the blog in the array
+            blogPosts[blogIndex].title = updatedTitle;
+            blogPosts[blogIndex].content = updatedContent;
+            blogPosts[blogIndex].image = updatedImage;
+            // Add logic to update other blog properties based on your data structure
+
+            // Update the local storage
+            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+
+            // Redirect back to the blog list page
+            window.location.href = 'addblog.html';
+        });
+
+        // The rest of your JavaScript code remains unchanged
+    </script>
 </body>
 </html>
+
+    

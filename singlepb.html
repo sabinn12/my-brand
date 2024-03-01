@@ -1,244 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>single page blog</title>
     <style>
-      *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body{
-        background: #111827;
-      }
-      header p{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #FFFF00;
-        font-size: 12px;
-        font-weight: bolder;
-        margin-top: 40px;
-        display: none;
-      }
-      img{
-        width: 300px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 35%;
-       margin-top: 2%;
-       height: 250px;
-      }
-    .container{
-        display: flex;
-        margin-top: 80px;
-        line-height: 30px;
-    }
-    .container .pone{
-        color: white;
-        font-size: 20px;
-        padding: 20px;
-        font-weight: bold;
-        margin-left: 20px;
-    }
-    .container .ptwo{
-        color: white;
-        font-size: 20px;
-        padding: 20px;
-        font-weight: bold;
-        margin-left: 20px;
-    }
-        #blogTitle{
-          color: #EAB308;
-          font-size: 20px;
-          text-transform: capitalize;
-          margin-top: 3%;
-          margin-left: 35%;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        #blogImage{
-        
-        }
-        #blogContent{
-        background: darkgray;
-        margin-top: 1%;
-        width: 70%;
-        margin-left: 12%;
-     
-        }
-        
-    .contains{
-        display: inline-block;
-        align-items: center;
-        justify-content: center;
-        margin-top: 5%;
-        
-    }
-    .contains h2{
-        text-align: center;
-        margin-left: 130px;
-        font-size: 23px;
-        font-weight: bold;
-        color: blue;
-        
-    }
-     input{
-        width: 80%;
-        padding: 7px;
-        background: #1F2937;
-        color: white;
-    }
-    textarea{
-        width: 80%;
-        padding: 10px;
-        background: #1F2937;
-        color: white;
-        
-    }
-    input,textarea{
-        margin-top: 5px;
-        margin-bottom: 7px;
-    }
-    .contains, input, textarea, button{
-        margin-left: 200px;
-        
-    }
-    button{
-        background: #6B7280;
-        color: white;
-        margin-bottom: 1px;
-        cursor: pointer;
-    }
-   .back{
-        margin-bottom: -30px;
-        margin-right: 00px;
-        color: #FFFF00;
-    }
-    .back a{
-        font-style: inherit;
-        color: black;
-        background: #EAB308;
-        text-decoration: none;
-        cursor: pointer;
-        margin-left: -180px;
-        border: 1px solid black;
-        border-color: #6B7280;
-        border-radius: 12px;
-    }
-   
-    /* debugging */
-   
-    @media (max-width: 1250px) {
-        header p, .container .pone, .container .ptwo, .contains h2 {
-            font-size: 24px;
-        }
-        .contains, input, textarea, button {
-            margin-left: 50px;
-        }
-        input, textarea {
-            width: 90%;
-        }
-    }
 
+        body {
+            background: #111827;
+        }
+
+        header p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #FFFF00;
+            font-size: 12px;
+            font-weight: bolder;
+            margin-top: 40px;
+            display: none;
+        }
+
+        img {
+            width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 35%;
+            margin-top: 2%;
+            height: 250px;
+        }
+
+        .container {
+            display: flex;
+            margin-top: 80px;
+            line-height: 30px;
+        }
+
+        .container .pone {
+            color: white;
+            font-size: 20px;
+            padding: 20px;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+
+        .container .ptwo {
+            color: white;
+            font-size: 20px;
+            padding: 20px;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+
+        #blogTitle {
+            color: #EAB308;
+            font-size: 20px;
+            text-transform: capitalize;
+            margin-top: 3%;
+            margin-left: 35%;
+        }
+
+        #blogImage {}
+
+        #blogContent {
+            background: darkgray;
+            margin-top: 1%;
+            width: 70%;
+            margin-left: 12%;
+        }
+
+        .contains {
+            display: inline-block;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5%;
+        }
+
+        .contains h2 {
+            text-align: center;
+            margin-left: 130px;
+            font-size: 23px;
+            font-weight: bold;
+            color: blue;
+        }
+
+        input {
+            width: 80%;
+            padding: 7px;
+            background: #1F2937;
+            color: white;
+        }
+
+        textarea {
+            width: 80%;
+            padding: 10px;
+            background: #1F2937;
+            color: white;
+        }
+
+        input,
+        textarea {
+            margin-top: 5px;
+            margin-bottom: 7px;
+        }
+
+        .contains,
+        input,
+        textarea,
+        button {
+            margin-left: 200px;
+        }
+
+        button {
+            background: #6B7280;
+            color: white;
+            margin-bottom: 1px;
+            cursor: pointer;
+        }
+
+        .delete-button {
+            background: red;
+            color: white;
+        }
+
+        .back {
+            margin-bottom: -30px;
+            margin-right: 00px;
+            color: #FFFF00;
+        }
+
+        .back a {
+            font-style: inherit;
+            color: black;
+            background: #EAB308;
+            text-decoration: none;
+            cursor: pointer;
+            margin-left: -180px;
+            border: 1px solid black;
+            border-color: #6B7280;
+            border-radius: 12px;
+        }
+
+        /* Debugging */
+
+        @media (max-width: 1250px) {
+            header p,
+            .container .pone,
+            .container .ptwo,
+            .contains h2 {
+                font-size: 24px;
+            }
+
+            .contains,
+            input,
+            textarea,
+            button {
+                margin-left: 50px;
+            }
+
+            input,
+            textarea {
+                width: 90%;
+            }
+        }
+
+        #commentsSection {
+            color: white;
+            border: 1px solid yellow;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        .comment {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #6B7280;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .comment-content {
+            flex: 1;
+        }
+
+        .comment-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .comment-actions i {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .delete-icon {
+            color: red;
+        }
     </style>
+    <!-- Include Font Awesome (Replace with your preferred icon library) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-hVEjcczIY4aEdZl2u3h+7x3hCDBTDzD0vcX6V6+SiA00KW7rFeV+aewb/K1FAiQ=" crossorigin="anonymous">
 </head>
+
 <body>
     <header>
-     <p>Blog Title</p>
+        <p>Blog Title</p>
     </header>
 
     <div>
         <h1 id="blogTitle"></h1>
         <img id="blogImage" alt="Blog Image">
         <div id="blogContent"></div>
-    </div> 
-        <div class="contains">
-            <h2>Comments</h2>
-            <input type="text" id="commenterName" placeholder="Your Email">
-            <br>
-            <textarea rows="3" cols="10" id="commentText" placeholder="Add a comment"></textarea>
-            <br>
-            <button type="button" onclick="submitComment()">Submit</button>
+    </div>
 
-            <div class="back">
-                <a href="blog.html">Back Home</a>
-            </div>
+    <div class="contains">
+        <h2>Comments</h2>
+        <input type="text" id="commenterName" placeholder="Your Email">
+        <br>
+        <textarea rows="3" cols="10" id="commentText" placeholder="Add a comment"></textarea>
+        <br>
+        <button type="button" onclick="submitComment()">Submit</button>
+
+        <!-- Display submitted comments -->
+        <div id="commentsSection"></div>
+
+        <div class="back">
+            <a href="blog.html">Back Home</a>
         </div>
-    
-        
-    
+    </div>
 
     <script>
-
-window.onload = function () {
-            // Get the blog ID from the query parameters
+        window.onload = function () {
             const urlParams = new URLSearchParams(window.location.search);
             const blogId = urlParams.get('id');
 
-            // Get the existing blog posts from local storage
             const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-
-            // Find the blog post based on the provided ID
             const targetBlog = blogPosts.find(blog => blog.id === blogId);
 
             if (targetBlog) {
-                // Display the blog content on the page
                 document.getElementById('blogTitle').innerText = targetBlog.title;
                 document.getElementById('blogImage').src = targetBlog.image;
                 document.getElementById('blogContent').innerHTML = targetBlog.content;
 
-                // Initialize CKEditor on the blog content
+                if (targetBlog.comments && targetBlog.comments.length > 0) {
+                    displayComments(targetBlog.comments);
+                }
+
                 CKEDITOR.replace('blogContent', {
                     readOnly: true
                 });
             } else {
-                // Handle case where the blog with the provided ID is not found
                 alert('Blog not found');
             }
         };
 
-        // Function to submit a new comment
+        function displayComments(comments) {
+            const commentsSection = document.getElementById('commentsSection');
+
+            comments.forEach(comment => {
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment';
+
+                const commentContent = `<div class="comment-content"><strong>${comment.name}:</strong> ${comment.text}</div>`;
+                const commentActions = `
+                    <div class="comment-actions">
+                        <i class="fas fa-reply" onclick="replyToComment('${comment.name}')"></i>
+                        <i class="fas fa-thumbs-up" onclick="likeComment('${comment.name}')"></i>
+                        <i class="fas fa-trash delete-icon" onclick="deleteComment('${comment.name}')"></i>
+                    </div>
+                `;
+
+                commentDiv.innerHTML = commentContent + commentActions;
+                commentsSection.appendChild(commentDiv);
+            });
+        }
+
         function submitComment() {
-            // Get the comment details
             const commenterName = document.getElementById('commenterName').value;
             const commentText = document.getElementById('commentText').value;
 
-            // Validate if commenterName and commentText are not empty
             if (commenterName.trim() === '' || commentText.trim() === '') {
                 alert('Please enter your name and comment before submitting.');
                 return;
             }
 
-            // Create a new comment object
             const newComment = {
                 name: commenterName,
                 text: commentText,
+                likes: 0
             };
 
-            // Get the existing blog posts from local storage
             const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+            const targetBlogPost = blogPosts.find(blog => blog.id === getBlogIdFromUrl());
 
-            // Find the correct blog post based on some identifier, let's assume it's the first one for simplicity
-            const targetBlogPostIndex = 0;
+            if (targetBlogPost) {
+                targetBlogPost.comments = targetBlogPost.comments || [];
+                targetBlogPost.comments.push(newComment);
+                targetBlogPost.commentsCount = (targetBlogPost.commentsCount || 0) + 1;
 
-            // Add the new comment to the comments array of the target blog post
-            blogPosts[targetBlogPostIndex].comments = blogPosts[targetBlogPostIndex].comments || [];
-            blogPosts[targetBlogPostIndex].comments.push(newComment);
+                localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+                location.reload();
+            } else {
+                alert('Blog not found');
+            }
+        }
 
-            // Increment the comments count for the target blog post
-            blogPosts[targetBlogPostIndex].commentsCount = (blogPosts[targetBlogPostIndex].commentsCount || 0) + 1;
+        function replyToComment(commenterName) {
+            // Add logic to handle replies
+            alert(`Replying to ${commenterName}`);
+        }
 
-            // Update the local storage with the modified blog posts
-            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+        function likeComment(commenterName) {
+            const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+            const targetBlogPost = blogPosts.find(blog => blog.id === getBlogIdFromUrl());
+            const targetComment = targetBlogPost.comments.find(comment => comment.name === commenterName);
 
-            // Optionally, you can redirect the user back to the blog post or perform any other actions
+            if (targetComment) {
+                targetComment.likes = (targetComment.likes || 0) + 1;
+                localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+                location.reload();
+            }
+        }
 
-            // Reload the page to display the updated comments
-            location.reload();
+        function deleteComment(commenterName) {
+            const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+            const targetBlogPost = blogPosts.find(blog => blog.id === getBlogIdFromUrl());
+            const targetCommentIndex = targetBlogPost.comments.findIndex(comment => comment.name === commenterName);
+
+            if (targetCommentIndex !== -1) {
+                targetBlogPost.comments.splice(targetCommentIndex, 1);
+                targetBlogPost.commentsCount = (targetBlogPost.commentsCount || 1) - 1;
+                localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+                location.reload();
+            }
+        }
+
+        function getBlogIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
         }
     </script>
-    
+    <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

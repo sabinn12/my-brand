@@ -62,7 +62,7 @@
             blogText.classList.add('blog-text');
             const blogTitle = document.createElement('a');
             blogTitle.classList.add('blog-title');
-            blogTitle.href = `singlepb.html?id=${blog.id}`; // Use template literal with id parameter
+            blogTitle.href = `singlepb.html?id=${blog.id}`; 
             blogTitle.textContent = blog.title;
     
             const blogActions = document.createElement('div');
@@ -81,17 +81,16 @@
             const commentButton = document.createElement('button');
             commentButton.innerHTML = `<i class="fas fa-comments"></i> ${blog.commentsCount || 0}`;
             commentButton.addEventListener('click', () => {
-                // Do nothing here, comments are handled in singlepb.html
-                // No need to increment or update the count here
+               
             });
     
             const readMoreLink = document.createElement('a');
-            readMoreLink.href = `singlepb.html?id=${blog.id}`; // Add the correct href with id parameter
+            readMoreLink.href = `singlepb.html?id=${blog.id}`;
             readMoreLink.textContent = 'Read More';
 
             blogActions.appendChild(likeButton);
             blogActions.appendChild(commentButton);
-            blogActions.appendChild(readMoreLink); // Append the readMoreLink to blogActions
+            blogActions.appendChild(readMoreLink); 
     
             blogText.appendChild(blogTitle);
             blogText.appendChild(blogActions);
@@ -102,7 +101,7 @@
             slider.appendChild(blogBox);
         });
     
-        // Function to update local storage
+        //  update local storage
         function updateLocalStorage() {
             localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
         }

@@ -177,9 +177,8 @@
             if (blogIndex !== null && blogIndex >= 0 && blogIndex < blogPosts.length) {
                 const blogToEdit = blogPosts[blogIndex];
                 document.getElementById('title').value = blogToEdit.title;
-                document.getElementById('editor').value = blogToEdit.content; // Assuming content is a plain text input
-                document.getElementById('imagePreview').src = blogToEdit.image; // Set the src attribute of the img tag
-                // Add logic to populate other form fields based on your data structure
+                document.getElementById('editor').value = blogToEdit.content; 
+                document.getElementById('imagePreview').src = blogToEdit.image; 
             }
         });
 
@@ -212,16 +211,16 @@
             blogPosts[blogIndex].title = updatedTitle;
             blogPosts[blogIndex].content = updatedContent;
             blogPosts[blogIndex].image = updatedImage;
-            // Add logic to update other blog properties based on your data structure
+            
 
-            // Update the local storage
+            
             localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
 
-            // Redirect back to the blog list page
+            
             window.location.href = 'addblog.html';
         });
 
-        // The rest of your JavaScript code remains unchanged
+       
     </script>
 </body>
 </html>

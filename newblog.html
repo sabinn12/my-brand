@@ -80,7 +80,7 @@
         </div>
     </main>
     <footer>
-        <a href="blog.html">Back</a>
+        <a href="addblog.html">Back</a>
     </footer>
     <script>
         CKEDITOR.replace('editor');
@@ -123,7 +123,7 @@
 
             localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
 
-            window.location.href = `singlepb.html?id=${blogId}`;
+            window.location.href = `blog.html?id=${blogId}`;
         });
 
         function generateUniqueId() {

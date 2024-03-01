@@ -5,65 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="login.css">
     <title>Login</title>
-    <script>
-    function validateForm() {
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
-    var usernameError = document.getElementById('usernameError');
-    var passwordError = document.getElementById('passwordError');
-
-    // Clear previous error messages
-    usernameError.innerHTML = "";
-    passwordError.innerHTML = "";
-
-    // Username validation rules
-    var hasOnlyLettersAndNumbers = /^[a-zA-Z0-9]+$/.test(username);
-
-    if(username === "") {
-        usernameError.innerHTML = "Please enter a username";
-        return false;
-    }
-
-    if (!hasOnlyLettersAndNumbers) {
-        usernameError.innerHTML = "Username must contain only letters and numbers";
-        return false;
-    }
-
-    // Password validation rules
-    var hasUpperCase = /[A-Z]/.test(password);
-    var hasLowerCase = /[a-z]/.test(password);
-    var hasNumbers = /\d/.test(password);
-    var hasSymbols = /\W/.test(password);
-
-    if(password === "") {
-        passwordError.innerHTML = "Please enter a password";
-        return false;
-    }
-
-    if (!hasUpperCase) {
-        passwordError.innerHTML = "Password must have at least one uppercase letter";
-        return false;
-    }
-
-    if (!hasLowerCase) {
-        passwordError.innerHTML = "Password must have at least one lowercase letter";
-        return false;
-    }
-
-    if (!hasNumbers) {
-        passwordError.innerHTML = "Password must include numbers";
-        return false;
-    }
-
-    if (!hasSymbols) {
-        passwordError.innerHTML = "Password must include symbols";
-        return false;
-    }
-    window.location.href = "Dashboard.html";
-    return false;
-}
-
-    </script>
+   
 </head>
 <body>
     <header>
@@ -78,6 +20,8 @@
                 <a href="blog.html">Blogs</a>
                 <a href="contact.html">Contact me</a>
                 <a href="login.html">Login</a>
+                
+
             </div>
         </div>
     <header>
@@ -97,14 +41,152 @@
                         <div class="log-in">
                             <button type="submit" style="background: none; border: none; cursor: pointer;"><h3>Log in</h3></button>
                         </div>
+                        <h3 style="color: white; margin-left: 45%;">or</h3>
+                        <br>
+                        <a style="color: white; text-decoration: none;margin-left: 40%; font-size: 20px; " href="#" id="signup-link" onclick="openSignupPopup()">Sign Up</a>
                     </form>
                 </section>
-            </div>       
+                
+            </div>
+            <!-- sign up option        -->
+            <div id="signup-popup" class="popup">
+                <div class="popup-content">
+                  <span class="close" onclick="closeSignupPopup()">&times;</span>
+                  <h2>Sign Up</h2>
+                  <form id="signupForm" onsubmit="return validateSignupForm()">
+                    <div class="inputs">
+                      <input type="text" id="signup-name" placeholder="Name">
+                      <input type="email" id="signup-email" placeholder="Email">
+                      <input type="password" id="signup-password" placeholder="Password">
+                    </div>
+                    <div class="sign-up">
+                      <button type="submit"><h3>Sign Up</h3></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              
     
                 </main>
         <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
         
        
+        <script>
+            function validateForm() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var usernameError = document.getElementById('usernameError');
+            var passwordError = document.getElementById('passwordError');
+        
+            // Clear previous error messages
+            usernameError.innerHTML = "";
+            passwordError.innerHTML = "";
+        
+            // Username validation rules
+            var hasOnlyLettersAndNumbers = /^[a-zA-Z0-9]+$/.test(username);
+        
+            if(username === "") {
+                usernameError.innerHTML = "Please enter a username";
+                return false;
+            }
+        
+            if (!hasOnlyLettersAndNumbers) {
+                usernameError.innerHTML = "Username must contain only letters and numbers";
+                return false;
+            }
+        
+            // Password validation rules
+            var hasUpperCase = /[A-Z]/.test(password);
+            var hasLowerCase = /[a-z]/.test(password);
+            var hasNumbers = /\d/.test(password);
+            var hasSymbols = /\W/.test(password);
+        
+            if(password === "") {
+                passwordError.innerHTML = "Please enter a password";
+                return false;
+            }
+        
+            if (!hasUpperCase) {
+                passwordError.innerHTML = "Password must have at least one uppercase letter";
+                return false;
+            }
+        
+            if (!hasLowerCase) {
+                passwordError.innerHTML = "Password must have at least one lowercase letter";
+                return false;
+            }
+        
+            if (!hasNumbers) {
+                passwordError.innerHTML = "Password must include numbers";
+                return false;
+            }
+        
+            if (!hasSymbols) {
+                passwordError.innerHTML = "Password must include symbols";
+                return false;
+            }
+            window.location.href = "Dashboard.html";
+            return false;
+        }
 
+        // sign up option 
+        function openSignupPopup() {
+  document.getElementById('signup-popup').style.display = 'block';
+}
+
+function closeSignupPopup() {
+  document.getElementById('signup-popup').style.display = 'none';
+}
+
+function validateSignupForm() {
+    var signupName = document.getElementById('signup-name').value;
+    var signupEmail = document.getElementById('signup-email').value;
+    var signupPassword = document.getElementById('signup-password').value;
+
+    // Clear previous error messages
+    document.getElementById('signup-name-error').innerHTML = '';
+    document.getElementById('signup-email-error').innerHTML = '';
+    document.getElementById('signup-password-error').innerHTML = '';
+
+    // Validate name
+    if (signupName.trim() === '') {
+        document.getElementById('signup-name-error').innerHTML = 'Name is required';
+        return false;
+    }
+    // to find if the name is full
+    if (!signupName.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+        document.getElementById('signup-name-error').innerHTML = 'Write full Name';
+        return false;
+    }
+
+    // Validate email
+    if (signupEmail.trim() === '') {
+        document.getElementById('signup-email-error').innerHTML = 'Email is required';
+        return false;
+    } else {
+        // Add email format validation if needed
+        // Example: You can use regular expressions to check for a valid email format
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(signupEmail)) {
+            document.getElementById('signup-email-error').innerHTML = 'Email is invalid';
+            return false;
+        }
+    }
+
+    // Validate password
+    if (signupPassword.trim() === '') {
+        document.getElementById('signup-password-error').innerHTML = 'Password is required';
+        return false;
+    }
+
+    // Add any additional validation logic here
+
+    // After successful signup, you may redirect or perform other actions
+    alert('Signup successful!');
+    closeSignupPopup(); // Close the signup popup
+
+    return false; // Prevent form submission
+}
+            </script>
 </body>
 </html>

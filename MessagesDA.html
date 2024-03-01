@@ -10,99 +10,189 @@
     <title>Dashboard Messages</title>
 </head>
 <body>
-        <main>
-            <div id="side">
-                <h1 class="greener">Dashboard</h1>
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-                <div id="nav">
-                    <a class="link active" href="Dashboard.html" id="home">
-                        <i class="fa fa-home"></i>
-                        <span>Home</span>
-                    </a>
-                    <a class="link" id="blog" href="addblog.html">
-                        <i class="fa fa-newspaper"></i>
-                        <span>Blogs</span>
-                    </a>
-                    <a class="link" id="blog" href="MessagesDA.html">
-                        <i class="fa-solid fa-message"></i>
-                        <span>Messages</span>
-                    </a>
-                    <a class="link" href="index.html">
-                        <i class="fa fa-sign-out"></i>
-                        <span>Log out</span>
-                    </a>
+    <main>
+        <div id="side">
+            <h1 class="greener">Dashboard</h1>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <div id="nav">
+                <a class="link active" href="Dashboard.html" id="home">
+                    <i class="fa fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a class="link" id="blog" href="addblog.html">
+                    <i class="fa fa-newspaper"></i>
+                    <span>Blogs</span>
+                </a>
+                <a class="link" id="blog" href="MessagesDA.html">
+                    <i class="fa-solid fa-message"></i>
+                    <span>Messages</span>
+                </a>
+                <a class="link" href="index.html">
+                    <i class="fa fa-sign-out"></i>
+                    <span>Log out</span>
+                </a>
+            </div>
+        </div>
+        <div id="content">
+            <button class="openbtn" onclick="openNav()">☰</button>
+            <div class="dashboard">
+                <h1 style="color: #FACC15;">Messages</h1>
+                <div class="messages" id="messages-container">
+                   
                 </div>
             </div>
-            <div id="content">
-                <button class="openbtn" onclick="openNav()">☰</button>
-                <div class="dashboard">
-                    <h1 style="color: #FACC15;">Messages</h1>
-                    <div class="messages">
-                      <div class="message">
-                        <div class="message-header">
-                          <span class="name">John Doe</span>
-                          <span class="email">johndoe@example.com</span>
-                          <span class="date">22 Feb 2024</span>
-                        </div>
-                        <div class="message-body">
-                          <p>Hello, I am interested in your product. Can you please send me more details?</p>
-                        </div>
-                        <div class="message-footer">
-                          <button class="reply">Reply</button>
-                          <button class="delete">Delete</button>
-                        </div>
-                      </div>
-                      <div class="message">
-                        <div class="message-header">
-                          <span class="name">John Doe</span>
-                          <span class="email">johndoe@example.com</span>
-                          <span class="date">22 Feb 2024</span>
-                        </div>
-                        <div class="message-body">
-                          <p>Hello, I am interested in your product. Can you please send me more details?</p>
-                        </div>
-                        <div class="message-footer">
-                          <button class="reply">Reply</button>
-                          <button class="delete">Delete</button>
-                        </div>
-                      </div>
-                      <div class="message">
-                        <div class="message-header">
-                          <span class="name">John Doe</span>
-                          <span class="email">johndoe@example.com</span>
-                          <span class="date">22 Feb 2024</span>
-                        </div>
-                        <div class="message-body">
-                          <p>Hello, I am interested in your product. Can you please send me more details?</p>
-                        </div>
-                        <div class="message-footer">
-                          <button class="reply">Reply</button>
-                          <button class="delete">Delete</button>
-                        </div>
-                      </div>
-                      <div class="message">
-                        <div class="message-header">
-                          <span class="name">John Doe</span>
-                          <span class="email">johndoe@example.com</span>
-                          <span class="date">22 Feb 2024</span>
-                        </div>
-                        <div class="message-body">
-                          <p>Hello, I am interested in your product. Can you please send me more details?</p>
-                        </div>
-                        <div class="message-footer">
-                          <button class="reply">Reply</button>
-                          <button class="delete">Delete</button>
-                        </div>
-                      </div>
-                      <!-- End of sample message -->
-                    </div>
-                  </div>
-                  
-                    </div>
-                    </main>
-                
-                    <script src="script.js"></script>
-                    
-    </body>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
+            integrity="sha512-xZzVglbxr4eR2Xiqh+5iltaNc9gBKZlrSh8AC+3Pi6eJCD0QFLWdbD6zXkacZQSc02flmyd2dpyUGc60Iuyqpg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+    <script>
+        // messages dynamically from local storage
+        window.onload = function () {
+            var messagesContainer = document.getElementById('messages-container');
+            var messages = JSON.parse(localStorage.getItem('messages')) || [];
 
+            messages.forEach(function (message) {
+                var messageElement = document.createElement('div');
+                messageElement.className = 'message';
+
+                var headerElement = document.createElement('div');
+                headerElement.className = 'message-header';
+                headerElement.innerHTML = '<span class="name">' + message.name + '</span>' +
+                                          '<span class="email">' + message.email + '</span>' +
+                                          '<span class="date">' + message.date + '</span>';
+
+                var bodyElement = document.createElement('div');
+                bodyElement.className = 'message-body';
+                bodyElement.innerHTML = '<p>' + message.message + '</p>';
+
+                var footerElement = document.createElement('div');
+                footerElement.className = 'message-footer';
+                footerElement.innerHTML = '<button class="reply">Reply</button>' +
+                                          '<button class="delete">Delete</button>';
+
+                messageElement.appendChild(headerElement);
+                messageElement.appendChild(bodyElement);
+                messageElement.appendChild(footerElement);
+
+                messagesContainer.appendChild(messageElement);
+            });
+        };
+        // Function to delete a message
+function deleteMessage(index) {
+    // Retrieve existing messages from local storage
+    var messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+    // Remove the message at the specified index
+    messages.splice(index, 1);
+
+    // Save the updated messages array back to local storage
+    localStorage.setItem('messages', JSON.stringify(messages));
+
+    // Refresh the messages on the page
+    refreshMessages();
+}
+
+// Function to refresh messages on the page
+function refreshMessages() {
+    var messagesContainer = document.getElementById('messages-container');
+    var messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+    // Clear the current messages on the page
+    messagesContainer.innerHTML = '';
+
+    // Populate messages dynamically from local storage
+    messages.forEach(function (message, index) {
+        var messageElement = document.createElement('div');
+        messageElement.className = 'message';
+
+        var headerElement = document.createElement('div');
+        headerElement.className = 'message-header';
+        headerElement.innerHTML = '<span class="name">' + message.name + '</span>' +
+                                  '<span class="email">' + message.email + '</span>' +
+                                  '<span class="date">' + message.date + '</span>';
+
+        var bodyElement = document.createElement('div');
+        bodyElement.className = 'message-body';
+        bodyElement.innerHTML = '<p>' + message.message + '</p>';
+
+        var footerElement = document.createElement('div');
+        footerElement.className = 'message-footer';
+
+        // Add a delete button with an onclick event to trigger the deleteMessage function
+        footerElement.innerHTML = '<button class="reply">Reply</button>' +
+                                  '<button class="delete" onclick="deleteMessage(' + index + ')">Delete</button>';
+
+        messageElement.appendChild(headerElement);
+        messageElement.appendChild(bodyElement);
+        messageElement.appendChild(footerElement);
+
+        messagesContainer.appendChild(messageElement);
+    });
+}
+
+// Refresh messages on page load
+window.onload = function () {
+    refreshMessages();
+};
+// Function to reply to a message
+function replyToMessage(index) {
+    // Retrieve existing messages from local storage
+    var messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+    // Get the email of the message at the specified index
+    var emailToReply = messages[index].email;
+
+     // Create a mailto link with the subject and body pre-filled
+     var mailtoLink = 'mailto:' + emailToReply + '?subject=Reply to Your Message&body=Dear ' + messages[index].name + ',%0D%0A%0D%0A';
+
+// Open the default email client
+window.location.href = mailtoLink;
+}
+
+// Function to refresh messages on the page
+function refreshMessages() {
+    var messagesContainer = document.getElementById('messages-container');
+    var messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+    // Clear the current messages on the page
+    messagesContainer.innerHTML = '';
+
+    // Populate messages dynamically from local storage
+    messages.forEach(function (message, index) {
+        var messageElement = document.createElement('div');
+        messageElement.className = 'message';
+
+        var headerElement = document.createElement('div');
+        headerElement.className = 'message-header';
+        headerElement.innerHTML = '<span class="name">' + message.name + '</span>' +
+                                  '<span class="email">' + message.email + '</span>' +
+                                  '<span class="date">' + message.date + '</span>';
+
+        var bodyElement = document.createElement('div');
+        bodyElement.className = 'message-body';
+        bodyElement.innerHTML = '<p>' + message.message + '</p>';
+
+        var footerElement = document.createElement('div');
+        footerElement.className = 'message-footer';
+
+        // Add a reply button with an onclick event to trigger the replyToMessage function
+        footerElement.innerHTML = '<button class="reply" onclick="replyToMessage(' + index + ')">Reply</button>' +
+                                  '<button class="delete" onclick="deleteMessage(' + index + ')">Delete</button>';
+
+        messageElement.appendChild(headerElement);
+        messageElement.appendChild(bodyElement);
+        messageElement.appendChild(footerElement);
+
+        messagesContainer.appendChild(messageElement);
+    });
+}
+
+// Refresh messages on page load
+window.onload = function () {
+    refreshMessages();
+};
+    </script>
+</body>
 </html>

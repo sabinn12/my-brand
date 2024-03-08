@@ -1,85 +1,83 @@
 :root{
-    --nav-height: 60px;
-  }
-  body{
-    margin: 0;
-    background: #111827;
-    
-  }
-  * {
-    box-sizing: border-box;
-    font-family: sans-serif;
-    
-  }
-  .nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: black;
-    height: var(--nav-height);
-    padding: 0 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  --nav-height: 60px;
+}
+body{
+  margin: 0;
+  background: #111827
+}
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  
+}
+.nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: black;
+  height: var(--nav-height);
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
-  }
-  .nav h2{
-    color: white;
-    margin-left: 70px;
-    font-size: 24px;
-  }
-  .nav h2 span{
-    color: #EAB308;
-  }
-  .nav a{
-    color: #9CA3AF;
-    font-size: 16px;
-   
-  }
-  .nav a:first-child{
-    color: white;
-  }
+}
+.nav h2{
+  color: white;
+  margin-left: 70px;
+  font-size: 24px;
+}
+.nav h2 span{
+  color: #EAB308;
+}
+.nav a{
+  color: #9CA3AF;
+  font-size: 16px;
+ 
+}
+.nav a:first-child{
+  color: white;
+}
+.nav i{
+  font-size: 1.4rem;
+  padding: 0 10px;
+  display: none;
+  color: #EAB308;
+}
+.nav i:hover{
+  background: white;
+}
+.nav .links a{
+  text-decoration: none;
+  padding: 5px;
+}
+.nav .links a:hover{
+  color: #fff;
+  background: #000;
+}
+@media only screen and (max-width: 620px){
   .nav i{
-    font-size: 1.4rem;
-    padding: 0 10px;
-    display: none;
-    color: #EAB308;
+      display: block;
   }
-  .nav i:hover{
-    background: white;
+  .links {
+      position: absolute;
+      display: none;
+      flex-direction: column;
+      top: var(--nav-height);
+      background: black;
+      left: 0;
+      right: 0;
+      border-top: 2px solid #aaa;
+      
   }
-  .nav .links a{
-    text-decoration: none;
-    padding: 5px;
+  .responsive{
+      display: flex;
   }
-  .nav .links a:hover{
-    color: #fff;
-    background: #000;
-  }
-  @media only screen and (max-width: 620px){
-    .nav i{
-        display: block;
-    }
-    .links {
-        position: absolute;
-        display: none;
-        flex-direction: column;
-        top: var(--nav-height);
-        background: black;
-        left: 0;
-        right: 0;
-        border-top: 2px solid #aaa;
-        
-    }
-    .responsive{
-        display: flex;
-    }
-    .links a{
-        color: darkgray;
-    }
-    
+  .links a{
+      color: darkgray;
   }
   
+}  
 
 /* login content */
 

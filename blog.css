@@ -1,22 +1,23 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
     box-sizing: border-box;
+    font-family: sans-serif;   
 }
+
 body{
     margin: 0;
-    padding: 0;
-    background: #111827;
+    background: #111827
 }
+
 .nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: black;
-    height:60px;
+    height: 60px;
     padding: 0 20px;
-   
-	
+    position: sticky;
+    top: 0;
+    z-index: 100;
 
 }
 .nav h2{
@@ -29,7 +30,7 @@ body{
 }
 .nav a{
     color: #9CA3AF;
-    font-size: 18px;
+    font-size: 16px;
    
 }
 .nav a:first-child{
@@ -57,8 +58,8 @@ body{
         display: block;
     }
     .links {
-        display: none;
         position: absolute;
+        display: none;
         flex-direction: column;
         top: 60px;
         background: black;
@@ -75,6 +76,7 @@ body{
     }
     
 }
+
 .slider {
     display: flex;
     justify-content: center;
@@ -192,6 +194,8 @@ body{
 }
 
 @media(max-width:1250px){
+   
+    
     .blog-box{
         width: 300px;
     }

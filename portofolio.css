@@ -1,5 +1,6 @@
-:root{
-    --nav-height: 60px;
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;  
 }
 html{
     margin: 0px;
@@ -11,17 +12,13 @@ body{
     background: #111827;
     
 }
-* {
-    box-sizing: border-box;
-    font-family: sans-serif;
-    
-}
+
 .nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: black;
-    height: var(--nav-height);
+    height: 60px;
     padding: 0 20px;
     position: sticky;
     top: 0;
@@ -66,12 +63,13 @@ body{
     
     .nav i{
         display: block;
+        
     }
     .links {
         position: absolute;
         display: none;
         flex-direction: column;
-        top: var(--nav-height);
+        top: 60px;
         background: black;
         left: 0;
         right: 0;
@@ -228,7 +226,7 @@ body{
    }
    .pic, .pic2, .pic3, .pic4, .pic5{
     
-     width: 90%;
+     width: 50%;
      margin-left: 5%;
      margin-right: 5%;
    }

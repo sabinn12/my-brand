@@ -1,12 +1,3 @@
-@font-face {
-	font-family: main;
-	src: url("../fonts/roboto.ttf");
-}
-
-@font-face {
-	font-family: headings;
-	src: url("../fonts/clemente.ttf");
-}
 
 * {
 	box-sizing: border-box;
@@ -22,7 +13,7 @@ body {
 	overflow: auto;
 	margin: 0;
 	padding: 0;
-	background: var(--dark);
+	
     font-family: main, sans-serif;
 }
 

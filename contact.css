@@ -1,25 +1,23 @@
-:root{
-  --nav-height: 60px;
-}
-body{
-  margin: 0;
-  background: #111827;
-  overflow-x: hidden;
-  
-}
 * {
   box-sizing: border-box;
-  font-family: sans-serif;
-  
+  font-family: sans-serif;   
 }
+
+body{
+  margin: 0;
+  background: #111827
+}
+
 .nav{
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: black;
-  height: var(--nav-height);
+  height: 60px;
   padding: 0 20px;
-  
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
 }
 .nav h2{
@@ -56,9 +54,6 @@ body{
   background: #000;
 }
 @media only screen and (max-width: 620px){
-  .nav{
-    width: 100%;
-  }
   .nav i{
       display: block;
   }
@@ -66,7 +61,7 @@ body{
       position: absolute;
       display: none;
       flex-direction: column;
-      top: var(--nav-height);
+      top: 60px;
       background: black;
       left: 0;
       right: 0;
@@ -148,47 +143,6 @@ button{
   background: #EAB308;
   cursor: pointer;
 }
-@media (max-width: 600px) {
- 
-  .container {
-    margin-top: 10px;
-      flex-direction: column;
-      margin-left: -10px;
-      position: relative;
-  }
-  .container .content h2 {
-      font-size: 32px;
-      margin-left: 90px;
-  }
-  .contact-info {
-      margin-left: 0;
-      margin-top: 10%;
-  }
-  .container .contact-form {
-      float: none;
-      margin-top: 20px;
-      margin-left: 20px;
-  }
-  .container .contact-form input {
-      width: 80vw;
-      height: 5vw;
-  }
-  .container .contact-form textarea{
-    width: 80vw;
-    height: 20vw;
-  }
-  .container .contact-form button{
-    margin-left: 14%;
-  }
-  .contact-info p {
-    margin-left: 20px;
-  }
-  .content p{
-    margin-left: 20px;
-  }
-  
- 
-}
 .contact-form .fa-paper-plane{
   position: absolute;
   top: 0;
@@ -225,4 +179,48 @@ button{
 }
 .contact-form span i{
   color: seagreen;
+}
+@media (max-width: 600px) {
+ 
+  .container {
+    margin-top: 10px;
+      flex-direction: column;
+      margin-left: -10px;
+      
+  }
+  .container .content h2 {
+      font-size: 32px;
+      margin-left: 90px;
+  }
+  .contact-info {
+      margin-left: 0;
+      margin-top: 10%;
+  }
+  .content p{
+    margin-right: 0;
+  }
+  .container .contact-form {
+      float: none;
+      margin-top: 20px;
+      margin-left: 20px;
+  }
+  .container .contact-form input {
+      width: 50%;
+      height: 5%;
+  }
+  .container .contact-form textarea{
+    width: 50%;
+    height: 20vw;
+  }
+  .container .contact-form button{
+    margin-left: 14%;
+  }
+  .contact-info p {
+    margin-left: 20px;
+  }
+  .content p{
+    margin-left: 20px;
+  }
+  
+ 
 }

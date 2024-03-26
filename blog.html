@@ -36,83 +36,53 @@
     </main>
 
     <script>
-        /* Home or main content navbar */ 
-let menuBtn = document.getElementById("menu");
-let links = document.getElementById("links");
+        // Fetch blog posts from backend API
+        async function fetchBlogPosts() {
+            try {
+                const response = await fetch("https://mybrand-back-end.onrender.com/api/v1/blogs");
+                const data = await response.json();
+                
+                if (data.status === "success") {
+                    const blogs = data.message;
+                    const slider = document.getElementById('slider');
 
-menuBtn.addEventListener("click", function(e){
-    links.classList.toggle('responsive');
-    menuBtn.classList.toggle('fa-x')
-});
-        
-        // Get the existing blog posts from local storage
-        const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-    
-        // Display blog posts on the page
-        const slider = document.getElementById('slider');
-        blogPosts.forEach(blog => {
-            // Initialize likes and comments to zero if not present
-            blog.likes = blog.likes || 0;
-            blog.comments = blog.comments || 0;
-    
-            const blogBox = document.createElement('div');
-            blogBox.classList.add('blog-box');
-    
-            // Create the structure for each blog post
-            const blogImg = document.createElement('div');
-            blogImg.classList.add('blog-img');
-            const img = document.createElement('img');
-            img.src = blog.image;
-            img.alt = 'blog';
-            blogImg.appendChild(img);
-    
-            const blogText = document.createElement('div');
-            blogText.classList.add('blog-text');
-            const blogTitle = document.createElement('a');
-            blogTitle.classList.add('blog-title');
-            blogTitle.href = `singlepb.html?id=${blog.id}`; 
-            blogTitle.textContent = blog.title;
-    
-            const blogActions = document.createElement('div');
-            blogActions.classList.add('blog-actions');
-    
-            // Likes
-            const likeButton = document.createElement('button');
-            likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
-            likeButton.addEventListener('click', () => {
-                blog.likes = (blog.likes || 0) + 1;
-                updateLocalStorage();
-                likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
-            });
-    
-            // Comments
-            const commentButton = document.createElement('button');
-            commentButton.innerHTML = `<i class="fas fa-comments"></i> ${blog.commentsCount || 0}`;
-            commentButton.addEventListener('click', () => {
-               
-            });
-    
-            const readMoreLink = document.createElement('a');
-            readMoreLink.href = `singlepb.html?id=${blog.id}`;
-            readMoreLink.textContent = 'Read More';
+                    blogs.forEach(blog => {
+                        const blogBox = document.createElement('div');
+                        blogBox.classList.add('blog-box');
 
-            blogActions.appendChild(likeButton);
-            blogActions.appendChild(commentButton);
-            blogActions.appendChild(readMoreLink); 
-    
-            blogText.appendChild(blogTitle);
-            blogText.appendChild(blogActions);
-    
-            blogBox.appendChild(blogImg);
-            blogBox.appendChild(blogText);
-    
-            slider.appendChild(blogBox);
-        });
-    
-        //  update local storage
-        function updateLocalStorage() {
-            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+                        const blogImg = document.createElement('div');
+                        blogImg.classList.add('blog-img');
+                        const img = document.createElement('img');
+                        img.src = blog.image;
+                        img.alt = 'blog';
+                        blogImg.appendChild(img);
+
+                        const blogText = document.createElement('div');
+                        blogText.classList.add('blog-text');
+                        const blogTitle = document.createElement('a');
+                        blogTitle.classList.add('blog-title');
+                        blogTitle.href = `singlepb.html?id=${blog._id}`;
+                        blogTitle.textContent = blog.title;
+
+                        // You can add more elements like author, date, etc. here
+
+                        blogText.appendChild(blogTitle);
+
+                        blogBox.appendChild(blogImg);
+                        blogBox.appendChild(blogText);
+
+                        slider.appendChild(blogBox);
+                    });
+                } else {
+                    console.error("Failed to fetch blog posts:", data.error);
+                }
+            } catch (error) {
+                console.error("Error fetching blog posts:", error.message);
+            }
         }
+
+        // Call the fetchBlogPosts function to fetch and render the blog posts
+        fetchBlogPosts();
     </script>
     <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
     

@@ -38,6 +38,7 @@
             try {
                 const response = await fetch("https://mybrand-back-end.onrender.com/api/v1/blogs");
                 const data = await response.json();
+                console.log(data)
                 
                 if (data.status === "success") {
                     const blogs = data.blogs; // Assuming the blog data is in 'blogs' array
@@ -46,9 +47,11 @@
                     blogs.forEach(blog => {
                         const blogBox = document.createElement('div');
                         blogBox.classList.add('blog-box');
+                        console.log(blogBox)
 
                         const blogImg = document.createElement('div');
                         blogImg.classList.add('blog-img');
+                        console.log(blogImg)
                         const img = document.createElement('img');
                         img.src = blog.image;
                         img.alt = 'blog';
@@ -80,7 +83,4 @@
 
         // Call the fetchBlogPosts function to fetch and render the blog posts
         fetchBlogPosts();
-    </script>
-    <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
-</body>
-</html>
+    

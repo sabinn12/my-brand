@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="blog.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-3ZI/IIYwRKmu0CBVfS4UaP7n6s07GY6kSEJV6w7WcZcOG4C8LN5cJ8ta38pky4UzVUHxoFF/OpDkuF+Y3ZNE4A==" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
     <title>Blog</title>
-    
 </head>
 <body>
     <header>
@@ -31,10 +28,9 @@
            <h2>My <span>Blog</span></h2>
            <p>The latest industry news, interviews, technologies, and resources.</p>
          </div>
-     
-    <div class="slider" id="slider">
+        <div class="slider" id="slider">
         
-    </div>
+        </div>
     </main>
     <script>
         // Fetch blog posts from backend API
@@ -44,7 +40,7 @@
                 const data = await response.json();
                 
                 if (data.status === "success") {
-                    const blogs = data.message;
+                    const blogs = data.blogs; // Assuming the blog data is in 'blogs' array
                     const slider = document.getElementById('slider');
 
                     blogs.forEach(blog => {
@@ -86,6 +82,5 @@
         fetchBlogPosts();
     </script>
     <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
-    
 </body>
 </html>

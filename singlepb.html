@@ -358,7 +358,7 @@
             const data = await response.json();
     
             if (data.status === 200) {
-                const blog = data.blogs;
+                const blog = data.blogs[0];
     
                 document.getElementById('blogTitle').innerText = blog.title;
                 document.getElementById('blogImage').src = blog.image;

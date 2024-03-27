@@ -41,8 +41,8 @@
                 const response = await fetch("https://mybrand-back-end.onrender.com/api/v1/blogs");
                 const data = await response.json();
     
-                if (data.status === "success") {
-                    const blogs = data.Blogs; // Assuming the blog data is in 'blogs' array
+                if (data.status === 200) {
+                    const blogs = data.blogs; 
                     const slider = document.getElementById('slider');
     
                     blogs.forEach(blog => {
@@ -60,10 +60,12 @@
                         blogText.classList.add('blog-text');
                         const blogTitle = document.createElement('a');
                         blogTitle.classList.add('blog-title');
-                        blogTitle.href = `singlepb.html?id=${blog._id}`; // Use the blog's id
+                        blogTitle.href = `singlepb.html?id=${blog._id}`; 
                         blogTitle.textContent = blog.title;
     
-                        // You can add more elements like author, date, etc. here
+                        const blogContent = document.createElement('p');
+                        blogContent.textContent = blog.content;
+                        blogText.appendChild(blogContent);
     
                         blogText.appendChild(blogTitle);
     

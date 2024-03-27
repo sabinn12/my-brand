@@ -247,9 +247,9 @@
             if (data.status === 200) {
                 const blog = data.blogs[0];
     
-                document.getElementById('blogTitle').innerText = blog.title ;
-                document.getElementById('blogImage').src = blog.image;
-                document.getElementById('blogContent').innerHTML = blog.content;
+                document.getElementById('blogTitle').innerText = blogs.title ;
+                document.getElementById('blogImage').src = blogs.image;
+                document.getElementById('blogContent').innerHTML = blogs.content;
     
                 // Fetch the comments for the blog post
                 const commentsResponse = await fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`);

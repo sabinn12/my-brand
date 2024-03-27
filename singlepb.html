@@ -6,104 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>single page blog</title>
     <style>
-        /* Your CSS styles here */
-    </style>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        integrity="sha384-hVEjcczIY4aEdZl2u3h+7x3hCDBTDzD0vcX6V6+SiA00KW7rFeV+aewb/K1FAiQ="
-        crossorigin="anonymous">
-</head>
-
-<body>
-    <header>
-        <p>Blog Title</p>
-    </header>
-
-    <div>
-        <h1 id="blogTitle"></h1>
-        <img id="blogImage" alt="Blog Image">
-        <div id="blogContent"></div>
-    </div>
-
-    <div class="contains">
-        <h2>Comments</h2>
-        <input type="text" id="commenterName" placeholder="Your Email">
-        <br>
-        <textarea rows="3" cols="10" id="commentText" placeholder="Add a comment"></textarea>
-        <br>
-        <button type="button" onclick="submitComment()">Submit</button>
-
-        <!-- Display submitted comments -->
-        <div id="commentsSection"></div>
-
-        <div class="back">
-            <a href="blog.html">Back Home</a>
-        </div>
-    </div>
-    <script>
-        async function fetchData(url) {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
-            }
-            return response.json();
-        }
-
-        async function fetchAndDisplayData() {
-            try {
-                const [blogData, commentsData] = await Promise.all([
-                    fetchData('https://mybrand-back-end.onrender.com/api/v1/blogs/65fd4372a571556c86231f50'),
-                    fetchData('https://mybrand-back-end.onrender.com/api/v1/blogs/65fd4372a571556c86231f50/comments')
-                ]);
-                // Populate blog data
-                document.getElementById('blogTitle').textContent = blogData.title;
-                document.getElementById('blogImage').src = blogData.image;
-                document.getElementById('blogContent').textContent = blogData.content;
-
-                // Populate comments data
-                displayComments(commentsData);
-            } catch (error) {
-                console.error('Error:', error.message);
-            }
-        }
-
-        function displayComments(comments) {
-            const commentsSection = document.getElementById('commentsSection');
-            comments.forEach(comment => {
-                const commentDiv = document.createElement('div');
-                commentDiv.className = 'comment';
-                const commentContent = `<div class="comment-content"><strong>${comment.name}:</strong> ${comment.text}</div>`;
-                const commentActions = `
-                    <div class="comment-actions">
-                        <i class="fas fa-reply" onclick="replyToComment('${comment.name}')"></i>
-                        <i class="fas fa-thumbs-up" onclick="likeComment('${comment.name}')"></i>
-                        <i class="fas fa-trash delete-icon" onclick="deleteComment('${comment.name}')"></i>
-                    </div>
-                `;
-                commentDiv.innerHTML = commentContent + commentActions;
-                commentsSection.appendChild(commentDiv);
-            });
-        }
-
-        // Call the function to fetch and display data when the page loads
-        window.onload = fetchAndDisplayData;
-
-        // Your other functions...
-    </script>
-
-</body>
-
-</html>
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>single page blog</title>
-    <style>
         * {
             margin: 0;
             padding: 0;
@@ -333,93 +235,121 @@
         </div>
     </div>
     <script>
-    
+    window.onload = async function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const blogId = urlParams.get('id');
+
+    // Fetch the blog post from the backend
+    const response = await fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}`);
+    const data = await response.json();
+
+    if (data.status === 200 && data.blog) {
+        const blog = data.blog;
+
+        document.getElementById('blogTitle').innerText = blog.title;
+        document.getElementById('blogImage').src = blog.image;
+        document.getElementById('blogContent').innerHTML = blog.content;
+
+        // Fetch the comments for the blog post
+        const commentsResponse = await fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`);
+        const commentsData = await commentsResponse.json();
+
+        if (commentsData.status === 200) {
+            displayComments(commentsData.comments);
+        } else {
+            console.error("Failed to fetch comments:", commentsData.error);
+        }
+    } else {
+        alert('Blog not found');
+    }
+};
+
    
 
-        function displayComments(comments) {
-            const commentsSection = document.getElementById('commentsSection');
+        // function displayComments(comments) {
+        //     const commentsSection = document.getElementById('commentsSection');
 
-            comments.forEach(comment => {
-                const commentDiv = document.createElement('div');
-                commentDiv.className = 'comment';
+        //     comments.forEach(comment => {
+        //         const commentDiv = document.createElement('div');
+        //         commentDiv.className = 'comment';
 
-                const commentContent = `<div class="comment-content"><strong>${comment.name}:</strong> ${comment.text}</div>`;
-                const commentActions = `
-                    <div class="comment-actions">
-                        <i class="fas fa-reply" onclick="replyToComment('${comment.name}')"></i>
-                        <i class="fas fa-thumbs-up" onclick="likeComment('${comment.name}')"></i>
-                        <i class="fas fa-trash delete-icon" onclick="deleteComment('${comment.name}')"></i>
-                    </div>
-                `;
+        //         const commentContent = `<div class="comment-content"><strong>${comment.name}:</strong> ${comment.text}</div>`;
+        //         const commentActions = `
+        //             <div class="comment-actions">
+        //                 <i class="fas fa-reply" onclick="replyToComment('${comment.name}')"></i>
+        //                 <i class="fas fa-thumbs-up" onclick="likeComment('${comment.name}')"></i>
+        //                 <i class="fas fa-trash delete-icon" onclick="deleteComment('${comment.name}')"></i>
+        //             </div>
+        //         `;
 
-                commentDiv.innerHTML = commentContent + commentActions;
-                commentsSection.appendChild(commentDiv);
-            });
-        }
+        //         commentDiv.innerHTML = commentContent + commentActions;
+        //         commentsSection.appendChild(commentDiv);
+        //     });
+        // }
 
-        function submitComment() {
-            const commenterName = document.getElementById('commenterName').value;
-            const commentText = document.getElementById('commentText').value;
+        // function submitComment() {
+        //     const commenterName = document.getElementById('commenterName').value;
+        //     const commentText = document.getElementById('commentText').value;
 
-            if (commenterName.trim() === '' || commentText.trim() === '') {
-                alert('Please enter your name and comment before submitting.');
-                return;
-            }
+        //     if (commenterName.trim() === '' || commentText.trim() === '') {
+        //         alert('Please enter your name and comment before submitting.');
+        //         return;
+        //     }
 
-            const newComment = {
-                name: commenterName,
-                text: commentText,
-                likes: 0
-            };
+        //     const newComment = {
+        //         name: commenterName,
+        //         text: commentText,
+        //         likes: 0
+        //     };
 
-            const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-            const targetBlogPost = blogPosts.find(blog => blog.id === getBlogIdFromUrl());
+        //     const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+        //     const targetBlogPost = blogPosts.find(blog => blog.id === getBlogIdFromUrl());
 
-            if (targetBlogPost) {
-                targetBlogPost.comments = targetBlogPost.comments || [];
-                targetBlogPost.comments.push(newComment);
-                targetBlogPost.commentsCount = (targetBlogPost.commentsCount || 0) + 1;
+        //     if (targetBlogPost) {
+        //         targetBlogPost.comments = targetBlogPost.comments || [];
+        //         targetBlogPost.comments.push(newComment);
+        //         targetBlogPost.commentsCount = (targetBlogPost.commentsCount || 0) + 1;
 
-                localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
-                location.reload();
-            } else {
-                alert('Blog not found');
-            }
-        }
+        //         localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+        //         location.reload();
+        //     } else {
+        //         alert('Blog not found');
+        //     }
+        // }
 
-        function replyToComment(commenterName) {
-            // Add logic to handle replies
-            alert(`Replying to ${commenterName}`);
-        }
+        // function replyToComment(commenterName) {
+        //     // Add logic to handle replies
+        //     alert(`Replying to ${commenterName}`);
+        // }
 
-        function likeComment(commenterName) {
-            const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-            const targetBlogPost = blogPosts.find(blog => blog.id === getBlogIdFromUrl());
-            const targetComment = targetBlogPost.comments.find(comment => comment.name === commenterName);
+        // function likeComment(commenterName) {
+        //     const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+        //     const targetBlogPost = blogPosts.find(blog => blog.id === getBlogIdFromUrl());
+        //     const targetComment = targetBlogPost.comments.find(comment => comment.name === commenterName);
 
-            if (targetComment) {
-                targetComment.likes = (targetComment.likes || 0) + 1;
-                localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
-                location.reload();
-            }
-        }
+        //     if (targetComment) {
+        //         targetComment.likes = (targetComment.likes || 0) + 1;
+        //         localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+        //         location.reload();
+        //     }
+        // }
 
-        function deleteComment(commenterName) {
-            const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-            const targetBlogPost = blogPosts.find(blog => blog.id === getBlogIdFromUrl());
-            const targetCommentIndex = targetBlogPost.comments.findIndex(comment => comment.name === commenterName);
+        // function deleteComment(commenterName) {
+        //     const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+        //     const targetBlogPost = blogPosts.find(blog => blog.id === getBlogIdFromUrl());
+        //     const targetCommentIndex = targetBlogPost.comments.findIndex(comment => comment.name === commenterName);
 
-            if (targetCommentIndex !== -1) {
-                targetBlogPost.comments.splice(targetCommentIndex, 1);
-                targetBlogPost.commentsCount = (targetBlogPost.commentsCount || 1) - 1;
-                localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
-                location.reload();
-            }
-        }
+        //     if (targetCommentIndex !== -1) {
+        //         targetBlogPost.comments.splice(targetCommentIndex, 1);
+        //         targetBlogPost.commentsCount = (targetBlogPost.commentsCount || 1) - 1;
+        //         localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+        //         location.reload();
+        //     }
+        // }
 
   
     </script>
     
 </body>
 
-</html> -->
+</html>

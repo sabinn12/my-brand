@@ -354,7 +354,7 @@
             const blogId = urlParams.get('id');
     
             // Fetch the blog post from the backend
-            const response = await fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${Id}`);
+            const response = await fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${id}`);
             const data = await response.json();
     
             if (data.status === 200) {
@@ -365,7 +365,7 @@
                 document.getElementById('blogContent').innerHTML = blog.content;
     
                 // Fetch the comments for the blog post
-                const commentsResponse = await fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${Id}/comments`);
+                const commentsResponse = await fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${id}/comments`);
                 const commentsData = await commentsResponse.json();
     
                 if (commentsData.status === 200) {

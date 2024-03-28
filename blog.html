@@ -17,12 +17,13 @@
         }
 
         .loader {
+            margin-bottom: 20%;
             border: 8px solid #f3f3f3;
             border-top: 8px solid #3498db;
             border-radius: 50%;
             width: 50px;
             height: 50px;
-            animation: spin 1s linear infinite;
+            animation: spin 120s linear infinite;
         }
 
         @keyframes spin {
@@ -105,8 +106,17 @@
             }
 
             function displayBlogs(blogs) {
-                // Display blogs on the page
-                slider.innerHTML = ''; // Clear existing content
+                 // Check if blogs is an array
+    if (!Array.isArray(blogs)) {
+        console.error('Error fetching blogs: Invalid data format');
+        // Handle the error (show error message, retry mechanism, etc.)
+        return;
+    }
+
+    // Display blogs on the page
+    const slider = document.getElementById('slider');
+    slider.style.display = 'block'; // Show slider
+    slider.innerHTML = ''; // Clear existing content
 
                 blogs.forEach(blog => {
                     // Initialize likes and comments to zero if not present

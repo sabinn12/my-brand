@@ -21,13 +21,13 @@
                 <a href="portofolio.html">Portfolio</a>
                 <a href="blog.html">Blogs</a>
                 <a href="contact.html">Contact me</a>
-                <a href="login.html">Login</a>
+                <a href="login.html"></a>
             </div>
         </div>
     </header>
     <main>
         <div class="blog-heading">
-            <h2>My <span>Blog</span></h2>
+            <h2>My <span>Blogs</span></h2>
             <p>The latest industry news, interviews, technologies, and resources.</p>
         </div>
 
@@ -102,36 +102,36 @@
             const blogActions = document.createElement('div');
             blogActions.classList.add('blog-actions');
 
-            // Likes
-            const likeButton = document.createElement('button');
-            likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
-            likeButton.addEventListener('click', () => {
-                if (!isLoggedIn()) {
-                    // Redirect unauthenticated users to login page
-                    window.location.href = 'login.html';
-                    return;
-                }
+            // // Likes
+            // const likeButton = document.createElement('button');
+            // likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
+            // likeButton.addEventListener('click', () => {
+            //     if (!isLoggedIn()) {
+            //         // Redirect unauthenticated users to login page
+            //         window.location.href = 'login.html';
+            //         return;
+            //     }
 
-                // Increment likes in real-time
-                blog.likes++;
-                updateLocalStorage();
-                likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
-                // Display success message in popup
-                showPopup('Liked successfully!');
-            });
+            //     // Increment likes in real-time
+            //     blog.likes++;
+            //     updateLocalStorage();
+            //     likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
+            //     // Display success message in popup
+            //     showPopup('Liked successfully!');
+            // });
 
             // Comments
-            const commentButton = document.createElement('button');
-            commentButton.innerHTML = `<i class="fas fa-comments"></i> ${blog.comments}`;
-            commentButton.addEventListener('click', () => {
-                if (!isLoggedIn()) {
-                    // Redirect unauthenticated users to login page
-                    window.location.href = 'login.html';
-                    return;
-                }
+            // const commentButton = document.createElement('button');
+            // commentButton.innerHTML = `<i class="fas fa-comments"></i> ${blog.comments}`;
+            // commentButton.addEventListener('click', () => {
+            //     if (!isLoggedIn()) {
+            //         // Redirect unauthenticated users to login page
+            //         window.location.href = 'login.html';
+            //         return;
+            //     }
 
-                // Add your comment functionality here
-            });
+            //     // Add your comment functionality here
+            // });
 
             const readMoreLink = document.createElement('a');
             readMoreLink.href = `singlepb.html?id=${blog._id}`;
@@ -168,6 +168,15 @@
         alert(message); // For simplicity, using alert for now
     }
 });
+        /* Home or main content navbar */ 
+        let menuBtn = document.getElementById("menu");
+let links = document.getElementById("links");
+
+menuBtn.addEventListener("click", function(e){
+    links.classList.toggle('responsive');
+    menuBtn.classList.toggle('fa-x')
+});
+        
 
     </script>
        

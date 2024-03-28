@@ -97,7 +97,10 @@
                         // Handle error (show error message, retry mechanism, etc.)
                         loaderContainer.style.display = 'none';
                         slider.style.display = 'block';
-                        slider.innerHTML = '<p>Error fetching blogs. Please try again later.</p>';
+                        slider.style.marginLeft= '40%'
+                        slider.style.color= 'red'
+                        slider.innerHTML = '<p >Error fetching blogs. Please try again later.</p>';
+
                     });
             }
 

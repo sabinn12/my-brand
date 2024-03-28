@@ -73,31 +73,27 @@
             fetchBlogs();
 
             function fetchBlogs() {
-                loaderContainer.style.display = 'flex'; // Show loader
-                slider.style.display = 'none'; // Hide slider
+    loader.style.display = 'block'; // Show loader
+    // Fetch blogs from your backend API using HTTPS
+    fetch('https://mybrand-back-end.onrender.com/api/v1/blogs')
+        .then(response => response.json())
+        .then(data => {
+            // Check if data contains blogs
+            if (data && data.blogs && data.blogs.length > 0) {
+                // Hide loader once blogs are fetched
+                loader.style.display = 'none';
+                displayBlogs(data.blogs); // Display fetched blogs
+            } else {
+                console.error('Error fetching blogs: No blogs found');
+                // Handle the error (show error message, retry mechanism, etc.)
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching blogs:', error);
+            // Handle error (show error message, retry mechanism, etc.)
+       
 
-                // Fetch blogs from your backend API using HTTPS
-                fetch('https://mybrand-back-end.onrender.com/api/v1/blogs')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        // Hide loader and show slider once blogs are fetched
-                        loaderContainer.style.display = 'none';
-                        slider.style.display = 'block';
 
-                        if (data && data.length > 0) {
-                            displayBlogs(data); // Display fetched blogs
-                        } else {
-                            // Handle case when no blogs are found
-                            slider.innerHTML = '<p>No blogs found.</p>';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching blogs:', error);
                         // Handle error (show error message, retry mechanism, etc.)
                         loaderContainer.style.display = 'none';
                         slider.style.display = 'block';

@@ -41,7 +41,6 @@
     </main>
 
     <script>
-   
         window.addEventListener('DOMContentLoaded', (event) => {
     const loader = document.getElementById('loader');
     const loaderContainer = document.getElementById('loader-container');
@@ -103,36 +102,36 @@
             const blogActions = document.createElement('div');
             blogActions.classList.add('blog-actions');
 
-            //  Likes
-            const likeButton = document.createElement('button');
-            likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
-            likeButton.addEventListener('click', () => {
-                if (!isLoggedIn()) {
-                    // Redirect unauthenticated users to login page
-                    window.location.href = 'login.html';
-                    return;
-                }
+            // // Likes
+            // const likeButton = document.createElement('button');
+            // likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
+            // likeButton.addEventListener('click', () => {
+            //     if (!isLoggedIn()) {
+            //         // Redirect unauthenticated users to login page
+            //         window.location.href = 'login.html';
+            //         return;
+            //     }
 
             //     // Increment likes in real-time
-                blog.likes++;
-                updateLocalStorage();
-                likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
-                // Display success message in popup
-                showPopup('Liked successfully!');
-            });
+            //     blog.likes++;
+            //     updateLocalStorage();
+            //     likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
+            //     // Display success message in popup
+            //     showPopup('Liked successfully!');
+            // });
 
             // Comments
-            const commentButton = document.createElement('button');
-            commentButton.innerHTML = `<i class="fas fa-comments"></i> ${blog.comments}`;
-            commentButton.addEventListener('click', () => {
-                if (!isLoggedIn()) {
-                    // Redirect unauthenticated users to login page
-                    window.location.href = 'login.html';
-                    return;
-                }
+            // const commentButton = document.createElement('button');
+            // commentButton.innerHTML = `<i class="fas fa-comments"></i> ${blog.comments}`;
+            // commentButton.addEventListener('click', () => {
+            //     if (!isLoggedIn()) {
+            //         // Redirect unauthenticated users to login page
+            //         window.location.href = 'login.html';
+            //         return;
+            //     }
 
-            //    Add your comment functionality here
-            });
+            //     // Add your comment functionality here
+            // });
 
             const readMoreLink = document.createElement('a');
             readMoreLink.href = `singlepb.html?id=${blog._id}`;
@@ -169,7 +168,14 @@
         alert(message); // For simplicity, using alert for now
     }
 });
-        
+        /* Home or main content navbar */ 
+        let menuBtn = document.getElementById("menu");
+let links = document.getElementById("links");
+
+menuBtn.addEventListener("click", function(e){
+    links.classList.toggle('responsive');
+    menuBtn.classList.toggle('fa-x')
+});
         
 
     </script>

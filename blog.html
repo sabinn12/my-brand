@@ -78,8 +78,8 @@
 
         blogs.forEach(blog => {
             // Initialize likes and comments to zero if not present
-            blog.likes = blog.likes || 0;
-            blog.comments = blog.comments || 0;
+            // blog.likes = blog.likes || 0;
+            // blog.comments = blog.comments || 0;
 
             const blogBox = document.createElement('div');
             blogBox.classList.add('blog-box');
@@ -137,8 +137,8 @@
             readMoreLink.href = `singlepb.html?id=${blog._id}`;
             readMoreLink.textContent = 'Read More';
 
-            blogActions.appendChild(likeButton);
-            blogActions.appendChild(commentButton);
+            // blogActions.appendChild(likeButton);
+            // blogActions.appendChild(commentButton);
             blogActions.appendChild(readMoreLink); 
 
             blogText.appendChild(blogTitle);

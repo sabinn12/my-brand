@@ -20,7 +20,188 @@
                 <a href="portofolio.html">Portfolio</a>
                 <a href="blog.html">Blogs</a>
                 <a href="contact.html">Contact me</a>
-                <a href="login.html"></a>
+                <a href="login.html">Login</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="blog-heading">
+           <h2>My <span>Blog</span></h2>
+           <p>The latest industry news, interviews, technologies, and resources.</p>
+         </div>
+     
+    <div class="loader" id="loader"></div> <!-- Loader Element -->
+
+    <div class="slider" id="slider">
+        
+    </div>
+    </main>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const loader = document.getElementById('loader');
+
+            // Fetch blogs
+            fetchBlogs();
+
+            function fetchBlogs() {
+                loader.style.display = 'block'; // Show loader
+                // Fetch blogs from your backend API
+                fetch('http://mybrand-back-end.onrender.com/api/v1/blogs')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Hide loader once blogs are fetched
+                        loader.style.display = 'none';
+                        displayBlogs(data); // Display fetched blogs
+                    })
+                    .catch(error => {
+                        console.error('Error fetching blogs:', error);
+                        // Handle error (show error message, retry mechanism, etc.)
+                    });
+            }
+
+            function displayBlogs(blogs) {
+                // Display blogs on the page
+                const slider = document.getElementById('slider');
+                slider.innerHTML = ''; // Clear existing content
+
+                blogs.forEach(blog => {
+                    // Initialize likes and comments to zero if not present
+                    blog.likes = blog.likes || 0;
+                    blog.comments = blog.comments || 0;
+
+                    const blogBox = document.createElement('div');
+                    blogBox.classList.add('blog-box');
+
+                    // Create the structure for each blog post
+                    const blogImg = document.createElement('div');
+                    blogImg.classList.add('blog-img');
+                    const img = document.createElement('img');
+                    img.src = blog.image;
+                    img.alt = 'blog';
+                    blogImg.appendChild(img);
+
+                    const blogText = document.createElement('div');
+                    blogText.classList.add('blog-text');
+                    const blogTitle = document.createElement('a');
+                    blogTitle.classList.add('blog-title');
+                    blogTitle.href = `singlepb.html?id=${blog.id}`; 
+                    blogTitle.textContent = blog.title;
+
+                    const blogActions = document.createElement('div');
+                    blogActions.classList.add('blog-actions');
+
+                    // Likes
+                    const likeButton = document.createElement('button');
+                    likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
+                    likeButton.addEventListener('click', () => {
+                        if (!isLoggedIn()) {
+                            // Redirect unauthenticated users to login page
+                            window.location.href = 'login.html';
+                            return;
+                        }
+
+                        // Increment likes in real-time
+                        blog.likes++;
+                        updateLocalStorage();
+                        likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
+                        // Display success message in popup
+                        showPopup('Liked successfully!');
+                    });
+
+                    // Comments
+                    const commentButton = document.createElement('button');
+                    commentButton.innerHTML = `<i class="fas fa-comments"></i> ${blog.commentsCount || 0}`;
+                    commentButton.addEventListener('click', () => {
+                        if (!isLoggedIn()) {
+                            // Redirect unauthenticated users to login page
+                            window.location.href = 'login.html';
+                            return;
+                        }
+
+                        // Add your comment functionality here
+                    });
+
+                    const readMoreLink = document.createElement('a');
+                    readMoreLink.href = `singlepb.html?id=${blog.id}`;
+                    readMoreLink.textContent = 'Read More';
+
+                    blogActions.appendChild(likeButton);
+                    blogActions.appendChild(commentButton);
+                    blogActions.appendChild(readMoreLink); 
+
+                    blogText.appendChild(blogTitle);
+                    blogText.appendChild(blogActions);
+
+                    blogBox.appendChild(blogImg);
+                    blogBox.appendChild(blogText);
+
+                    slider.appendChild(blogBox);
+                });
+            }
+
+            //  update local storage
+            function updateLocalStorage() {
+                // Implement update to local storage if needed
+            }
+
+            // Function to check if user is logged in
+            function isLoggedIn() {
+                // Implement your authentication logic here (e.g., check if user is logged in)
+                // Return true if logged in, false otherwise
+            }
+
+            // Function to show popup message
+            function showPopup(message) {
+                // Implement popup display logic here (e.g., using a modal)
+                alert(message); // For simplicity, using alert for now
+            }
+        });
+
+        /* Home or main content navbar */ 
+        let menuBtn = document.getElementById("menu");
+        let links = document.getElementById("links");
+
+        menuBtn.addEventListener("click", function(e){
+            links.classList.toggle('responsive');
+            menuBtn.classList.toggle('fa-x')
+        });
+    </script>
+    <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-3ZI/IIYwRKmu0CBVfS4UaP7n6s07GY6kSEJV6w7WcZcOG4C8LN5cJ8ta38pky4UzVUHxoFF/OpDkuF+Y3ZNE4A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Blog</title>
+    
+</head>
+<body>
+    <header>
+        <div class="nav">
+            <h2>Sab<span>in</span></h2>
+            <i class="fa fa-navicon" id="menu"></i>
+            <div class="links" id="links">
+                <a href="index.html">Home</a>
+                <a href="about-me.html">About Me</a>
+                <a href="skills.html">Skills</a>
+                <a href="portofolio.html">Portfolio</a>
+                <a href="blog.html">Blogs</a>
+                <a href="contact.html">Contact me</a>
+                <a href="login.html">Login</a>
             </div>
         </div>
     </header>
@@ -117,4 +298,4 @@ menuBtn.addEventListener("click", function(e){
     <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
     
 </body>
-</html>
+</html> -->

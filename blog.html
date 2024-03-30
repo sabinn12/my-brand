@@ -21,13 +21,13 @@
                 <a href="portofolio.html">Portfolio</a>
                 <a href="blog.html">Blogs</a>
                 <a href="contact.html">Contact me</a>
-                <a href="login.html">Login</a>
+                <a href="login.html"></a>
             </div>
         </div>
     </header>
     <main>
         <div class="blog-heading">
-            <h2>My <span>Blog</span></h2>
+            <h2>My <span>Blogs</span></h2>
             <p>The latest industry news, interviews, technologies, and resources.</p>
         </div>
 
@@ -74,6 +74,8 @@ menuBtn.addEventListener("click", function(e){
             .catch(error => {
                 console.error('Error fetching blogs:', error);
                 slider.innerHTML = '<p>Error fetching blogs. Please try again later.</p>';
+                slider.style.color = 'red';
+                slider.style.marginLeft = '38%'
             })
             .finally(() => {
                 loaderContainer.style.display = 'none'; // Hide loader container
@@ -145,7 +147,7 @@ menuBtn.addEventListener("click", function(e){
             const readMoreLink = document.createElement('a');
             readMoreLink.href = `singlepb.html?id=${blog._id}`;
             readMoreLink.textContent = 'Read More';
-            readMoreLink.style.marginLeft= '80%'
+            readMoreLink.style.marginLeft= '75%'
             
 
             // blogActions.appendChild(likeButton);

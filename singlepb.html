@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>single page blog</title>
+    <title>Single Page Blog</title>
     <style>
-        /* CSS Styles Provided */
+        /* Common Styles */
 
         * {
             margin: 0;
@@ -16,124 +16,65 @@
 
         body {
             background: #111827;
+            font-family: Arial, sans-serif;
+            color: white;
         }
 
-        header p {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #FFFF00;
-            font-size: 12px;
-            font-weight: bolder;
-            margin-top: 40px;
-            display: none;
-        }
-
-        img {
-            width: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 35%;
-            margin-top: 2%;
-            height: 250px;
-        }
-
+        /* Laptop Styles */
+        /* Adjustments for laptops */
         .container {
             display: flex;
+            justify-content: center;
             margin-top: 80px;
-            line-height: 30px;
-        }
-
-        .container .pone {
-            color: white;
-            font-size: 20px;
-            padding: 20px;
-            font-weight: bold;
-            margin-left: 20px;
-        }
-
-        .container .ptwo {
-            color: white;
-            font-size: 20px;
-            padding: 20px;
-            font-weight: bold;
-            margin-left: 20px;
         }
 
         #blogTitle {
-            color: #EAB308;
             font-size: 20px;
             text-transform: capitalize;
             margin-top: 3%;
-            margin-left: 35%;
         }
 
         #blogContent {
             background: darkgray;
             margin-top: 1%;
             width: 70%;
-            margin-left: 12%;
+            padding: 20px;
         }
 
         .contains {
-            display: inline-block;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
             margin-top: 5%;
         }
 
-        .contains h2 {
-            text-align: center;
-            margin-left: 130px;
+        h2 {
             font-size: 23px;
             font-weight: bold;
             color: blue;
+            margin-bottom: 10px;
         }
 
-        input {
+        input,
+        textarea {
             width: 80%;
             padding: 7px;
             background: #1F2937;
             color: white;
-        }
-
-        textarea {
-            width: 80%;
-            padding: 10px;
-            background: #1F2937;
-            color: white;
-        }
-
-        input,
-        textarea {
             margin-top: 5px;
             margin-bottom: 7px;
-        }
-
-        .contains,
-        input,
-        textarea,
-        button {
-            margin-left: 200px;
+            border: none;
+            border-radius: 5px;
         }
 
         button {
             background: #6B7280;
             color: white;
-            margin-bottom: 1px;
+            margin-bottom: 10px;
             cursor: pointer;
-        }
-
-        .delete-button {
-            background: red;
-            color: white;
-        }
-
-        .back {
-            margin-bottom: -30px;
-            margin-right: 00px;
-            color: #FFFF00;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
         }
 
         .back a {
@@ -142,79 +83,117 @@
             background: #EAB308;
             text-decoration: none;
             cursor: pointer;
-            margin-left: -180px;
             border: 1px solid black;
             border-color: #6B7280;
             border-radius: 12px;
-        }
-
-        /* Debugging */
-
-        @media (max-width: 1250px) {
-            header p,
-            .container .pone,
-            .container .ptwo,
-            .contains h2 {
-                font-size: 24px;
-            }
-
-            .contains,
-            input,
-            textarea,
-            button {
-                margin-left: 50px;
-            }
-
-            input,
-            textarea {
-                width: 90%;
-            }
-        }
-
-        #commentsSection {
-            color: white;
-            border: 1px solid yellow;
-            padding: 10px;
+            padding: 5px 15px;
             margin-top: 20px;
         }
 
+        #commentsSection {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #1F2937;
+            border-radius: 5px;
+        }
+
+        #commentsSection p {
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+
         .comment {
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #6B7280;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color:red;
+            border-radius: 5px;
         }
 
         .comment-content {
-            flex: 1;
+            color: white;
         }
 
-        .comment-actions {
+
+        /* Responsive Styles */
+        /* Adjustments for smaller screens */
+
+        @media (max-width: 768px) {
+            .container,
+            .contains {
+                margin-top: 40px;
+            }
+
+            #blogTitle {
+                font-size: 18px;
+                text-align: center;
+            }
+
+            #blogContent {
+                width: 90%;
+                margin: 0 auto;
+            }
+
+            input,
+            textarea,
+            button {
+                width: 90%;
+            }
+
+        }
+
+        @media (max-width: 576px) {
+            #blogTitle {
+                font-size: 16px;
+            }
+        }
+
+        /* Loader Styles */
+        /* Loader styles remain unchanged */
+
+        .loader-container {
             display: flex;
+            justify-content: center;
             align-items: center;
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
         }
 
-        .comment-actions i {
-            margin-right: 10px;
-            cursor: pointer;
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
         }
 
-        .delete-icon {
-            color: red;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
     <!-- Include Font Awesome (Replace with your preferred icon library) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-hVEjcczIY4aEdZl2u3h+7x3hCDBTDzD0vcX6V6+SiA00KW7rFeV+aewb/K1FAiQ=" crossorigin="anonymous">
 </head>
 
+
 <body>
     <header>
         <p>Blog Title</p>
     </header>
 
-    <div>
+    <!-- Loader Container -->
+    <div class="loader-container" id="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <div style="display: none;">
         <h1 id="blogTitle"></h1>
         <img id="blogImage" alt="Blog Image">
         <div id="blogContent"></div>
@@ -222,7 +201,7 @@
 
     <div class="contains">
         <h2>Comments</h2>
-        <input type="text" id="commenterName" placeholder="Your Email">
+        <input type="text" id="commenterEmail" placeholder="Your Email">
         <br>
         <textarea rows="3" cols="10" id="commentText" placeholder="Add a comment"></textarea>
         <br>
@@ -236,66 +215,148 @@
         </div>
     </div>
 
+
     <script>
         window.onload = function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const blogId = urlParams.get('id');
-    
-            // Fetch blog details from backend API
-            fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}`)
-                .then(response => response.json())
-                .then(blogData => {
-                    document.getElementById('blogTitle').innerText = blogData.title;
-                    document.getElementById('blogImage').src = blogData.image;
-                    document.getElementById('blogContent').innerHTML = blogData.content;
-    
-                    if (blogData.comments && blogData.comments.length > 0) {
-                        displayComments(blogData.comments);
+    const loaderContainer = document.getElementById('loader-container');
+    const blogContainer = document.querySelector('div[style="display: none;"]');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const blogId = urlParams.get('id');
+
+    if (!blogId) {
+        console.error('Blog ID is missing.');
+        return;
+    }
+
+    const blogUrl = `https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}`;
+    const commentsUrl = `https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`;
+
+    // Show loader
+    loaderContainer.style.display = 'flex';
+
+    // Fetch blog details from backend API
+    fetch(blogUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch blog data');
+            }
+            return response.json();
+        })
+        .then(blogData => {
+            // Hide loader
+            loaderContainer.style.display = 'none';
+            // Show blog content
+            blogContainer.style.display = 'block';
+
+            document.getElementById('blogTitle').innerText = blogData.blogs.title;
+            document.getElementById('blogImage').src = blogData.blogs.image;
+            document.getElementById('blogContent').innerHTML = blogData.blogs.content;
+
+            // Fetch comments for the blog
+            fetch(commentsUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch comments');
                     }
+                    return response.json();
+                })
+                .then(commentsData => {
+                    // Display comments
+                    displayComments(commentsData.comments);
+                    console.log(commentsData);
                 })
                 .catch(error => {
-                    console.error('Error fetching blog details:', error);
+                    console.error('Error fetching comments:', error);
+                    // Optionally display an error message to the user
                 });
-        };
-    
-        function displayComments(comments) {
-            const commentsSection = document.getElementById('commentsSection');
-    
-            comments.forEach(comment => {
-                const commentDiv = document.createElement('div');
-                commentDiv.className = 'comment';
-    
-                const commentContent = `<div class="comment-content"><strong>${comment.name}:</strong> ${comment.text}</div>`;
-                const commentActions = `
-                    <div class="comment-actions">
-                        <i class="fas fa-reply" onclick="replyToComment('${comment.name}')"></i>
-                        <i class="fas fa-thumbs-up" onclick="likeComment('${comment.name}')"></i>
-                        <i class="fas fa-trash delete-icon" onclick="deleteComment('${comment.name}')"></i>
-                    </div>
-                `;
-    
-                commentDiv.innerHTML = commentContent + commentActions;
-                commentsSection.appendChild(commentDiv);
-            });
-        }
-    
-        function submitComment() {
-            // Implement submitComment function
-        }
-    
-        function replyToComment(commenterName) {
-            // Implement replyToComment function
-        }
-    
-        function likeComment(commenterName) {
-            // Implement likeComment function
-        }
-    
-        function deleteComment(commenterName) {
-            // Implement deleteComment function
-        }
-    </script>
-    
+        })
+        .catch(error => {
+            console.error('Error fetching blog details:', error);
+            // Hide loader on error
+            loaderContainer.style.display = 'none';
+            // Optionally display an error message to the user
+        });
+};
+function displayComments(comments) {
+    const commentsSection = document.getElementById('commentsSection');
+
+    // Check if comments data is available and not empty
+    if (!comments || comments.length === 0) {
+        // If comments data is not available or empty, display a message
+        commentsSection.innerHTML = "<p>No comments available.</p>";
+        return;
+    }
+
+    // Clear previous comments
+    commentsSection.innerHTML = '';
+
+    // Log comments data for debugging
+    console.log('Comments Data:', comments);
+
+    // Iterate over the comments array and display each comment
+    comments.forEach(comment => {
+        const commentDiv = document.createElement('div');
+        commentDiv.className = 'comment';
+
+        // Use the correct property names for email and comment text
+        const commentContent = `<div class="comment-content"><strong>${comment.Email}:</strong> ${comment.Comment}</div>`;
+        commentDiv.innerHTML = commentContent;
+        commentsSection.appendChild(commentDiv);
+    });
+}
+
+
+function submitComment() {
+    const commenterEmail = document.getElementById('commenterEmail').value; // Corrected the ID
+    const commentText = document.getElementById('commentText').value;
+
+    // Obtain the blog ID from the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const blogId = urlParams.get('id');
+
+    // Make a POST request to submit the comment to the backend
+    fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            Email: commenterEmail,
+            Comment: commentText
+        })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to submit comment');
+            }
+            // Comment submitted successfully, fetch updated comments data
+            return fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`);
+        })
+        .then(response => response.json())
+        .then(commentsData => {
+            // Display the updated comments on the page
+            displayComments(commentsData.comments);
+        })
+        .catch(error => {
+            console.error('Error submitting comment:', error);
+            // Optionally display an error message to the user
+        });
+}
+
+
+function replyToComment(commenterName) {
+    // Implement replyToComment function
+}
+
+function likeComment(commenterName) {
+    // Implement likeComment function
+}
+
+function deleteComment(commenterName) {
+    // Implement deleteComment function
+}
+</script>
 </body>
 
 </html>

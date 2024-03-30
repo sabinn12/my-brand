@@ -31,14 +31,22 @@
         #blogTitle {
             font-size: 20px;
             text-transform: capitalize;
-            margin-top: 3%;
+            margin-top: 0.2%;
+            margin-bottom: 1%;
+            margin-left: 48%;
+            color: #EAB308;
         }
 
         #blogContent {
-            background: darkgray;
+            background: #333;
             margin-top: 1%;
             width: 70%;
-            padding: 20px;
+            padding: 10px;
+            margin-left: 12%;
+        }
+        #blogImage{
+            width: 30%;
+            margin-left: 35%;
         }
 
         .contains {
@@ -77,24 +85,32 @@
             padding: 10px 20px;
         }
 
-        .back a {
-            font-style: inherit;
-            color: black;
-            background: #EAB308;
-            text-decoration: none;
-            cursor: pointer;
-            border: 1px solid black;
-            border-color: #6B7280;
-            border-radius: 12px;
-            padding: 5px 15px;
-            margin-top: 20px;
-        }
+        .back {
+    display: flex;
+    justify-content: flex-end; /* Align to the right side */
+    margin-top: 20px;
+    margin-right: 90%;
+}
+
+.back a {
+    font-style: inherit;
+    color: black;
+    background: #EAB308;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid black;
+    border-color: #6B7280;
+    border-radius: 12px;
+    padding: 5px 15px;
+}
 
         #commentsSection {
             margin-top: 20px;
             padding: 10px;
             background-color: #1F2937;
             border-radius: 5px;
+            width: 50%;
+            margin-right: 40%;
         }
 
         #commentsSection p {
@@ -106,7 +122,7 @@
         .comment {
             margin-bottom: 10px;
             padding: 10px;
-            background-color:red;
+            background-color:gray;
             border-radius: 5px;
         }
 
@@ -133,20 +149,28 @@
                 width: 90%;
                 margin: 0 auto;
             }
+            #commentsSection{
+                width: 80%;
+                margin-left: 20%;
+            }
 
             input,
             textarea,
             button {
                 width: 90%;
             }
-
-        }
-
-        @media (max-width: 576px) {
             #blogTitle {
                 font-size: 16px;
+                
+                margin-left: 8%;
             }
+            .back{
+                margin-left: 10%;
+            }
+
         }
+
+        
 
         /* Loader Styles */
         /* Loader styles remain unchanged */
@@ -184,10 +208,6 @@
 
 
 <body>
-    <header>
-        <p>Blog Title</p>
-    </header>
-
     <!-- Loader Container -->
     <div class="loader-container" id="loader-container">
         <div class="loader"></div>
@@ -263,8 +283,8 @@
                 })
                 .then(commentsData => {
                     // Display comments
-                    displayComments(commentsData.comments);
-                    console.log(commentsData);
+                    displayComments(commentsData.comment);
+                    
                 })
                 .catch(error => {
                     console.error('Error fetching comments:', error);
@@ -291,9 +311,6 @@ function displayComments(comments) {
     // Clear previous comments
     commentsSection.innerHTML = '';
 
-    // Log comments data for debugging
-    console.log('Comments Data:', comments);
-
     // Iterate over the comments array and display each comment
     comments.forEach(comment => {
         const commentDiv = document.createElement('div');
@@ -308,14 +325,11 @@ function displayComments(comments) {
 
 
 function submitComment() {
-    const commenterEmail = document.getElementById('commenterEmail').value; // Corrected the ID
+    const commenterEmail = document.getElementById('commenterEmail').value;
     const commentText = document.getElementById('commentText').value;
-
-    // Obtain the blog ID from the URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const blogId = urlParams.get('id');
 
-    // Make a POST request to submit the comment to the backend
     fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`, {
         method: 'POST',
         headers: {
@@ -330,18 +344,84 @@ function submitComment() {
             if (!response.ok) {
                 throw new Error('Failed to submit comment');
             }
-            // Comment submitted successfully, fetch updated comments data
-            return fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`);
+            return response.json();
         })
-        .then(response => response.json())
-        .then(commentsData => {
-            // Display the updated comments on the page
-            displayComments(commentsData.comments);
+        .then(commentData => {
+            console.log('New comment data:', commentData); // Log the new comment data
+            // Clear input fields
+            document.getElementById('commenterEmail').value = '';
+            document.getElementById('commentText').value = '';
+            // Show notification
+            showNotification('Comment added successfully!');
+
+            // Refetch comments after adding a new comment
+            fetchComments(blogId);
         })
         .catch(error => {
             console.error('Error submitting comment:', error);
+            // Show error notification
+            showNotification('Failed to add comment. Please try again.');
+        });
+}
+
+// Function to fetch comments and display them
+function fetchComments(blogId) {
+    const commentsUrl = `https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`;
+
+    fetch(commentsUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch comments');
+            }
+            return response.json();
+        })
+        .then(commentsData => {
+            // Display comments
+            displayComments(commentsData.comment);
+        })
+        .catch(error => {
+            console.error('Error fetching comments:', error);
             // Optionally display an error message to the user
         });
+}
+
+
+
+function appendComment(commentData) {
+    const commentsSection = document.getElementById('commentsSection');
+    const commentDiv = document.createElement('div');
+    commentDiv.className = 'comment';
+    console.log(commentData)
+    
+    // Check if the commentData contains the required properties (Email and Comment)
+    if (commentData && commentData.Email && commentData.Comment) {
+        // Format the comment content and append it to the commentDiv
+        const commentContent = `<div class="comment-content"><strong>${commentData.Email}:</strong> ${commentData.Comment}</div>`;
+        commentDiv.innerHTML = commentContent;
+    } else if (commentData && commentData.comment && commentData.comment.Email && commentData.comment.Comment) {
+        // If the Email and Comment fields are nested inside a 'comment' object
+        const commentContent = `<div class="comment-content"><strong>${commentData.comment.Email}:</strong> ${commentData.comment.Comment}</div>`;
+        commentDiv.innerHTML = commentContent;
+    }
+    
+    // Append the commentDiv to the comments section
+    commentsSection.appendChild(commentDiv);
+}
+
+
+function showNotification(message) {
+    // Create a notification element
+    const notification = document.createElement('div');
+    notification.classList.add('notification');
+    notification.textContent = message;
+
+    // Append the notification to the body
+    document.body.appendChild(notification);
+
+    // Remove the notification after a delay
+    setTimeout(() => {
+        notification.remove();
+    }, 3000); // Adjust the delay as needed
 }
 
 

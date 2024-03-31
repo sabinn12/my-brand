@@ -162,7 +162,7 @@ border-radius: 15%;
 
     .home-content h1 {
         font-size: 18px;
-        margin-top: -20%;
+        margin-top: -10%;
         margin-bottom: 10px;
     }
 
@@ -181,11 +181,11 @@ border-radius: 15%;
     }
 
     .home-content-pic img {
-        width: 100%;
+        width: 70%;
         height: auto;
         position: relative;
         top: 0;
-        right: 0;
+        right: -15%;
         margin-top: 10%;
         margin-bottom: 5%;
     }

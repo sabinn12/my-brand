@@ -4,33 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="login.css">
-    <!-- <style>
-        #signup-popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #050b45;
-            padding: 20px;
-            box-shadow: blanchedalmond;
-            z-index: 0;
-            color: black;
-        }
-        #signup-popup input{
-            color: black;
+    <style>
+        #usernameError,
+        #passwordError {
+            color: red;
         }
 
-        #signup-popup h2 {
-            color: black;
+        .log-in button {
+            background: none;
+            border: none;
+            cursor: pointer;
         }
-
-        #signup-name-error,
-        #signup-email-error,
-        #signup-password-error {
-            color: black;
-        }
-    </style> -->
+    </style>
     <title>Login</title>
 </head>
 <body>
@@ -58,50 +43,27 @@
                 <form id="loginForm" onsubmit="return validateForm()">
                     <div class="inputs">
                         <input type="text" id="username" placeholder="Username">
-                        <div id="usernameError" style="color: red;"></div>
+                        <div id="usernameError"></div>
                         <input type="password" id="password" placeholder="Password">
-                        <div id="passwordError" style="color: red;"></div>
+                        <div id="passwordError"></div>
                     </div>
                     <div class="log-in">
-                        <button type="submit" style="background: none; border: none; cursor: pointer;"><h3>Log in</h3></button>
+                        <button type="submit"><h3>Log in</h3></button>
                     </div>
-                    <h3 style="color: white; margin-left: 45%;">or</h3>
-                    <br>
-                    <a style="color: white; text-decoration: none;margin-left: 40%; font-size: 20px; " href="#" id="signup-link" onclick="openSignupPopup()">Sign Up</a>
                 </form>
             </section>
-        </div>
-        <!-- sign up option        -->
-        <div id="signup-popup" class="popup">
-            <div class="popup-content">
-                <span class="close" onclick="closeSignupPopup()">&times;</span>
-                <h2>Sign Up</h2>
-                <form id="signupForm" onsubmit="return validateSignupForm()">
-                    <div class="inputs">
-                        <input type="text" id="signup-name" placeholder="Name">
-                        <div id="signup-name-error" style="color: red; margin-top: 5px;"></div>
-                        <input type="email" id="signup-email" placeholder="Email">
-                        <div id="signup-email-error" style="color: red; margin-top: 5px;"></div>
-                        <input type="password" id="signup-password" placeholder="Password">
-                        <div id="signup-password-error" style="color: red; margin-top: 5px;"></div>
-                    </div>
-                    <!-- <div class="sign-up">
-                        <button type="submit"><h3>Sign Up</h3></button>
-                    </div> -->
-                </form> 
-            </div>
         </div>
     </main>
     <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
     <script>
-        /* Home or main content navbar */ 
-let menuBtn = document.getElementById("menu");
-let links = document.getElementById("links");
+        /* Home or main content navbar */
+        let menuBtn = document.getElementById("menu");
+        let links = document.getElementById("links");
 
-menuBtn.addEventListener("click", function(e){
-    links.classList.toggle('responsive');
-    menuBtn.classList.toggle('fa-x')
-});
+        menuBtn.addEventListener("click", function(e){
+            links.classList.toggle('responsive');
+            menuBtn.classList.toggle('fa-x')
+        });
 
         function validateForm() {
             var username = document.getElementById('username').value;
@@ -157,86 +119,6 @@ menuBtn.addEventListener("click", function(e){
             window.location.href = "Dashboard.html";
             return false;
         }
-
-        function openSignupPopup() {
-            document.getElementById('signup-popup').style.display = 'block';
-            return false;
-        }
-
-        function closeSignupPopup() {
-            document.getElementById('signup-popup').style.display = 'none';
-        }
-
-    function validateSignupForm() {
-        var signupName = document.getElementById('signup-name').value;
-        var signupEmail = document.getElementById('signup-email').value;
-        var signupPassword = document.getElementById('signup-password').value;
-
-        document.getElementById('signup-name-error').innerHTML = '';
-        document.getElementById('signup-email-error').innerHTML = '';
-        document.getElementById('signup-password-error').innerHTML = '';
-
-        if (signupName.trim() === '') {
-            document.getElementById('signup-name-error').innerHTML = 'Name is required';
-            return false;
-        }
-
-        if (!signupName.match(/^[A-Za-z]+\s[A-Za-z]+$/)) {
-            document.getElementById('signup-name-error').innerHTML = 'Write full Name';
-            return false;
-        }
-
-        if (signupEmail.trim() === '') {
-            document.getElementById('signup-email-error').innerHTML = 'Email is required';
-            return false;
-        } else {
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(signupEmail)) {
-                document.getElementById('signup-email-error').innerHTML = 'Email is invalid';
-                return false;
-            }
-        }
-
-        if (signupPassword.trim() === '') {
-            document.getElementById('signup-password-error').innerHTML = 'Password is required';
-            return false;
-        }
-
-        // Password validation rules
-        var hasUpperCase = /[A-Z]/.test(signupPassword);
-        var hasLowerCase = /[a-z]/.test(signupPassword);
-        var hasNumbers = /\d/.test(signupPassword);
-        var hasSymbols = /\W/.test(signupPassword);
-
-        if (!hasUpperCase) {
-            document.getElementById('signup-password-error').innerHTML = 'Password must have at least one uppercase letter';
-            return false;
-        }
-
-        if (!hasLowerCase) {
-            document.getElementById('signup-password-error').innerHTML = 'Password must have at least one lowercase letter';
-            return false;
-        }
-
-        if (!hasNumbers) {
-            document.getElementById('signup-password-error').innerHTML = 'Password must include numbers';
-            return false;
-        }
-
-        if (!hasSymbols) {
-            document.getElementById('signup-password-error').innerHTML = 'Password must include symbols';
-            return false;
-        }
-
-        // Alert for successful signup
-        alert('Signup successful!');
-
-        // Redirect to the login page
-        window.location.href = "login.html";
-
-        return false;
-    }
-</script>
-
+    </script>
 </body>
 </html>

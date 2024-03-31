@@ -9,17 +9,19 @@ body{
 }
 
 .nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: black;
-    height: 60px;
-    padding: 0 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: black;
+        height: 60px;
+        padding: 0 20px;
+        position: sticky; /* Make the navigation sticky */
+        top: 0;
+        z-index: 100;
+    }
 
-}
+
 .nav h2{
     color: white;
     margin-left: 70px;

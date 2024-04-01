@@ -1,78 +1,3 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Blog</title>
-    <style>
-        /*  */
-
-    </style>
-    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-</head>
-<body>
-    <header>
-        <div class="text">
-            <h1>Edit Blog</h1>
-        </div>
-    </header>
-    <main>
-        <div class="container">
-            <div class="form">
-                <form id="editBlogForm">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" required>
-                    <label for="image">Choose image</label>
-                    <input type="file" id="image" name="image" accept="image/*">
-                    <label for="content">Content:</label>
-                    <textarea id="editor" name="content" rows="10" cols="30" required></textarea>
-
-                    <input type="submit" value="Update">
-                </form>
-            </div>
-        </div>
-    </main>
-    <footer>
-        <a href="addblog.html">Back</a>
-    </footer>
-    <script>
-        CKEDITOR.replace('editor');
-
-        // Retrieve the blog index from the URL parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        const blogIndex = urlParams.get('index');
-
-        // Get the existing blog data
-        const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-
-        // Load the existing blog data and fill the form
-        document.addEventListener('DOMContentLoaded', function () {
-            if (blogIndex !== null && blogIndex >= 0 && blogIndex < blogPosts.length) {
-                const blogToEdit = blogPosts[blogIndex];
-                document.getElementById('title').value = blogToEdit.title;
-                // Add logic to populate other form fields (image, content, etc.) based on your data structure
-            }
-        });
-
-        // Handle form submission
-        document.getElementById('editBlogForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            // Get the updated values from the form
-            const updatedTitle = document.getElementById('title').value;
-            // Add logic to get other updated values (image, content, etc.) based on your data structure
-
-            // Update the blog in the array
-            blogPosts[blogIndex].title = updatedTitle;
-            // Add logic to update other blog properties based on your data structure
-
-            // Update the local storage
-            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
-
-            // Redirect back to the blog list page
-            window.location.href = 'addblog.html';
-        });
-    </script>
-</body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -153,7 +78,7 @@
                     <label for="image">Choose image</label>
                     <input type="file" id="image" name="image" accept="image/*" onchange="previewImage()">
                     <img id="imagePreview" src="" alt="Preview">
-                    <label for="content">Content:</label>
+                    <label for="editor">Content:</label>
                     <textarea id="editor" name="content" rows="10" cols="30" required></textarea>
                     <input type="submit" value="Update">
                 </form>
@@ -165,24 +90,82 @@
     </footer>
     <script>
         CKEDITOR.replace('editor');
-        // Retrieve the blog index from the URL parameter
+
         const urlParams = new URLSearchParams(window.location.search);
-        const blogIndex = urlParams.get('index');
+        const blogId = urlParams.get('id');
+        console.log(blogId)
+        async function fetchBlogData() {
+            try {
+                if (!blogId) {
+                    throw new Error('Blog ID is missing');
+                }
 
-        // Get the existing blog data
-        const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+                const response = await fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}`);
 
-        // Load the existing blog data and fill the form
-        document.addEventListener('DOMContentLoaded', function () {
-            if (blogIndex !== null && blogIndex >= 0 && blogIndex < blogPosts.length) {
-                const blogToEdit = blogPosts[blogIndex];
-                document.getElementById('title').value = blogToEdit.title;
-                document.getElementById('editor').value = blogToEdit.content; 
-                document.getElementById('imagePreview').src = blogToEdit.image; 
+                if (!response.ok) {
+                    throw new Error('Failed to fetch blog data');
+                }
+
+                const blogData = await response.json();
+
+
+// Access the nested blogs object
+const blog = blogData.blogs;
+
+// Populate form fields with the relevant data
+document.getElementById('title').value = blog.title;
+document.getElementById('imagePreview').src = blog.image;
+CKEDITOR.instances.editor.setData(blog.content);
+            } catch (error) {
+                console.error('Error fetching blog data:', error);
+                alert('Failed to fetch blog data. Please try again later.');
+            }
+        }
+
+        // Call the fetchBlogData function to fetch and populate the form with blog data
+        fetchBlogData();
+
+        // Add event listener for form submission
+        document.getElementById('editBlogForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            // Retrieve form data
+            const updatedTitle = document.getElementById('title').value;
+            const updatedContent = CKEDITOR.instances.editor.getData();
+            const updatedImage = document.getElementById('imagePreview').src;
+
+            // Construct updated blog data object
+            const updatedBlogData = {};
+updatedBlogData['title'] = updatedTitle;
+updatedBlogData['image'] = updatedImage;
+updatedBlogData['content'] = updatedContent;
+
+            // Send PUT request to update the blog
+            try {
+                const updateResponse = await fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}`, {
+                    
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify(updatedBlogData)
+                });
+                
+
+                if (!updateResponse.ok) {
+                    throw new Error('Failed to update blog data');
+                }
+
+                // Redirect to the addblog.html page after successful update
+                window.location.href = 'addblog.html';
+            } catch (error) {
+                console.error('Error updating blog data:', error);
+                alert('Failed to update blog data. Please try again later.');
             }
         });
 
-        // Function to preview the selected image
+        // Function to preview image selected for upload
         function previewImage() {
             var fileInput = document.getElementById('image');
             var imagePreview = document.getElementById('imagePreview');
@@ -197,32 +180,6 @@
                 reader.readAsDataURL(fileInput.files[0]);
             }
         }
-
-        // Handle form submission
-        document.getElementById('editBlogForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            // Get the updated values from the form
-            const updatedTitle = document.getElementById('title').value;
-            const updatedContent = CKEDITOR.instances.editor.getData(); // Get content from CKEditor
-            const updatedImage = document.getElementById('imagePreview').src;
-
-            // Update the blog in the array
-            blogPosts[blogIndex].title = updatedTitle;
-            blogPosts[blogIndex].content = updatedContent;
-            blogPosts[blogIndex].image = updatedImage;
-            
-
-            
-            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
-
-            
-            window.location.href = 'addblog.html';
-        });
-
-       
     </script>
 </body>
 </html>
-
-    

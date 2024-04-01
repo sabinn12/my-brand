@@ -85,50 +85,67 @@
     <script>
         CKEDITOR.replace('editor');
 
-        // Function to preview the selected image
-        function previewImage() {
-            var fileInput = document.getElementById('image');
-            var imagePreview = document.getElementById('imagePreview');
+        
 
-            if (fileInput.files && fileInput.files[0]) {
-                var reader = new FileReader();
+// Function to handle form submission
+document.getElementById('addBlogForm').addEventListener('submit', async function (event) {
+    event.preventDefault();
 
-                reader.onload = function (e) {
-                    imagePreview.src = e.target.result;
-                };
+    const title = document.getElementById('title').value;
+    const image = document.getElementById('image').files[0]; // Get the selected image file
+    const content = CKEDITOR.instances.editor.getData();
 
-                reader.readAsDataURL(fileInput.files[0]);
-            }
+    // Prepare form data
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('image', image);
+    formData.append('content', content);
+
+    try {
+        // Get the authentication token from localStorage
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            throw new Error('Authentication token not found');
         }
 
-        document.getElementById('addBlogForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            const title = document.getElementById('title').value;
-            const image = document.getElementById('imagePreview').src;
-            const content = CKEDITOR.instances.editor.getData();
-
-            const blogId = generateUniqueId();
-
-            const newBlog = {
-                id: blogId,
-                title: title,
-                image: image,
-                content: content,
-            };
-
-            const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-
-            blogPosts.push(newBlog);
-
-            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
-
-            window.location.href = `blog.html?id=${blogId}`;
+        // Send POST request to backend API with authentication token
+        const response = await fetch('https://mybrand-back-end.onrender.com/api/v1/blogs', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData
         });
 
-        function generateUniqueId() {
-            return 'blog_' + Date.now();
+        if (response.ok) {
+            const data = await response.json();
+            const blogId = data.id;
+            window.location.href = `addblog.html?id=${blogId}`;
+        } else {
+            console.error('Failed to add blog');
         }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+// Function to preview the selected image
+function previewImage() {
+    var fileInput = document.getElementById('image');
+    var imagePreview = document.getElementById('imagePreview');
+
+    if (fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            imagePreview.src = e.target.result;
+        };
+
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+}
     </script>
+    
 </body>
 </html>

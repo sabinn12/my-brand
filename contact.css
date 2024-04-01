@@ -83,6 +83,7 @@ body{
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+
 }
 .container .content h2{
    color: white;
@@ -102,7 +103,7 @@ body{
 }
 .contact-info {
   margin-left: -50%;
-  margin-top: 20%;
+  margin-top: 18%;
   color: #EAB308;
 }
 .contact-info span{

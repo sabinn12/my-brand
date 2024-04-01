@@ -42,7 +42,7 @@
                 </div>
                 <form id="loginForm" onsubmit="return validateForm()">
                     <div class="inputs">
-                        <input type="text" id="username" placeholder="Username">
+                        <input type="text" id="email" placeholder="email">
                         <div id="usernameError"></div>
                         <input type="password" id="password" placeholder="Password">
                         <div id="passwordError"></div>
@@ -65,60 +65,53 @@
             menuBtn.classList.toggle('fa-x')
         });
 
-        function validateForm() {
-            var username = document.getElementById('username').value;
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var email = document.getElementById('email').value; // Fixed variable name
             var password = document.getElementById('password').value;
             var usernameError = document.getElementById('usernameError');
             var passwordError = document.getElementById('passwordError');
 
+            // Reset error messages
             usernameError.innerHTML = "";
             passwordError.innerHTML = "";
 
-            var hasOnlyLettersAndNumbers = /^[a-zA-Z0-9]+$/.test(username);
+            // Validate inputs (You can add validation here)
 
-            if(username === "") {
-                usernameError.innerHTML = "Please enter a username";
-                return false;
-            }
+            // Retrieve token from localStorage
+            const token = localStorage.getItem('token');
 
-            if (!hasOnlyLettersAndNumbers) {
-                usernameError.innerHTML = "Username must contain only letters and numbers";
-                return false;
-            }
+            // Make POST request to login endpoint with token in Authorization header
+            fetch('https://mybrand-back-end.onrender.com/api/v1/brand/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` // Include token in Authorization header
+                },
+                body: JSON.stringify({
+                    email: email, // Fixed variable name
+                    password: password
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Login failed');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Store token in localStorage
+                localStorage.setItem('token', data.token);
 
-            var hasUpperCase = /[A-Z]/.test(password);
-            var hasLowerCase = /[a-z]/.test(password);
-            var hasNumbers = /\d/.test(password);
-            var hasSymbols = /\W/.test(password);
-
-            if(password === "") {
-                passwordError.innerHTML = "Please enter a password";
-                return false;
-            }
-
-            if (!hasUpperCase) {
-                passwordError.innerHTML = "Password must have at least one uppercase letter";
-                return false;
-            }
-
-            if (!hasLowerCase) {
-                passwordError.innerHTML = "Password must have at least one lowercase letter";
-                return false;
-            }
-
-            if (!hasNumbers) {
-                passwordError.innerHTML = "Password must include numbers";
-                return false;
-            }
-
-            if (!hasSymbols) {
-                passwordError.innerHTML = "Password must include symbols";
-                return false;
-            }
-
-            window.location.href = "Dashboard.html";
-            return false;
-        }
+                // Redirect to dashboard or other page
+                window.location.href = 'dashboard.html';
+            })
+            .catch(error => {
+                console.error('Login error:', error);
+                alert('Login failed. Please check your credentials.');
+            });
+        });
     </script>
 </body>
 </html>

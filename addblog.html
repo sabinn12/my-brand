@@ -42,108 +42,129 @@
                     <button style="font-size: 15px;"><a href="newblog.html">Newblog</a></button>
                 </div>
             </div>
-            <table>
+            <table id="blogTable">
                 <tr>
                     <th>Image</th>
                     <th>Title</th>
                     <th>Content</th>
-                    <th></th>
-                </tr>
-                
-                <tr>
-                    <td><img src="pics/a.png" alt="Blog Image" class="blog-image"></td>
-                    <td>Some Title</td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam condimentum varius urna, a
-                        efficitur orci aliquam id.</td>
-                    <td>
-                        <button style="background: #B09F00;"><a style="color: #202027;" href="editblog.html">Edit</a></button>
-                        <button style="background: #B00000;"><a style="color: #202027;" href="">Delete</a></button>
-                    </td>
                 </tr>
             </table>
-
-            
-            <h3>Add/Update Content</h3>
-            <div id="editor-container">
-                
-            </div>
+            <div id="editor-container"></div>
         </div>
     </main>
 
-    
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
     <script>
-        var blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-        var table = document.querySelector('table');
-
-        function deleteBlog(blogIndex) {
-            blogPosts.splice(blogIndex, 1);
-            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
-            displayBlogs();
-        }
-
-        function editBlog(blogIndex) {
-            window.location.href = 'editblog.html?index=' + blogIndex;
-        }
-
-        function displayBlogs() {
-            table.innerHTML = '';
-
-            for (let i = 0; i < blogPosts.length; i++) {
-                const blogPost = blogPosts[i];
-                const row = document.createElement('tr');
-
-                const imageCell = document.createElement('td');
-                imageCell.innerHTML = `<img src="${blogPost.image}" alt="Blog Image" class="blog-image">`;
-
-                const titleCell = document.createElement('td');
-                titleCell.textContent = blogPost.title;
-
-                const contentCell = document.createElement('td');
-                contentCell.textContent = blogPost.content;
-
-                const actionsCell = document.createElement('td');
-                const editButton = document.createElement('button');
-                const deleteButton = document.createElement('button');
-
-                editButton.textContent = 'Edit';
-                editButton.style.backgroundColor = '#B09F00';
-                editButton.style.color = '#202027';
-                editButton.addEventListener('click', function () {
-                    editBlog(i);
-                });
-
-                deleteButton.textContent = 'Delete';
-                deleteButton.style.backgroundColor = '#B00000';
-                deleteButton.style.color = '#202027';
-                deleteButton.addEventListener('click', function () {
-                    deleteBlog(i);
-                });
-
-                actionsCell.appendChild(editButton);
-                actionsCell.appendChild(deleteButton);
-
-                row.appendChild(imageCell);
-                row.appendChild(titleCell);
-                row.appendChild(contentCell);
-                row.appendChild(actionsCell);
-
-                table.appendChild(row);
+        // Function to fetch blog data from the backend API
+        async function fetchBlogData() {
+            try {
+                const response = await fetch('https://mybrand-back-end.onrender.com/api/v1/blogs');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch blog data');
+                }
+                const data = await response.json();
+                return data.blogs;
+            } catch (error) {
+                console.error('Error fetching blog data:', error);
+                return [];
             }
         }
 
-        // Calling displayBlogs 
+        // Function to populate the table with fetched blog data
+        async function displayBlogs() {
+            const table = document.getElementById('blogTable');
+            const blogData = await fetchBlogData();
+
+            // Clear the existing table rows
+            table.innerHTML = '';
+
+            // Loop through each blog post data and create table rows
+            blogData.forEach((blog, index) => {
+                const row = table.insertRow();
+
+                const imageCell = row.insertCell(0);
+                const titleCell = row.insertCell(1);
+                const contentCell = row.insertCell(2);
+                const actionsCell = row.insertCell(3);
+
+                imageCell.innerHTML = `<img src="${blog.image}" alt="Blog Image" class="blog-image">`;
+                titleCell.textContent = blog.title;
+                contentCell.textContent = blog.content;
+
+                // Add a link to editblog.html instead of creating an edit button
+                const editLink = document.createElement('a');
+                editLink.textContent = 'Edit';
+                editLink.href = `editblog.html?id=${blog._id}`;
+                editLink.style.backgroundColor = '#B09F00';
+                editLink.style.color = '#202027';
+                actionsCell.appendChild(editLink);
+
+                // Add a delete button with event listener
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.style.backgroundColor = '#B00000';
+                deleteButton.style.color = '#202027';
+                deleteButton.addEventListener('click', () => deleteBlog(blog._id));
+                actionsCell.appendChild(deleteButton);
+            });
+        }
+
+        // Call the displayBlogs function to populate the table
         displayBlogs();
 
-        // Integration of Rich Text 
-        ClassicEditor
-            .create(document.querySelector('#editor-container'))
+        // Delete blog function
+        function deleteBlog(blogId) {
+            const token = localStorage.getItem('token');
+            fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}` 
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // If deletion is successful, re-display the updated blog list
+                    displayBlogs();
+                } else {
+                    console.error('Failed to delete blog');
+                }
+            })
             .catch(error => {
-                console.error(error);
+                console.error('Error deleting blog:', error);
             });
-    </script>
+        }
 
-    <script src="script.js"></script>
-    
-    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.1/classic/ckeditor.js"></script>
+        // Check if the elements exist before trying to access them
+        document.addEventListener("DOMContentLoaded", function() {
+            // Open side navigation
+            const openNavButton = document.querySelector('.openbtn');
+            const sideNav = document.getElementById('side');
+            if (openNavButton && sideNav) {
+                openNavButton.addEventListener('click', openNav);
+            }
+
+            // Close side navigation
+            const closeNavButton = document.querySelector('.closebtn');
+            if (closeNavButton && sideNav) {
+                closeNavButton.addEventListener('click', closeNav);
+            }
+        });
+
+        // Function to open side navigation
+        function openNav() {
+            const sideNav = document.getElementById('side');
+            if (sideNav) {
+                sideNav.style.width = '250px';
+            }
+        }
+
+        // Function to close side navigation
+        function closeNav() {
+            const sideNav = document.getElementById('side');
+            if (sideNav) {
+                sideNav.style.width = '0';
+            }
+        }
+    </script>
 </body>
 </html>

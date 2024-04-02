@@ -130,33 +130,28 @@
 
             // Retrieve form data
             const updatedTitle = document.getElementById('title').value;
-            console.log(updatedTitle)
-            const updatedImage = document.getElementById('imagePreview').src;
+            const updatedImage = document.getElementById('image').files[0];
             const updatedContent = CKEDITOR.instances.editor.getData();
-            console.log(updatedContent)
-            
 
             // Construct updated blog data object
-            const updatedBlogData = {
-                title: updatedTitle,
-                image: updatedImage,
-                content: updatedContent
-            };
+            const formData = new FormData();
+            formData.append('title', updatedTitle);
+            formData.append('content', updatedContent);
+             if (updatedImage) {
+            formData.append('image', updatedImage);
+}
 
             // Retrieve the authorization token from localStorage
-            // Retrieve the authorization token from localStorage
-const token = localStorage.getItem('token');
-
+            const token = localStorage.getItem('token');
 
             // Send PUT request to update the blog
             try {
                 const updateResponse = await fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}`, { 
                     method: 'PUT',
                     headers: {
-                        'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify(updatedBlogData)
+                    body: formData
                 });
 
                 if (!updateResponse.ok) {
@@ -167,7 +162,7 @@ const token = localStorage.getItem('token');
                 window.location.href = 'addblog.html';
             } catch (error) {
                 console.error('Error updating blog data:', error);
-                alert('Failed to update blog data. Please try again later.');
+                
             }
         });
 

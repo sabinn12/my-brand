@@ -16,7 +16,7 @@ body{
         background: black;
         height: 60px;
         padding: 0 20px;
-        position: sticky; /* Make the navigation sticky */
+        position: sticky; 
         top: 0;
         z-index: 100;
     }
@@ -56,6 +56,11 @@ body{
     background: #000;
 }
 @media only screen and (max-width: 620px){
+    .nav{
+        position: sticky; 
+        top: 0;
+        z-index: 100;
+    }
     .nav i{
         display: block;
     }

@@ -91,7 +91,7 @@
                 titleCell.textContent = blog.title;
                 contentCell.textContent = blog.content;
 
-                // Add a link to editblog.html instead of creating an edit button
+                // Add a link to editblog.html 
                 const editLink = document.createElement('a');
                 editLink.textContent = 'Edit';
                 editLink.href = `editblog.html?id=${blog._id}`;
@@ -110,7 +110,7 @@
             });
         }
 
-        // Call the displayBlogs function to populate the table
+       
         displayBlogs();
 
         // Delete blog function

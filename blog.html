@@ -41,149 +41,103 @@
     </main>
 
     <script>
-                /* Home or main content navbar */ 
-let menuBtn = document.getElementById("menu");
-let links = document.getElementById("links");
-
-menuBtn.addEventListener("click", function(e){
-    links.classList.toggle('responsive');
-    menuBtn.classList.toggle('fa-x')
-});
-        
         window.addEventListener('DOMContentLoaded', (event) => {
-    const loader = document.getElementById('loader');
-    const loaderContainer = document.getElementById('loader-container');
-    const slider = document.getElementById('slider');
+            const loader = document.getElementById('loader');
+            const loaderContainer = document.getElementById('loader-container');
+            const slider = document.getElementById('slider');
 
-    // Fetch blogs
-    fetchBlogs();
+            // Load liked blogs from local storage
+            let likedBlogs = JSON.parse(localStorage.getItem('likedBlogs')) || {};
 
-    function fetchBlogs() {
-        loaderContainer.style.display = 'flex'; // Show loader container
+            fetchBlogs();
 
-        // Fetch blogs from your backend API using HTTPS
-        fetch('https://mybrand-back-end.onrender.com/api/v1/blogs')
-            .then(response => response.json())
-            .then(data => {
-                if (data && data.blogs && Array.isArray(data.blogs)) {
-                    displayBlogs(data.blogs); // Display fetched blogs
-                } else {
-                    throw new Error('No blogs found');
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching blogs:', error);
-                slider.innerHTML = '<p>Error fetching blogs. Please try again later.</p>';
-                slider.style.color = 'red';
-                slider.style.marginLeft = '38%'
-            })
-            .finally(() => {
-                loaderContainer.style.display = 'none'; // Hide loader container
-                slider.style.display = 'block'; // Show slider
-            });
-    }
+            function fetchBlogs() {
+                loaderContainer.style.display = 'flex';
 
-    function displayBlogs(blogs) {
-        // Display blogs on the page
-        slider.innerHTML = ''; // Clear existing content
+                // Fetch blogs
+                fetch('https://mybrand-back-end.onrender.com/api/v1/blogs')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.blogs && Array.isArray(data.blogs)) {
+                            displayBlogs(data.blogs);
+                        } else {
+                            throw new Error('No blogs found');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching blogs:', error);
+                        slider.innerHTML = '<p>Error fetching blogs. Please try again later.</p>';
+                        slider.style.color = 'red';
+                        slider.style.marginLeft = '38%'
+                    })
+                    .finally(() => {
+                        loaderContainer.style.display = 'none';
+                        slider.style.display = 'block';
+                    });
+            }
 
-        blogs.forEach(blog => {
-            // Initialize likes and comments to zero if not present
-            // blog.likes = blog.likes || 0;
-            // blog.comments = blog.comments || 0;
+            function displayBlogs(blogs) {
+                slider.innerHTML = '';
 
-            const blogBox = document.createElement('div');
-            blogBox.classList.add('blog-box');
+                blogs.forEach(blog => {
+                    const blogBox = document.createElement('div');
+                    blogBox.classList.add('blog-box');
 
-            // Create the structure for each blog post
-            const blogImg = document.createElement('div');
-            blogImg.classList.add('blog-img');
-            const img = document.createElement('img');
-            img.src = blog.image;
-            img.alt = 'blog';
-            blogImg.appendChild(img);
+                    const blogImg = document.createElement('div');
+                    blogImg.classList.add('blog-img');
+                    const img = document.createElement('img');
+                    img.src = blog.image;
+                    img.alt = 'blog';
+                    blogImg.appendChild(img);
 
-            const blogText = document.createElement('div');
-            blogText.classList.add('blog-text');
-            const blogTitle = document.createElement('a');
-            blogTitle.classList.add('blog-title');
-            blogTitle.href = `singlepb.html?id=${blog._id}`; 
-            blogTitle.textContent = blog.title;
+                    const blogText = document.createElement('div');
+                    blogText.classList.add('blog-text');
+                    const blogTitle = document.createElement('a');
+                    blogTitle.classList.add('blog-title');
+                    blogTitle.href = `singlepb.html?id=${blog._id}`;
+                    blogTitle.textContent = blog.title;
 
-            const blogActions = document.createElement('div');
-            blogActions.classList.add('blog-actions');
+                    const blogActions = document.createElement('div');
+                    blogActions.classList.add('blog-actions');
 
-            // // Likes
-            // const likeButton = document.createElement('button');
-            // likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
-            // likeButton.addEventListener('click', () => {
-            //     if (!isLoggedIn()) {
-            //         // Redirect unauthenticated users to login page
-            //         window.location.href = '';
-            //         return;
-            //     }
+                    const likeButton = document.createElement('button');
+                    const likes = likedBlogs[blog._id] || blog.likes || 0;
+                    likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${likes}`;
+                    likeButton.addEventListener('click', () => {
+                        // Increment likes in real-time
+                        likedBlogs[blog._id] = (likedBlogs[blog._id] || blog.likes || 0) + 1;
+                        updateLocalStorage();
+                        likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${likedBlogs[blog._id]}`;
+                        // Display success message in popup
+                        showPopup('Liked successfully!');
+                    });
 
-            //     // Increment likes in real-time
-            //     blog.likes++;
-            //     updateLocalStorage();
-            //     likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${blog.likes}`;
-            //     // Display success message in popup
-            //     showPopup('Liked successfully!');
-            // });
+                    const readMoreLink = document.createElement('a');
+                    readMoreLink.href = `singlepb.html?id=${blog._id}`;
+                    readMoreLink.textContent = 'Read More';
+                    readMoreLink.style.marginLeft = '7%';
 
-            // // Comments
-            // const commentButton = document.createElement('button');
-            // commentButton.innerHTML = `<i class="fas fa-comments"></i> ${blog.comments}`;
-            // commentButton.addEventListener('click', () => {
-            //     if (!isLoggedIn()) {
-            //         // Redirect unauthenticated users to login page
-            //         window.location.href = 'login.html';
-            //         return;
-            //     }
+                    blogActions.appendChild(likeButton);
+                    blogActions.appendChild(readMoreLink);
 
-            //     // Add your comment functionality here
-            // });
+                    blogText.appendChild(blogTitle);
+                    blogText.appendChild(blogActions);
 
-            const readMoreLink = document.createElement('a');
-            readMoreLink.href = `singlepb.html?id=${blog._id}`;
-            readMoreLink.textContent = 'Read More';
-            readMoreLink.style.marginLeft= '75%'
-            
+                    blogBox.appendChild(blogImg);
+                    blogBox.appendChild(blogText);
 
-            // blogActions.appendChild(likeButton);
-            // blogActions.appendChild(commentButton);
-            blogActions.appendChild(readMoreLink); 
+                    slider.appendChild(blogBox);
+                });
+            }
 
-            blogText.appendChild(blogTitle);
-            blogText.appendChild(blogActions);
+            function updateLocalStorage() {
+                localStorage.setItem('likedBlogs', JSON.stringify(likedBlogs));
+            }
 
-            blogBox.appendChild(blogImg);
-            blogBox.appendChild(blogText);
-
-            slider.appendChild(blogBox);
+           
         });
-    }
-
-    //  update local storage
-    function updateLocalStorage() {
-        // Implement update to local storage if needed
-    }
-
-    // Function to check if user is logged in
-    function isLoggedIn() {
-        // Implement your authentication logic here (e.g., check if user is logged in)
-        // Return true if logged in, false otherwise
-    }
-
-    // Function to show popup message
-    function showPopup(message) {
-        // Implement popup display logic here (e.g., using a modal)
-        alert(message); // For simplicity, using alert for now
-    }
-});
-
     </script>
-       
+
     <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
 
 </body>

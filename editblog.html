@@ -130,16 +130,24 @@
 
             // Retrieve form data
             const updatedTitle = document.getElementById('title').value;
-            const updatedImage = document.getElementById('image').files[0];
             const updatedContent = CKEDITOR.instances.editor.getData();
+            const updatedImage = document.getElementById('image').files[0];
 
-            // Construct updated blog data object
+            // Construct form data
             const formData = new FormData();
             formData.append('title', updatedTitle);
             formData.append('content', updatedContent);
-             if (updatedImage) {
-            formData.append('image', updatedImage);
+
+          
+if (updatedImage) {
+    
+    formData.append('image', updatedImage);
+} else {
+
+    const currentImage = document.getElementById('imagePreview').src;
+    formData.append('image', currentImage);
 }
+
 
             // Retrieve the authorization token from localStorage
             const token = localStorage.getItem('token');

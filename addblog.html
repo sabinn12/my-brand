@@ -95,8 +95,9 @@
                 const editLink = document.createElement('a');
                 editLink.textContent = 'Edit';
                 editLink.href = `editblog.html?id=${blog._id}`;
-                editLink.style.backgroundColor = '#B09F00';
-                editLink.style.color = '#202027';
+                editLink.style.backgroundColor = 'yellow';
+                editLink.style.textDecoration = 'none';
+                editLink.style.border = '5px solid yellow'
                 actionsCell.appendChild(editLink);
 
                 // Add a delete button with event listener

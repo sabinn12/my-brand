@@ -103,13 +103,28 @@
                     const likeButton = document.createElement('button');
                     const likes = likedBlogs[blog._id] || blog.likes || 0;
                     likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${likes}`;
-                    likeButton.addEventListener('click', () => {
-                        // Increment likes in real-time
-                        likedBlogs[blog._id] = (likedBlogs[blog._id] || blog.likes || 0) + 1;
-                        updateLocalStorage();
-                        likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${likedBlogs[blog._id]}`;
-                        // Display success message in popup
-                        showPopup('Liked successfully!');
+                    likeButton.addEventListener('click', async () => {
+                        try {
+                            // Increment likes in real-time
+                            likedBlogs[blog._id] = (likedBlogs[blog._id] || blog.likes || 0) + 1;
+                            updateLocalStorage();
+                            likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${likedBlogs[blog._id]}`;
+                            // Send POST request to create a like
+                            const response = await fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blog._id}/likes`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({like: true})
+                            });
+                            if (!response.ok) {
+                                throw new Error('Failed to create like');
+                            }
+                            // Display success message in popup
+                            showPopup('Liked successfully!');
+                        } catch (error) {
+                            console.error('Error creating like:', error);
+                        }
                     });
 
                     const readMoreLink = document.createElement('a');

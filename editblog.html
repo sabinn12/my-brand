@@ -137,17 +137,11 @@
             const formData = new FormData();
             formData.append('title', updatedTitle);
             formData.append('content', updatedContent);
-
-          
-if (updatedImage) {
-    
-    formData.append('image', updatedImage);
-} else {
-
-    const currentImage = document.getElementById('imagePreview').src;
-    formData.append('image', currentImage);
-}
-
+           const currentImage = document.getElementById('imagePreview').src;
+           formData.append('image', currentImage);
+          if (updatedImage) {
+        formData.append('image', updatedImage);
+    }
 
             // Retrieve the authorization token from localStorage
             const token = localStorage.getItem('token');
@@ -166,7 +160,7 @@ if (updatedImage) {
                     throw new Error('Failed to update blog data');
                 }
 
-                // Redirect to the addblog.html page after successful update
+                
                 window.location.href = 'addblog.html';
             } catch (error) {
                 console.error('Error updating blog data:', error);
@@ -174,7 +168,7 @@ if (updatedImage) {
             }
         });
 
-        // Function to preview image selected for upload
+        // preview image selected for upload
         function previewImage() {
             var fileInput = document.getElementById('image');
             var imagePreview = document.getElementById('imagePreview');

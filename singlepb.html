@@ -7,7 +7,6 @@
     <title>Single Page Blog</title>
     <style>
         /* Common Styles */
-
         * {
             margin: 0;
             padding: 0;
@@ -44,7 +43,8 @@
             padding: 10px;
             margin-left: 12%;
         }
-        #blogImage{
+
+        #blogImage {
             width: 30%;
             margin-left: 35%;
         }
@@ -75,7 +75,7 @@
             border-radius: 5px;
         }
 
-        .submit  {
+        .submit {
             background: #6B7280;
             color: white;
             margin-bottom: 7px;
@@ -86,7 +86,8 @@
             padding: 7px;
             width: 80%;
         }
-        button{
+
+        button {
             background: #6B7280;
             color: white;
             margin-top: 9px;
@@ -94,11 +95,12 @@
             border: none;
             border-radius: 5px;
             padding: 7px;
-
         }
+
         .back {
             display: flex;
-            justify-content: flex-end; /* Align to the right side */
+            justify-content: flex-end;
+            /* Align to the right side */
             margin-top: 20px;
             margin-right: 90%;
         }
@@ -140,6 +142,7 @@
         .comment-content {
             color: white;
         }
+
         .notification {
             position: fixed;
             top: 50%;
@@ -152,10 +155,8 @@
             z-index: 999;
         }
 
-
         /* Responsive Styles */
         /* Adjustments for smaller screens */
-
         @media (max-width: 768px) {
             .container,
             .contains {
@@ -171,42 +172,39 @@
                 width: 90%;
                 margin: 0 auto;
             }
-            #commentsSection{
+
+            #commentsSection {
                 width: 80%;
                 margin-left: 20%;
             }
 
             input,
-            textarea
-          
-             {
+            textarea {
                 width: 90%;
             }
-            .submit{
+
+            .submit {
                 width: 90%;
                 padding: 2%;
                 margin-top: 1%;
             }
-             button{
+
+            button {
                 width: 10%;
                 padding: 0;
                 margin: 0;
                 margin-top: 20px;
-                
-             }
-             
+            }
+
             #blogTitle {
                 font-size: 16px;
-                
                 margin-left: 8%;
             }
-            .back{
+
+            .back {
                 margin-left: 10%;
             }
-
         }
-
-        
 
         /* Loader Styles */
         .loader-container {
@@ -232,209 +230,206 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-hVEjcczIY4aEdZl2u3h+7x3hCDBTDzD0vcX6V6+SiA00KW7rFeV+aewb/K1FAiQ=" crossorigin="anonymous">
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha384-hVEjcczIY4aEdZl2u3h+7x3hCDBTDzD0vcX6V6+SiA00KW7rFeV+aewb/K1FAiQ="
+        crossorigin="anonymous">
 </head>
 
 
 <body>
-    <!-- Loader Container -->
-    <div class="loader-container" id="loader-container">
-        <div class="loader"></div>
-    </div>
+    <div id="root"></div>
 
-    <div style="display: none;">
-        <h1 id="blogTitle"></h1>
-        <img id="blogImage" alt="Blog Image">
-        <div id="blogContent"></div>
-    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
 
-    <div class="contains">
-        <h2>Comments</h2>
-        <input type="text" id="commenterEmail" placeholder="Your Name">
-        <br>
-        <textarea rows="3" cols="10" id="commentText" placeholder="Add a comment"></textarea>
-        <br>
-        <button class="submit" type="button" onclick="submitComment()">Submit</button>
+        const App = () => {
+            const [likedBlogs, setLikedBlogs] = useState(JSON.parse(localStorage.getItem('likedBlogs')) || {});
+            const [blogData, setBlogData] = useState(null);
+            const [commentsData, setCommentsData] = useState([]);
+            const [loading, setLoading] = useState(true);
 
-        <!-- Display submitted comments -->
-        <div id="commentsSection"></div>
+            useEffect(() => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const blogId = urlParams.get('id');
 
-        <div class="back">
-            <a href="blog.html">Back Home</a>
-        </div>
-    </div>
+                if (!blogId) {
+                    console.error('Blog ID is missing.');
+                    return;
+                }
 
-<script>
-    let likedBlogs = JSON.parse(localStorage.getItem('likedBlogs')) || {};
-        window.onload = function () {
-            const loaderContainer = document.getElementById('loader-container');
-            const blogContainer = document.querySelector('div[style="display: none;"]');
-            const urlParams = new URLSearchParams(window.location.search);
-            const blogId = urlParams.get('id');
+                const blogUrl = `https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}`;
+                const commentsUrl = `https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`;
 
-            if (!blogId) {
-                console.error('Blog ID is missing.');
-                return;
-            }
-
-            const blogUrl = `https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}`;
-            const commentsUrl = `https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`;
-
-            loaderContainer.style.display = 'flex';
-
-            fetch(blogUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch blog data');
-                    }
-                    return response.json();
-                })
-                .then(blogData => {
-                    loaderContainer.style.display = 'none';
-                    blogContainer.style.display = 'block';
-
-                    document.getElementById('blogTitle').innerText = blogData.blogs.title;
-                    document.getElementById('blogImage').src = blogData.blogs.image;
-                    document.getElementById('blogContent').innerHTML = blogData.blogs.content;
-
-                    const likeButton = document.createElement('button');
-                    const likes = likedBlogs[blogId] || blogData.blogs.likes || 0;
-                    likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${likes}`;
-                    likeButton.addEventListener('click', async () => {
-                        try {
-                            likedBlogs[blogId] = (likedBlogs[blogId] || blogData.blogs.likes || 0) + 1;
-                            updateLocalStorage();
-                            likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${likedBlogs[blogId]}`;
-                            const response = await fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/likes`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({like: true})
-                            });
-                            if (!response.ok) {
-                                throw new Error('Failed to create like');
-                            }
-                            showNotification('Liked successfully!');
-                            return true;
-                        } catch (error) {
-                            console.error('Error creating like:', error);
-                            return false;
+                fetch(blogUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch blog data');
                         }
+                        return response.json();
+                    })
+                    .then(blogData => {
+                        setBlogData(blogData);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching blog details:', error);
                     });
-                    document.getElementById('blogContent').appendChild(likeButton);
 
-                    fetch(commentsUrl)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Failed to fetch comments');
-                            }
-                            return response.json();
-                        })
-                        .then(commentsData => {
-                            displayComments(commentsData.comment);
-                        })
-                        .catch(error => {
-                            console.error('Error fetching comments:', error);
-                        });
+                fetch(commentsUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch comments');
+                        }
+                        return response.json();
+                    })
+                    .then(commentsData => {
+                        setCommentsData(commentsData.comment);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching comments:', error);
+                    })
+                    .finally(() => setLoading(false));
+            }, []);
+
+            const updateLocalStorage = () => {
+                localStorage.setItem('likedBlogs', JSON.stringify(likedBlogs));
+            };
+
+            const submitComment = () => {
+                const commenterEmail = document.getElementById('commenterEmail').value;
+                const commentText = document.getElementById('commentText').value;
+                const urlParams = new URLSearchParams(window.location.search);
+                const blogId = urlParams.get('id');
+
+                fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        Email: commenterEmail,
+                        Comment: commentText
+                    })
                 })
-                .catch(error => {
-                    console.error('Error fetching blog details:', error);
-                    loaderContainer.style.display = 'none';
-                });
-        };
-        function updateLocalStorage() {
-            localStorage.setItem('likedBlogs', JSON.stringify(likedBlogs));
-        }
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to submit comment');
+                        }
+                        return response.json();
+                    })
+                    .then(commentData => {
+                        console.log('New comment data:', commentData);
+                        document.getElementById('commenterEmail').value = '';
+                        document.getElementById('commentText').value = '';
+                        showNotification('Comment added successfully!');
+                        fetchComments(blogId);
+                    })
+                    .catch(error => {
+                        console.error('Error submitting comment:', error);
+                        showNotification('Failed to add comment. Please try again.');
+                    });
+            };
 
-        function displayComments(comments) {
-            const commentsSection = document.getElementById('commentsSection');
+            const fetchComments = (blogId) => {
+                const commentsUrl = `https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`;
 
-            if (!comments || comments.length === 0) {
-                commentsSection.innerHTML = "<p>No comments available.</p>";
-                return;
+                fetch(commentsUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch comments');
+                        }
+                        return response.json();
+                    })
+                    .then(commentsData => {
+                        setCommentsData(commentsData.comment);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching comments:', error);
+                    });
+            };
+
+            const showNotification = (message) => {
+                const notification = document.createElement('div');
+                notification.classList.add('notification');
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            };
+
+            const handleLike = () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const blogId = urlParams.get('id');
+                const likes = likedBlogs[blogId] || blogData.blogs.likes || 0;
+                likedBlogs[blogId] = likes + 1;
+                updateLocalStorage();
+                setLikedBlogs({ ...likedBlogs }); // Update state to trigger re-render
+                showNotification('Liked successfully!');
+            };
+
+            if (loading || !blogData) {
+                return (
+                    <div className="loader-container">
+                        <div className="loader"></div>
+                    </div>
+                );
             }
 
-            commentsSection.innerHTML = '';
+            return (
+                <div>
+                    <h1 id="blogTitle">{blogData.blogs ? blogData.blogs.title : ''}</h1>
+                    <img id="blogImage" src={blogData.blogs ? blogData.blogs.image : ''} alt="Blog Image" />
+                    <div id="blogContent" dangerouslySetInnerHTML={{ __html: blogData.blogs ? blogData.blogs.content : '' }}></div>
 
-            comments.forEach(comment => {
-                const commentDiv = document.createElement('div');
-                commentDiv.className = 'comment';
-                const commentContent = `<div class="comment-content"><strong>${comment.Email}:</strong> ${comment.Comment}</div>`;
-                commentDiv.innerHTML = commentContent;
-                commentsSection.appendChild(commentDiv);
-            });
-        }
+                    <button onClick={handleLike} style={{ marginLeft: '12%' }}>
+                        <i className="fas fa-thumbs-up"></i> {likedBlogs[blogData.blogs._id] || blogData.blogs.likes || 0}
+                    </button>
 
-        function submitComment() {
-            const commenterEmail = document.getElementById('commenterEmail').value;
-            const commentText = document.getElementById('commentText').value;
-            const urlParams = new URLSearchParams(window.location.search);
-            const blogId = urlParams.get('id');
+                    <div className="contains">
+                        <h2>Comments</h2>
+                        <input type="text" id="commenterEmail" placeholder="Your Name" />
+                        <br />
+                        <textarea rows="3" cols="10" id="commentText" placeholder="Add a comment"></textarea>
+                        <br />
+                        <button className="submit" type="button" onClick={submitComment}>Submit</button>
 
-            fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    Email: commenterEmail,
-                    Comment: commentText
-                })
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to submit comment');
-                    }
-                    return response.json();
-                })
-                .then(commentData => {
-                    console.log('New comment data:', commentData);
-                    document.getElementById('commenterEmail').value = '';
-                    document.getElementById('commentText').value = '';
-                    showNotification('Comment added successfully!');
-                    fetchComments(blogId);
-                })
-                .catch(error => {
-                    console.error('Error submitting comment:', error);
-                    showNotification('Failed to add comment. Please try again.');
-                });
-        }
+                        <div id="commentsSection">
+                            {commentsData.length > 0 ? commentsData.map((comment, index) => (
+                                <div key={index} className="comment">
+                                    <div className="comment-content">
+                                        <strong>{comment.Email}:</strong> {comment.Comment}
+                                    </div>
+                                </div>
+                            )) : <p>No comments available.</p>}
+                        </div>
 
-        function fetchComments(blogId) {
-            const commentsUrl = `https://mybrand-back-end.onrender.com/api/v1/blogs/${blogId}/comments`;
+                        <div className="back">
+                            <a href="blog.html">Back Home</a>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
 
-            fetch(commentsUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch comments');
-                    }
-                    return response.json();
-                })
-                .then(commentsData => {
-                    displayComments(commentsData.comment);
-                })
-                .catch(error => {
-                    console.error('Error fetching comments:', error);
-                });
-        }
-
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.classList.add('notification');
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root')
+        );
     </script>
     <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
-   </body>
+</body>
 
 </html>

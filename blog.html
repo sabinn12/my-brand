@@ -25,7 +25,7 @@
             </div>
         </div>
     </header>
-    <main>
+    <!-- <main id="app"> -->
         <div class="blog-heading">
             <h2>My <span>Blogs</span></h2>
             <p>The latest industry news, interviews, technologies, and resources.</p>
@@ -40,121 +40,14 @@
         </div>
     </main>
 
-    <script>
-        window.addEventListener('DOMContentLoaded', (event) => {
-            const loader = document.getElementById('loader');
-            const loaderContainer = document.getElementById('loader-container');
-            const slider = document.getElementById('slider');
+    <!-- precompiled JavaScript files -->
 
-            // Load liked blogs from local storage
-            let likedBlogs = JSON.parse(localStorage.getItem('likedBlogs')) || {};
-
-            fetchBlogs();
-
-            function fetchBlogs() {
-                loaderContainer.style.display = 'flex';
-
-                // Fetch blogs
-                fetch('https://mybrand-back-end.onrender.com/api/v1/blogs')
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data && data.blogs && Array.isArray(data.blogs)) {
-                            displayBlogs(data.blogs);
-                        } else {
-                            throw new Error('No blogs found');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching blogs:', error);
-                        slider.innerHTML = '<p>Error fetching blogs. Please try again later.</p>';
-                        slider.style.color = 'red';
-                        slider.style.marginLeft = '38%'
-                    })
-                    .finally(() => {
-                        loaderContainer.style.display = 'none';
-                        slider.style.display = 'block';
-                    });
-            }
-
-            function displayBlogs(blogs) {
-                slider.innerHTML = '';
-
-                blogs.forEach(blog => {
-                    const blogBox = document.createElement('div');
-                    blogBox.classList.add('blog-box');
-
-                    const blogImg = document.createElement('div');
-                    blogImg.classList.add('blog-img');
-                    const img = document.createElement('img');
-                    img.src = blog.image;
-                    img.alt = 'blog';
-                    blogImg.appendChild(img);
-
-                    const blogText = document.createElement('div');
-                    blogText.classList.add('blog-text');
-                    const blogTitle = document.createElement('a');
-                    blogTitle.classList.add('blog-title');
-                    blogTitle.href = `singlepb.html?id=${blog._id}`;
-                    blogTitle.textContent = blog.title;
-
-                    const blogActions = document.createElement('div');
-                    blogActions.classList.add('blog-actions');
-
-                    const likeButton = document.createElement('button');
-                    const likes = likedBlogs[blog._id] || blog.likes || 0;
-                    likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${likes}`;
-                    likeButton.addEventListener('click', async () => {
-                        try {
-                            // Increment likes in real-time
-                            likedBlogs[blog._id] = (likedBlogs[blog._id] || blog.likes || 0) + 1;
-                            updateLocalStorage();
-                            likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${likedBlogs[blog._id]}`;
-                            // Send POST request to create a like
-                            const response = await fetch(`https://mybrand-back-end.onrender.com/api/v1/blogs/${blog._id}/likes`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({like: true})
-                            });
-                            if (!response.ok) {
-                                throw new Error('Failed to create like');
-                            }
-                            // Display success message in popup
-                            showPopup('Liked successfully!');
-                        } catch (error) {
-                            console.error('Error creating like:', error);
-                        }
-                    });
-
-                    const readMoreLink = document.createElement('a');
-                    readMoreLink.href = `singlepb.html?id=${blog._id}`;
-                    readMoreLink.textContent = 'Read More';
-                    readMoreLink.style.marginLeft = '7%';
-
-                    blogActions.appendChild(likeButton);
-                    blogActions.appendChild(readMoreLink);
-
-                    blogText.appendChild(blogTitle);
-                    blogText.appendChild(blogActions);
-
-                    blogBox.appendChild(blogImg);
-                    blogBox.appendChild(blogText);
-
-                    slider.appendChild(blogBox);
-                });
-            }
-
-            function updateLocalStorage() {
-                localStorage.setItem('likedBlogs', JSON.stringify(likedBlogs));
-            }
-
-           
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+    <script src="blog.js"></script>
 
     <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
-
 </body>
 
 </html>

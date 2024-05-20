@@ -1,3 +1,12 @@
+let menuBtn = document.getElementById("menu");
+let links = document.getElementById("links");
+
+menuBtn.addEventListener("click", function(e){
+    links.classList.toggle('responsive');
+    menuBtn.classList.toggle('fa-x')
+});
+
+
 window.addEventListener('DOMContentLoaded', (event) => {
     const loader = document.getElementById('loader');
     const loaderContainer = document.getElementById('loader-container');

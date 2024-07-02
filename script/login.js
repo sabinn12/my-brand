@@ -46,7 +46,7 @@
                 localStorage.setItem('token', data.token);
 
                 // Redirect to dashboard or other page
-                window.location.href = 'Dashboard.html';
+                window.location.href = '/dashboard/Dashboard.html';
             })
             .catch(error => {
                 console.error('Login error:', error);

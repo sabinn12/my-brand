@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/login.css">
+    <title>Login</title>
+</head>
+<body>
+    <header>
+        <div class="nav">
+            <h2>Sab<span>in</span></h2>
+            <i class="fa fa-navicon" id="menu"></i>
+            <div class="links" id="links">
+                <a href="index.html">Home</a>
+                <a href="about-me.html">About Me</a>
+                <a href="skills.html">Skills</a>
+                <a href="portofolio.html">Portofolio</a>
+                <a href="blog.html">Blogs</a>
+                <a href="contact.html">Contact me</a>
+                <a href="login.html">Login</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section>
+                <div class="content">
+                    <h2>Log in</h2>
+                </div>
+                <form id="loginForm" onsubmit="return validateForm()">
+                    <div class="inputs">
+                        <input type="text" id="email" placeholder="email">
+                        <div id="usernameError"></div>
+                        <input type="password" id="password" placeholder="Password">
+                        <div id="passwordError"></div>
+                    </div>
+                    <div class="log-in">
+                        <button type="submit"><h3>Log in</h3></button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+    <script src="https://kit.fontawesome.com/488ac4d149.js" crossorigin="anonymous"></script>
+    <script src="/script/login.js"></script>
+</body>
+</html>

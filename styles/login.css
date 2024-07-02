@@ -191,6 +191,17 @@ input{
 section {
   margin-bottom: 20px;
 }
+#usernameError,
+#passwordError {
+    color: red;
+}
+
+.log-in button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 /* #login-form {
 	width: 100%;
 	max-width: 31.25rem; 

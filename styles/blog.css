@@ -75,14 +75,44 @@ body{
         border-top: 2px solid #aaa;
         
     }
-    .responsive{
+    .responsive {
         display: flex;
+        animation: slideDown 1s forwards;
     }
-    .links a{
+
+    .links a {
         color: darkgray;
     }
-    
+
+    .links.closing {
+        animation: slideUp 1s forwards;
+    }
 }
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-10%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-10%);
+    }
+}
+
 .slider {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

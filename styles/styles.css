@@ -49,6 +49,7 @@ body {
     color: #EAB308;
 }
 
+
 .nav i:hover {
     background: white;
 }
@@ -76,8 +77,10 @@ body {
         background: black;
         left: 0;
         right: 0;
-        border-top: 2px solid #aaa;
+        border-top: 2.5px solid #aaa;
+        
     }
+   
 
     .responsive {
         display: flex;
@@ -91,6 +94,7 @@ body {
     .links.closing {
         animation: slideUp 1s forwards;
     }
+    
 }
 
 @keyframes slideDown {

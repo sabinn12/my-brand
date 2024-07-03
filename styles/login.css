@@ -159,6 +159,7 @@ input{
    width: 11.25rem;
    height: 2.5rem;
  }
+ 
 } 
 /* Add this to your existing CSS file or create a new one */
 .popup {
@@ -211,7 +212,7 @@ footer {
   position: sticky;
   bottom: 0;
   z-index: 100;
-  margin-top: 610px;
+  margin-top: 600px;
 }
 
 footer p {

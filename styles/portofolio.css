@@ -248,3 +248,23 @@ body{
    
    }
 }
+footer {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: black;
+    color: #9CA3AF;
+    font-size: 14px;
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+	
+}
+
+footer p {
+    margin: 0;
+}
+
+footer i {
+    color: red;
+}

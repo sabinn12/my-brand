@@ -263,3 +263,8 @@ function submitForm() {
     messageError.innerHTML = '';
     submitError.innerHTML = '';
 }
+
+
+// year footer
+
+document.getElementById('year').textContent = new Date().getFullYear();

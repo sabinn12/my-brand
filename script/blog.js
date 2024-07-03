@@ -119,3 +119,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     
     
 });
+
+
+// year footer
+
+document.getElementById('year').textContent = new Date().getFullYear();

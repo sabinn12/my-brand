@@ -18,7 +18,9 @@ body{
     background: black;
     height: var(--nav-height);
     padding: 0 20px;
-    position: relative;
+	position: sticky;
+    top: 0;
+    z-index: 100;
 }
 .nav h2{
     color: white;

@@ -296,61 +296,48 @@ body {
 
     .about-me-pic {
         display: block;
-        width: 100%;
+        max-width: 100%;
         margin-left: 0;
         margin-top: 20px;
         text-align: center;
     }
 
     .about-me-pic img {
-        width: 20%;
+        max-width:60%;
         margin: 0 auto;
-        opacity: 0.4;
-        margin-top: 70px;
+        opacity: 0.1;
+        top: 50px;
+        
     }
-    .about-me-pic::before{
-        width: 50%;
-        content: "";
-        position: absolute;
-        border: 1px solid black;
-        border-radius: 10%;
-        background-size: cover;
-        background-position: center;
-        animation: rotateBorder 30s linear infinite;
-        z-index: 0;
-        margin-left: 90px;
-        margin-top: 40px;
+
+    .about-me-pic::before {
+        margin-top: 20px;
+        left: 10%;
+        max-width: 80%;
+        
         
     }
 
     .aboutme-content {
-        width: 100%;
+        max-width: 100%;
+        margin-top: 70px;
         
-        
-        text-align: center;
-        float: none;
     }
 
     .aboutme-content h1 {
-        font-size: 28px;
-        margin-top: 190px;
-        margin-left: 35px;
+        font-size: 30px;
+        margin-top: 230px;
+        
     }
 
     .aboutme-content p {
-        max-width: 100%;
-        font-size: 16px;
-        margin-top: 5px;
-        margin-left: 30px;
-        
+        font-size: 14px;
         
     }
-    
 
     .aboutme-content .fa-brands {
         width: 10%;
         font-size: 19px;
-        margin-left: 5%;
     }
 }
 

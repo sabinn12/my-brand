@@ -1,65 +1,75 @@
-:root{
+:root {
     --nav-height: 60px;
 }
-body{
+
+body {
     margin: 0;
     background: #111827;
-    
 }
+
 * {
     box-sizing: border-box;
     font-family: sans-serif;
-    
 }
-.nav{
+
+.nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: black;
     height: var(--nav-height);
     padding: 0 20px;
-	position: sticky;
+    position: sticky;
     top: 0;
     z-index: 100;
 }
-.nav h2{
+
+.nav h2 {
     color: white;
     margin-left: 70px;
     font-size: 24px;
 }
-.nav h2 span{
+
+.nav h2 span {
     color: #EAB308;
 }
-.nav a{
+
+.nav a {
     color: #9CA3AF;
     font-size: 16px;
-   
+    text-transform: capitalize;
 }
-.nav a:first-child{
+
+.nav a:first-child {
     color: white;
 }
-.nav i{
+
+.nav i {
     font-size: 1.4rem;
     padding: 0 10px;
     display: none;
     color: #EAB308;
 }
-.nav i:hover{
+
+.nav i:hover {
     background: white;
 }
-.nav .links a{
+
+.nav .links a {
     text-decoration: none;
     padding: 5px;
 }
-.nav .links a:hover{
+
+.nav .links a:hover {
     color: #fff;
     background: #000;
 }
 
-@media only screen and (max-width: 620px){
-    .nav i{
+@media only screen and (max-width: 620px) {
+    .nav i {
         display: block;
     }
+
     .links {
         position: absolute;
         display: none;
@@ -69,8 +79,8 @@ body{
         left: 0;
         right: 0;
         border-top: 2px solid #aaa;
-        
     }
+
     .responsive {
         display: flex;
         animation: slideDown 1s forwards;
@@ -90,7 +100,6 @@ body{
         opacity: 0;
         transform: translateY(-10%);
     }
-
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -102,124 +111,183 @@ body{
         opacity: 1;
         transform: translateY(0);
     }
-
     100% {
         opacity: 0;
         transform: translateY(-10%);
     }
 }
 
-
-/* about me content */
+/* About me content */
 .container {
     width: 50%;
     display: flex;
     justify-content: space-between;
 }
 
-.about-me-pic{
-    width:40%;
-    border: 5px solid #EAB308;
+.about-me-pic {
+    width: 40%;
     float: left;
     margin-top: 15%;
-    margin-left: 20%;
-    border-radius: 10%;
+    margin-left: 220px;
     height: 63%;
     padding: 0;
+    position: relative;
 }
-img{
+
+.about-me-pic img {
     display: flex;
-    width: 90%;
-    margin-left: 10%;
-    border-radius: 10%;
-    
-}
-.aboutme-content{
     width: 70%;
+    margin-top: 40px;
+    margin-left: 20px;
+    border-radius: 10%;
+    transition: transform 0.5s ease-in-out;
+    position: relative;
+    z-index: 1;
+}
+
+.about-me-pic::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid black;
+    border-radius: 10%;
+    background-image: url('/assets/coding3.jpg'); 
+    background-size: cover;
+    background-position: center;
+    animation: rotateBorder 30s linear infinite;
+    z-index: 0;
+}
+
+@keyframes rotateBorder {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.aboutme-content {
+    max-width: 80%;
     float: right;
     align-items: center;
     justify-content: center;
-    margin-top: 20%;
-    margin-right: -70%;
+    margin-top: 120px;
+    margin-right: -80%;
     padding: 2%;
+    animation: fadeIn 2s ease-in-out;
 }
-.aboutme-content h1{
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.aboutme-content h1 {
     color: #F3F4F6;
     margin-bottom: 40px;
     margin-top: -60px;
     text-decoration: none;
     font-size: 42px;
+    animation: slideInLeft 1s ease-in-out;
+}
+
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
     }
-    .aboutme-content span{
-        color: #EAB308;
+    100% {
+        opacity: 1;
+        transform: translateX(0);
     }
-    .aboutme-content p{
-        color: #6B7280;
-        font-size: 18px;
-        padding: auto;
-        margin-bottom: 40px;
+}
+
+.aboutme-content span {
+    color: #EAB308;
+}
+
+.aboutme-content p {
+    color: #6B7280;
+    font-size: 18px;
+    padding: auto;
+    margin-bottom: 40px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.aboutme-content .fa-brands {
+    color: white;
+    width: 7%;
+    font-size: 20px;
+    margin-bottom: -90px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.aboutme-content .fa-brands:hover {
+    transform: scale(1.2);
+    color: #EAB308;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        width: 100%;
+        flex-direction: column;
     }
 
-    .aboutme-content .fa-brands{
-        color: white;
-        width: 7%;
-        font-size: 20px;
-        margin-bottom: -90px;
-    }
-    @media screen and (max-width: 600px) {
-        .container {
-            width: 100%;
-            flex-direction: column;
-        }
-    
-         .aboutme-content {
-            width: 100%;
-            margin: 0;
-            
-        }
-    
-        
-        
-    
-        .aboutme-content h1 {
-            font-size: 32px;
-            margin-top: 60%;
-            margin-left: 20%;
-        }
-    
-        .aboutme-content p {
-            font-size: 16px;
-            margin-top: 5%;
-        }
-    
-        .aboutme-content .fa-brands {
-            width: 10%;
-            color: white;
-            font-size: 19px;
-            margin-left: 5%;
-        }
-        .about-me-pic {
-           display: none;
-        }
-    }
-    footer {
-        text-align: center;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        background: black;
-        color: #9CA3AF;
-        font-size: 14px;
-        position: sticky;
-        bottom: 0;
-        z-index: 100;
-        margin-top: 150px;
-    }
-    
-    footer p {
+    .aboutme-content {
+        width: 100%;
         margin: 0;
     }
-    
-    footer i {
-        color: red;
+
+    .aboutme-content h1 {
+        font-size: 32px;
+        margin-top: 60%;
+        margin-left: 20%;
     }
-    
+
+    .aboutme-content p {
+        font-size: 16px;
+        margin-top: 5%;
+    }
+
+    .aboutme-content .fa-brands {
+        width: 10%;
+        color: white;
+        font-size: 19px;
+        margin-left: 5%;
+    }
+
+    .about-me-pic {
+        display: none;
+    }
+}
+
+footer {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: black;
+    color: #9CA3AF;
+    font-size: 14px;
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+    margin-top: 150px;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer i {
+    color: red;
+}

@@ -145,7 +145,7 @@ body {
     display: flex;
     width: 70%;
     margin-top: 40px;
-    margin-left: 25px;
+    margin-left: 28px;
     border-radius: 10%;
     transition: transform 0.5s ease-in-out;
     position: relative;
@@ -162,7 +162,7 @@ body {
     bottom: -10px;
     border: 1px solid black;
     border-radius: 10%;
-    background-image: url('/assets/coding4.jpg'); 
+    background-image: url('/assets/coding5.jpg'); 
     background-size: cover;
     background-position: center;
     animation: rotateBorder 30s linear infinite;
@@ -245,48 +245,7 @@ body {
     color: white;
 }
 
-@media screen and (max-width: 1024px) {
-    .container {
-        width: 90%;
-        flex-direction: column;
-        margin: 0 auto;
-        align-items: center;
-    }
 
-    .about-me-pic {
-        width: 100%;
-        margin-left: 0;
-        margin-top: 20px;
-        text-align: center;
-    }
-
-    .about-me-pic img {
-        width: 50%;
-        margin: 0 auto;
-        opacity: 0.4;
-    }
-
-    .aboutme-content {
-        width: 100%;
-        margin-top: 20px;
-        text-align: center;
-        float: none;
-    }
-
-    .aboutme-content h1 {
-        font-size: 36px;
-    }
-
-    .aboutme-content p {
-        font-size: 16px;
-        margin-top: 20px;
-    }
-
-    .aboutme-content .fa-brands {
-        width: 10%;
-        font-size: 24px;
-    }
-}
 
 @media screen and (max-width: 600px) {
     .container {
@@ -341,6 +300,7 @@ body {
     }
 }
 
+/* Footer */
 footer {
     text-align: center;
     padding-top: 20px;
@@ -351,7 +311,7 @@ footer {
     position: sticky;
     bottom: 0;
     z-index: 100;
-    margin-top: 150px;
+    margin-top: 6.1rem;
 }
 
 footer p {

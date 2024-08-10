@@ -1,17 +1,14 @@
-:root {
-    --nav-height: 60px;
-}
-
-body {
-    margin: 0;
-    background: #111827;
-}
-
 * {
     box-sizing: border-box;
     font-family: sans-serif;
 }
-
+body {
+    margin: 0;
+    background: #111827;
+}
+:root {
+    --nav-height: 60px;
+}
 .nav {
     display: flex;
     align-items: center;
@@ -309,9 +306,9 @@ footer {
     color: #9CA3AF;
     font-size: 14px;
     position: sticky;
-    bottom: 0;
+    
     z-index: 100;
-    margin-top: 6.1rem;
+    margin-top:7.7rem;
 }
 
 footer p {
